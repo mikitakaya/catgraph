@@ -47,6 +47,10 @@
 
   ( https://drive.google.com/file/d/1gNWZUCCgl8A04XZE7tLj9bfzzAX-8zyD/view?usp=sharing )
 
+  管理者側
+
+  ( https://drive.google.com/file/d/12iKsqe_1bp4Hy1b_YIIvPmTR4X6cwAhl/view?usp=sharing )
+
 ## 開発環境
 - OS：Linux
 - 言語：HTML,CSS,JavaScript,Ruby,SQL
