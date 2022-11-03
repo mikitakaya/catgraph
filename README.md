@@ -69,6 +69,10 @@
 
   ( https://drive.google.com/file/d/1Ps_SOwD0nHzpp_Lmql1Edr3LETQFXpgU/view?usp=sharing )
 
+- テーブル定義書
+
+  ( https://docs.google.com/spreadsheets/d/1C6siuO9BE19zaQqRBHb7O6uBcAddXD9Psips4t_Lh2o/edit?usp=sharing )
+
 ## 開発環境
 - OS：Linux
 - 言語：HTML,CSS,JavaScript,Ruby,SQL
