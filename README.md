@@ -65,6 +65,10 @@
 
   ( https://drive.google.com/file/d/1_ExZkTVHqHR8vQnMxm77cHnkk6A4tuyi/view?usp=sharing )
 
+- ER図
+
+  ( https://drive.google.com/file/d/1Ps_SOwD0nHzpp_Lmql1Edr3LETQFXpgU/view?usp=sharing )
+
 ## 開発環境
 - OS：Linux
 - 言語：HTML,CSS,JavaScript,Ruby,SQL
