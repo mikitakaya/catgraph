@@ -74,7 +74,7 @@
   ( https://docs.google.com/spreadsheets/d/1C6siuO9BE19zaQqRBHb7O6uBcAddXD9Psips4t_Lh2o/edit?usp=sharing )
 
 
-- Catgraph_アプリケーション詳細設計
+- アプリケーション詳細設計
 
   ( https://docs.google.com/spreadsheets/d/1kD_7g6Hm6VJ5Ri_sHDDZRdhi_5V_cYkM_p1iWrft_oM/edit?usp=sharing )
 
