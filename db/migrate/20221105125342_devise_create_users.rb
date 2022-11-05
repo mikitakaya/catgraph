@@ -36,6 +36,9 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.1]
       t.string :name, null: false
       # ユーザー名を保存するカラム
       t.string :username, null: false
+      # 自己紹介を保存するカラム
+      # 初期値は空のため、NOT NULL制約は設定しない
+      t.text :introduction
 
       t.timestamps null: false
     end
