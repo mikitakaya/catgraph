@@ -1,5 +1,12 @@
 Rails.application.routes.draw do
   # ユーザー用
+  scope module: :public do
+    # public/homes
+    root to: "homes#top"
+    get 'about' => "homes#about", as: "about"
+  end
+
+  # ユーザー用
   # URL /users/sign_in ...
   devise_for :users,skip: [:passwords], controllers: {
     registrations: "public/registrations",
