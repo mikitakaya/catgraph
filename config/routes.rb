@@ -1,5 +1,13 @@
 Rails.application.routes.draw do
 
+  # 管理者用
+  namespace :admin do
+    # admin/homes
+    get '/' => "homes#top", as: "top"
+
+    # admin/users
+    resources :users, only: [:index, :show, :edit, :update]
+  end
   # 検索機能
   get '/search', to: 'searches#search'
 
