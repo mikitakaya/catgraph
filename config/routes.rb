@@ -7,7 +7,11 @@ Rails.application.routes.draw do
 
     # admin/users
     resources :users, only: [:index, :show, :edit, :update]
+
+    # admin/post_images
+    resources :post_images, only: [:index, :show, :destroy]
   end
+
   # 検索機能
   get '/search', to: 'searches#search'
 
