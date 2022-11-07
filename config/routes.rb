@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  namespace :public do
+    get 'relationships/followings'
+    get 'relationships/followers'
+  end
   # ユーザー用
   scope module: :public do
     # public/homes
@@ -19,6 +23,11 @@ Rails.application.routes.draw do
 
     # public/post_comments
     resources :post_comments, only: [:create, :destroy]
+
+    # public/relationships
+    resources :relationships, only: [:create, :destroy]
+    get 'followings' => 'relationships#followings', as: 'followings'
+    get 'followers' => 'relationships#followers', as: 'followers'
   end
 
   # ユーザー用
