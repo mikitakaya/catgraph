@@ -1,20 +1,5 @@
 Rails.application.routes.draw do
 
-  # 管理者用
-  namespace :admin do
-    # admin/homes
-    get '/' => "homes#top", as: "top"
-
-    # admin/users
-    resources :users, only: [:index, :show, :edit, :update]
-
-    # admin/post_images
-    resources :post_images, only: [:index, :show, :destroy]
-
-    # admin/post_comments
-    resources :post_comments, only: [:destroy]
-  end
-
   # 検索機能
   get '/search', to: 'searches#search'
 
@@ -42,6 +27,21 @@ Rails.application.routes.draw do
     resources :relationships, only: [:create, :destroy]
     get 'followings' => 'relationships#followings', as: 'followings'
     get 'followers' => 'relationships#followers', as: 'followers'
+  end
+
+  # 管理者用
+  namespace :admin do
+    # admin/homes
+    get '/' => "homes#top", as: "top"
+
+    # admin/users
+    resources :users, only: [:index, :show, :edit, :update]
+
+    # admin/post_images
+    resources :post_images, only: [:index, :show, :destroy]
+
+    # admin/post_comments
+    resources :post_comments, only: [:destroy]
   end
 
   # ユーザー用
