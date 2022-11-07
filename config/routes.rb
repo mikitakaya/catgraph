@@ -1,9 +1,15 @@
 Rails.application.routes.draw do
+
   # ユーザー用
   scope module: :public do
     # public/homes
     root to: "homes#top"
     get 'about' => "homes#about", as: "about"
+
+    # public/users
+    resources :users, only: [:show, :edit, :update]
+    get 'users/unsubscribe' => "users#unsubscribe", as: "unsubscribe"
+    patch 'users/withdraw' => "users#withdraw", as: "withdraw"
   end
 
   # ユーザー用
