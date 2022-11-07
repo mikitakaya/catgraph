@@ -1,9 +1,8 @@
 Rails.application.routes.draw do
 
-  namespace :public do
-    get 'relationships/followings'
-    get 'relationships/followers'
-  end
+  # 検索機能
+  get '/search', to: 'searches#search'
+
   # ユーザー用
   scope module: :public do
     # public/homes
