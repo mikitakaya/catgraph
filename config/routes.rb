@@ -10,6 +10,9 @@ Rails.application.routes.draw do
 
     # admin/post_images
     resources :post_images, only: [:index, :show, :destroy]
+
+    # admin/post_comments
+    resources :post_comments, only: [:destroy]
   end
 
   # 検索機能
