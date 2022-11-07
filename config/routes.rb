@@ -10,6 +10,9 @@ Rails.application.routes.draw do
     resources :users, only: [:show, :edit, :update]
     get 'users/unsubscribe' => "users#unsubscribe", as: "unsubscribe"
     patch 'users/withdraw' => "users#withdraw", as: "withdraw"
+
+    # public/post_images
+    resources :post_images
   end
 
   # ユーザー用
