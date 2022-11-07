@@ -13,6 +13,9 @@ Rails.application.routes.draw do
 
     # public/post_images
     resources :post_images
+
+    # public/favorites
+    resources :favorites, only: [:index, :create, :destroy]
   end
 
   # ユーザー用
