@@ -16,6 +16,9 @@ Rails.application.routes.draw do
 
     # public/favorites
     resources :favorites, only: [:index, :create, :destroy]
+
+    # public/post_comments
+    resources :post_comments, only: [:create, :destroy]
   end
 
   # ユーザー用
