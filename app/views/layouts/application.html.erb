@@ -30,7 +30,14 @@
      <% end %>
    </header>
 
-    </header>
+   <main>
+    <p id="notice">
+     <%= flash[:notice] %>
+    </p>
     <%= yield %>
+   </main>
+
+   <footer></footer>
+
   </body>
 </html>
