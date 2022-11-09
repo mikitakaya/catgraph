@@ -1,5 +1,4 @@
 class Public::RelationshipsController < ApplicationController
-
   def create
   end
 

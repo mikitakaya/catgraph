@@ -23,4 +23,13 @@
   </div>
 <% end %>
 
-<%= render "public/shared/links" %>
+   <h3>
+    <span>
+     会員登録がお済みでない方
+    </span>
+   </h3>
+   <div class="field">
+    <%= link_to "こちら", new_user_registration_path, class: "sign_up" %>
+    から新規登録を行なってください。
+   </div>
+  </div>

@@ -1,43 +1,117 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Catgraph</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+   <title>Catgraph</title>
+   <meta name="viewport" content="width=device-width,initial-scale=1">
+   <%= csrf_meta_tags %>
+   <%= csp_meta_tag %>
 
-    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+   <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+   <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+   <!-- FontAwesomeの読み込み -->
+   <script src="https://kit.fontawesome.com/6eb889a2d4.js" crossorigin="anonymous"></script>
   </head>
 
   <body>
+   <header class="color">
+    <nav class="navbar navbar-expand-lg navbar-light">
+     <div class="container">
 
-   <header>
-    <% if user_signed_in? %>
-     <li>
-      <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
-     </li>
-     <% else %>
-      <li>
-       <%= link_to "新規登録", new_user_registration_path %>
-      </li>
-      <li>
-       <%= link_to "ログイン", new_user_session_path %>
-      </li>
-      <li>
-       <%= link_to 'ゲストログイン', users_guest_sign_in_path, method: :post %>
-      </li>
-     <% end %>
-   </header>
+      <!-- アイコン -->
+      <!--%= link_to '/', class: "navbar-brand" do %>-->
+       <!--%= image_tag "logo(2).png", size: "90x30" %>-->
+      <!--% end %>-->
 
-   <main>
-    <p id="notice">
-     <%= flash[:notice] %>
-    </p>
-    <%= yield %>
-   </main>
+      <!-- ナビゲーションバー -->
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+       <span class="navbar-toggler-icon"></span>
+      </button>
 
-   <footer></footer>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+       <ul class="navbar-nav ml-auto">
+
+       <!-- 条件1：admin（管理者）はログインしていますか？ -->
+       <% if admin_signed_in? %>
+
+        <!-- trueの場合、ここから管理者用のヘッダー -->
+        <li>
+         <%= link_to "ユーザー一覧", admin_users_path, class: "nav-link" %>
+        </li>
+
+        <li>
+         <%= link_to "投稿一覧", admin_post_images_path, class: "nav-link" %>
+        </li>
+
+        <li>
+         <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "nav-link" %>
+        </li>
+        <!-- ここまで管理者用のヘッダー -->
+
+       <!-- 条件1がfalse, 条件2:user（ユーザー）はログインしていますか？ -->
+       <% elsif user_signed_in? %>
+
+        <!-- trueの場合、ここからユーザー用のヘッダー -->
+        <li>
+         <%= link_to "マイページ", user_path(current_user.id), class: "nav-link" %>
+        </li>
+
+        <!-- ログインユーザーの名前が「ゲスト」の場合、表示しない -->
+        <% if current_user.name != "ゲスト" %>
+         <li>
+          <%= link_to "新規投稿", new_post_image_path, class: "nav-link" %>
+         </li>
+        <% end %>
+
+        <li>
+         <%= link_to "投稿一覧", post_images_path, class: "nav-link" %>
+        </li>
+
+        <!-- ログイン中ユーザーの名前が「ゲスト」の場合、表示しない -->
+        <% if current_user.name != "ゲスト" %>
+         <li>
+          <%= link_to "お気に入り", favorites_path, class: "nav-link" %>
+         </li>
+        <% end %>
+
+        <li>
+         <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "nav-link" %>
+        </li>
+        <!-- ここまでユーザー用のヘッダー -->
+
+       <!-- ここから管理者もユーザーもログアウト状態用のヘッダー -->
+       <% else %>
+        <li>
+         <%= link_to "About", about_path, class: "nav-link" %>
+        </li>
+
+        <li>
+         <%= link_to "新規登録", new_user_registration_path, class: "nav-link" %>
+        </li>
+
+        <li>
+         <%= link_to "ログイン", new_user_session_path, class: "nav-link" %>
+        </li>
+
+        <li>
+         <%= link_to 'ゲストログイン', users_guest_sign_in_path, method: :post, class: "nav-link" %>
+        </li>
+       <% end %>
+
+      </ul>
+     </div>
+    </div>
+   </nav>
+  </header>
+
+  <main>
+   <p id="notice">
+    <%= flash[:notice] %>
+   </p>
+   <%= yield %>
+  </main>
+
+  <footer></footer>
 
   </body>
 </html>
