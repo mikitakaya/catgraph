@@ -1,12 +1,70 @@
-<h1>Public::Users#show</h1>
-<p>Find me in app/views/public/users/show.html.erb</p>
-
 <div class="container">
  <div class="row">
-  <style></style>
+  <style>
+   .profile_image {
+    border-radius: 50%; /* プロフィール画像の形を丸にする */
+   }
+  </style>
 
-  <div class="col-lg-4">
+  <div class="col-lg-4 col-md-5">
+   <h3>
+    <span>マイページ</span>
+   </h3>
+
+   <div class="profile_image">
+    プロフィール写真
+    <%= image_tag @user.get_profile_image(100,100), class: "profile_image" %><br />
+    <!-- ログイン中のユーザーですか -->
+    <% if @user = current_user %>
+     <!-- ログインユーザーの名前が「ゲスト」の場合、表示しない -->
+     <% if current_user.name != "ゲスト" %>
+      <%= link_to "編集する", edit_user_path(@user.id), class: "btn btn-success" %>
+     <% end %>
+    <% end %>
+   </div>
+
+   <div class="info">
+    <%= @post_images.count %>投稿
+    ◯フォロワー
+    ◯フォロー中
+    <table class="table">
+     <tbody>
+      <tr>
+       <th>名前</th>
+       <td><%= @user.name %></td>
+      </tr>
+
+      <tr>
+       <th>ユーザー名</th>
+       <td><%= @user.username %></td>
+      </tr>
+
+      <tr>
+       <th>自己紹介</th>
+       <th><%= @user.introduction %></th>
+      </tr>
+
+     </tbody>
+    </table>
+   </div>
+  </div>
+
+  <div class="col-lg-7 offset-1">
+   <!-- post_imageがまだ無い場合 -->
+   <% if @post_images.empty? %>
+    <h3>投稿がありません</h3>
+   <% else %>
+
+    <% @post_images.each do |post_image| %>
+     <div class="post_images">
+      <%= link_to post_image_path(post_image.id) do %>
+       <%= image_tag post_image.get_image %>
+      <% end %>
+     </div>
+    <% end %>
+   <% end %>
 
   </div>
+
  </div>
 </div>

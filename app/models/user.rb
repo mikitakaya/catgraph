@@ -23,4 +23,14 @@ class User < ApplicationRecord
     end
   end
 
+  def get_profile_image(width, height)
+   unless profile_image.attached?
+    file_path = Rails.root.join('app/assets/images/default-image.jpg')
+    profile_image.attach(io: File.open(file_path), filename: 'default-image.jpg', content_type: 'image/jpeg')
+   end
+   profile_image.variant(resize_to_limit: [width, height]).processed
+  end
+
+  # ステータス true:退会、false:有効
+  enum is_deleted: { no_active: true, active: false}
 end
