@@ -1,2 +1,51 @@
-<h1>Public::Users#edit</h1>
-<p>Find me in app/views/public/users/edit.html.erb</p>
+<div class="container">
+ <div class="row">
+  <style>
+   textarea {
+    width: 50%;
+   }
+  </style>
+
+  <div class="col-12">
+   <h3>
+    <span>プロフィールを編集</span>
+   </h3>
+  </div>
+
+
+  <div class="col-lg-4">
+   <%= form_with model: @user, url: user_path do |f| %>
+   <div class="field">
+    <%= f.label :profile_image, "プロフィール写真" %><br />
+    <%= f.file_field :profile_image, accept: "image/*" %>
+   </div>
+  </div>
+
+  <div class="col-lg-7 offset-1">
+   <div class="field">
+    <%= f.label :name, "名前" %>
+    <%= f.text_field :name, class: "text_field" %>
+   </div>
+
+   <div class="field">
+    <%= f.label :username, "ユーザー名" %>
+    <%= f.text_field :username, class: "text_field" %>
+   </div>
+
+   <div class="field">
+    <%= f.label :introduction, class: "text_field" %>
+    <%= f.text_area :introduction, size: "1x8" %>
+   </div>
+
+   <div class="field">
+    <%= f.label :email, "メールアドレス" %>
+    <%= f.text_field :email, class: "text_field" %>
+   </div>
+
+   <%= f.submit "編集内容を保存する", class: "btn btn-success" %>
+   <%= link_to "退会する", unsubscribe_path, class: "btn btn-danger" %>
+  <% end %>
+  </div>
+
+ </div>
+</div>
