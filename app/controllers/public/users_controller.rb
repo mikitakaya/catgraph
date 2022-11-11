@@ -13,7 +13,7 @@ class Public::UsersController < ApplicationController
   end
 
   def update
-   # ログイン中のユーザー
+   # レコードを1件だけ取得
    @user = User.find(params[:id])
    @user.update(user_params)
    redirect_to user_path(@user.id)
