@@ -1,2 +1,40 @@
-<h1>Public::PostImages#show</h1>
-<p>Find me in app/views/public/post_images/show.html.erb</p>
+<div class="container">
+ <div class="row">
+  <style>
+   .cat-image {
+    width: 600px;
+    height: 600px;
+   }
+
+   .profile_image {
+    border-radius: 50%; /* プロフィール画像の形を丸にする */
+   }
+  </style>
+
+  <div class="col-6">
+   <div class="image">
+    <%= image_tag @post_image.image, class: "cat-image" %>
+   </div>
+  </div>
+
+  <div class="col-5 offset-1">
+   <div class="field">
+    <div class="user">
+     <%= link_to user_path(@user.id) do %>
+      <%= image_tag @user.get_profile_image(70,70), class: "profile_image" %>
+      <%= @user.name %>
+     <% end %>
+     
+     
+    </div>
+
+    <div class="text">
+     <p>タイトル：<%= @post_image.title %></p>
+     <p>本文：<%= @post_image.body %></p>
+     <p><%= @post_image.created_at.strftime('%Y/%m/%d %H:%M') %></p>
+    </div>
+   </div>
+  </div>
+
+ </div>
+</div>

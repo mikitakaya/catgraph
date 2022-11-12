@@ -4,6 +4,11 @@
    .profile_image {
     border-radius: 50%; /* プロフィール画像の形を丸にする */
    }
+
+   .post_image {
+    width: 200px;
+    height: 200px;
+   }
   </style>
 
   <div class="col-lg-4 col-md-5">
@@ -58,7 +63,7 @@
     <% @post_images.each do |post_image| %>
      <div class="post_images">
       <%= link_to post_image_path(post_image.id) do %>
-       <%= image_tag post_image.get_image %>
+       <%= image_tag post_image.image, class: "post_image" %>
       <% end %>
      </div>
     <% end %>
