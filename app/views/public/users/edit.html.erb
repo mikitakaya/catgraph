@@ -1,55 +1,55 @@
 <div class="container">
- <div class="row">
   <style>
    textarea {
     width: 50%;
    }
   </style>
 
-  <div class="col-12">
-   <h3>
-    <span>プロフィールを編集</span>
-   </h3>
-  </div>
 
 
-  <div class="col-lg-4">
-<<<<<<< HEAD
-   <%= form_with model: @user, url: user_path(@user.id), method: :patch do |f| %>
-=======
-   <%= form_with model: @user, url: user_path do |f| %>
->>>>>>> origin/main
-   <div class="field">
-    <%= f.label :profile_image, "プロフィール写真" %><br />
-    <%= f.file_field :profile_image, accept: "image/*" %>
-   </div>
-  </div>
 
-  <div class="col-lg-7 offset-1">
-   <div class="field">
-    <%= f.label :name, "名前" %>
-    <%= f.text_field :name, class: "text_field" %>
+  <%= form_with model: @user, url: user_path(@user.id), method: :patch do |f| %>
+   <div class="row">
+    <div class="col-12">
+     <h3>
+      <span>プロフィールを編集</span>
+     </h3>
+    </div>
    </div>
 
-   <div class="field">
-    <%= f.label :username, "ユーザー名" %>
-    <%= f.text_field :username, class: "text_field" %>
-   </div>
+   <div class="row">
+    <div class="col-4">
+     <div class="field">
+      <%= f.label :profile_image, "プロフィール写真" %><br />
+      <%= f.file_field :profile_image, accept: "image/*" %>
+     </div>
+    </div>
 
-   <div class="field">
-    <%= f.label :introduction, class: "text_field" %>
-    <%= f.text_area :introduction, size: "1x8" %>
-   </div>
+    <div class="col-7 offset-1">
+     <div class="field">
+      <%= f.label :name, "名前" %>
+      <%= f.text_field :name, class: "text_field" %>
+     </div>
 
-   <div class="field">
-    <%= f.label :email, "メールアドレス" %>
-    <%= f.text_field :email, class: "text_field" %>
-   </div>
+     <div class="field">
+      <%= f.label :username, "ユーザー名" %>
+      <%= f.text_field :username, class: "text_field" %>
+     </div>
 
-   <%= f.submit "編集内容を保存する", class: "btn btn-success" %>
-   <%= link_to "退会する", unsubscribe_path, class: "btn btn-danger" %>
+     <div class="field">
+      <%= f.label :introduction, class: "text_field" %>
+      <%= f.text_area :introduction, size: "1x8" %>
+     </div>
+
+     <div class="field">
+      <%= f.label :email, "メールアドレス" %>
+      <%= f.text_field :email, class: "text_field" %>
+     </div>
+
+     <%= f.submit "編集内容を保存する", class: "btn btn-success" %>
+     <%= link_to "退会する", unsubscribe_path, class: "btn btn-danger" %>
+    </div>
+   </div>
   <% end %>
-  </div>
 
- </div>
 </div>
