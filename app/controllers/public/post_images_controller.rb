@@ -11,7 +11,7 @@ class Public::PostImagesController < ApplicationController
    @post_image.user_id = current_user.id
    # データをデータベースに保存する
    @post_image.save
-   # 保存後、投稿の詳細ページにリダイレクトする
+   # 保存後、投稿の詳細画面にリダイレクトする
    redirect_to post_image_path(@post_image.id)
   end
 
@@ -19,18 +19,26 @@ class Public::PostImagesController < ApplicationController
   end
 
   def show
+   # レコードを1件だけ取得
    @post_image = PostImage.find(params[:id])
    @user = @post_image.user
   end
 
   def edit
-   
+   # レコードを1件だけ取得
+   @post_image = PostImage.find(params[:id])
   end
 
   def update
   end
 
   def destroy
+   # レコードを1件だけ取得
+   @post_image = PostImage.find(params[:id])
+   # レコードを削除
+   @post_image.destroy
+   # レコードを削除後、投稿一覧画面にリダイレクトする
+   redirect_to post_images_path
   end
 
   private

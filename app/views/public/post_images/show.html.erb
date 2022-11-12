@@ -19,14 +19,16 @@
 
   <div class="col-5 offset-1">
    <div class="field">
-    <div class="user">
-     <%= link_to user_path(@user.id) do %>
-      <%= image_tag @user.get_profile_image(70,70), class: "profile_image" %>
-      <%= @user.name %>
-     <% end %>
-     
-     
-    </div>
+    <%= link_to user_path(@user.id) do %>
+     <%= image_tag @user.get_profile_image(70,70), class: "profile_image" %>
+     <%= @user.name %>
+    <% end %>
+
+    <!-- 投稿者＝ログインユーザーの場合、以下を表示する -->
+    <% if @post_image.user == current_user %>
+     <%= link_to "編集", edit_post_image_path(@post_image.id), class: "btn btn-success" %>
+     <%= link_to "削除", post_image_path(@post_image), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-danger" %>
+    <% end %>
 
     <div class="text">
      <p>タイトル：<%= @post_image.title %></p>
