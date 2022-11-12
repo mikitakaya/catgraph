@@ -13,9 +13,15 @@ class Public::UsersController < ApplicationController
   end
 
   def update
+<<<<<<< HEAD
    # レコードを1件だけ取得
    @user = User.find(params[:id])
    @user.update(user_params)
+=======
+   # ログイン中のユーザー
+   @user = current_user
+   @user.update(user_params_update)
+>>>>>>> origin/main
    redirect_to user_path(@user.id)
   end
 
@@ -27,7 +33,11 @@ class Public::UsersController < ApplicationController
 
   private
   # ユーザーデータのストロングパラメータ
+<<<<<<< HEAD
   def user_params
+=======
+  def user_params_update
+>>>>>>> origin/main
    params.require(:user).permit(:name, :username, :introduction, :email, :is_deleted, :profile_image)
   end
 
