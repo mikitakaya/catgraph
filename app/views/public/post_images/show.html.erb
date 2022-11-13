@@ -11,32 +11,35 @@
    }
   </style>
 
-  <div class="col-6">
+  <div class="col-lg-6">
    <div class="image">
     <%= image_tag @post_image.image, class: "cat-image" %>
    </div>
   </div>
 
-  <div class="col-5 offset-1">
+  <div class="col-lg-5 offset-1">
    <div class="field">
     <%= link_to user_path(@user.id) do %>
      <%= image_tag @user.get_profile_image(70,70), class: "profile_image" %>
      <%= @user.name %>
     <% end %>
 
-    <!-- 投稿者＝ログインユーザーの場合、以下を表示する -->
-    <% if @post_image.user == current_user %>
-     <%= link_to "編集", edit_post_image_path(@post_image.id), class: "btn btn-success" %>
-     <%= link_to "削除", post_image_path(@post_image), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-danger" %>
-    <% end %>
-
-    <div class="text">
-     <p>タイトル：<%= @post_image.title %></p>
-     <p>本文：<%= @post_image.body %></p>
-     <p><%= @post_image.created_at.strftime('%Y/%m/%d %H:%M') %></p>
+    <div class="btn">
+     <!-- 投稿者＝ログインユーザーの場合、以下を表示する -->
+     <% if @post_image.user == current_user %>
+      <%= link_to "編集", edit_post_image_path(@post_image.id), class: "btn btn-success" %>
+      <%= link_to "削除", post_image_path(@post_image), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-danger" %>
+     <% end %>
     </div>
    </div>
-  </div>
 
+   <div class="text">
+    <p>タイトル：<%= @post_image.title %></p>
+    <!-- text_areaに入力されたまま出力する -->
+    <p>本文：<%= safe_join(@post_image.body.split("\n"),tag(:br)) %></p>
+    <p><%= @post_image.created_at.strftime('%Y/%m/%d %H:%M') %></p>
+   </div>
+
+  </div>
  </div>
 </div>
