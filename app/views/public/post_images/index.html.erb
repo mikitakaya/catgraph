@@ -5,6 +5,7 @@
     width: 230px;
     height: 230px;
     object-fit: cover; /* 中央でトリミング */
+    display: inline-block;
    }
 
    .pagination {
@@ -19,11 +20,13 @@
   </div>
 
   <div class="col-lg-12">
-   <% @post_images.each do |post_image| %>
-    <%= link_to post_image_path(post_image.id) do %>
-     <%= image_tag post_image.image, class: "post_image" %>
+   <div class="post" style="text-align: center;">
+    <% @post_images.each do |post_image| %>
+      <%= link_to post_image_path(post_image.id) do %>
+       <%= image_tag post_image.image, class: "post_image" %>
+      <% end %>
     <% end %>
-   <% end %>
+   </div>
    <%= paginate @post_images %>
   </div>
  </div>

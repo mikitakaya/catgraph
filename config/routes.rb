@@ -31,13 +31,13 @@ Rails.application.routes.draw do
     patch 'users/withdraw' => "users#withdraw", as: "withdraw"
 
     # public/post_images
-    resources :post_images
+    resources :post_images do
+     # public/favorites
+     resource :favorites, only: [:index, :create, :destroy]
 
-    # public/favorites
-    resources :favorites, only: [:index, :create, :destroy]
-
-    # public/post_comments
-    resources :post_comments, only: [:create, :destroy]
+     # public/post_comments
+     resources :post_comments, only: [:create, :destroy]
+    end
 
     # public/relationships
     resources :relationships, only: [:create, :destroy]
