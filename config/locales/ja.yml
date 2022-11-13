@@ -1,4 +1,11 @@
+# 投稿日時の表示設定
 ja:
  time:
   formats:
    default: "%Y/%m/%d %H:%M"
+
+ # ページネーションの表記変更
+ views:
+  pagination:
+   next: "Next>"
+   last: "Last>>"

@@ -1,16 +1,18 @@
 <div class="container">
  <div class="row">
   <style>
-
+   textarea {
+    width: 50%;
+   }
   </style>
 
-  <div class="col-12">
+  <div class="col-lg-12">
    <h3>
     <span>投稿編集</span>
    </h3>
   </div>
 
-  <div class="mx-auto">
+  <div class="col-lg-12">
    <%= form_with model: @post_image do |f| %>
     <div class="field">
      <%= f.label :image, "画像" %>
@@ -26,7 +28,6 @@
      <%= f.label :body, "本文" %>
      <%= f.text_area :body %>
     </div>
-
     <%= f.submit "変更を保存" %>
    <% end %>
   </div>
