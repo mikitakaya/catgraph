@@ -9,12 +9,12 @@ class Public::UsersController < ApplicationController
 
   def edit
    # レコードを1件だけ取得
-   @user = current_user
+   @user = User.find(params[:id])
   end
 
   def update
-   # ログイン中のユーザー
-   @user = current_user
+   # レコードを1件だけ取得
+   @user = User.find(params[:id])
    @user.update(user_params)
    redirect_to user_path(@user.id)
   end
