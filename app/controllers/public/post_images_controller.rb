@@ -16,11 +16,14 @@ class Public::PostImagesController < ApplicationController
   end
 
   def index
+   # 1ページあたりの表示件数を「8件」に設定
+   @post_images = PostImage.page(params[:page]).per(8)
   end
 
   def show
    # レコードを1件だけ取得
    @post_image = PostImage.find(params[:id])
+   # ユーザー＝投稿したユーザー
    @user = @post_image.user
   end
 
@@ -30,8 +33,11 @@ class Public::PostImagesController < ApplicationController
   end
 
   def update
+   # レコードを1件だけ取得
    @post_image = PostImage.find(params[:id])
+   # データを更新する
    @post_image.update(post_image_params)
+   # 更新後、投稿詳細画面にリダイレクトする
    redirect_to post_image_path(@post_image.id)
   end
 

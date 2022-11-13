@@ -8,6 +8,7 @@
    .post_image {
     width: 200px;
     height: 200px;
+    object-fit: cover; /* 中央でトリミング */
    }
   </style>
 
@@ -55,11 +56,11 @@
   </div>
 
   <div class="col-lg-7 offset-1">
-   <!-- post_imageがまだ無い場合 -->
+   <!-- post_imageが無い場合 -->
    <% if @post_images.empty? %>
     <h3>投稿がありません</h3>
+   <!-- post_imageがある場合 -->
    <% else %>
-
     <% @post_images.each do |post_image| %>
      <div class="post_images">
       <%= link_to post_image_path(post_image.id) do %>
@@ -67,6 +68,7 @@
       <% end %>
      </div>
     <% end %>
+    <%= paginate @post_images %>
    <% end %>
 
   </div>

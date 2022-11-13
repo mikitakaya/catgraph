@@ -1,9 +1,10 @@
 <div class="container">
  <div class="row">
   <style>
-   .cat-image {
+   .post_image {
     width: 600px;
     height: 600px;
+    object-fit: contain; /* ボックスに収まるようにリサイズする */
    }
 
    .profile_image {
@@ -13,7 +14,7 @@
 
   <div class="col-lg-6">
    <div class="image">
-    <%= image_tag @post_image.image, class: "cat-image" %>
+    <%= image_tag @post_image.image, class: "post_image" %>
    </div>
   </div>
 
@@ -37,7 +38,7 @@
     <p>タイトル：<%= @post_image.title %></p>
     <!-- text_areaに入力されたまま出力する -->
     <p>本文：<%= safe_join(@post_image.body.split("\n"),tag(:br)) %></p>
-    <p><%= @post_image.created_at.strftime('%Y/%m/%d %H:%M') %></p>
+    <p><%= l @post_image.created_at %></p>
    </div>
 
   </div>
