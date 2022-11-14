@@ -26,14 +26,18 @@ Rails.application.routes.draw do
     get 'about' => "homes#about", as: "about"
 
     # public/users
-    resources :users, only: [:show, :edit, :update]
+    resources :users, only: [:show, :edit, :update] do
+     member do
+      get :favorites
+     end
+    end
     get 'users/unsubscribe' => "users#unsubscribe", as: "unsubscribe"
     patch 'users/withdraw' => "users#withdraw", as: "withdraw"
 
     # public/post_images
     resources :post_images do
      # public/favorites
-     resource :favorites, only: [:index, :create, :destroy]
+     resource :favorites, only: [:create, :destroy]
 
      # public/post_comments
      resources :post_comments, only: [:create, :destroy]

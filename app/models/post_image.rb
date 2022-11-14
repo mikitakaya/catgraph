@@ -8,6 +8,7 @@ class PostImage < ApplicationRecord
   has_many :post_comments, dependent: :destroy
   # post_image（1）はfavorite（N）を複数持っている
   has_many :favorites, dependent: :destroy
+  has_many :favorited_users, through: :likes, source: :user
 
   def favorited_by?(user)
     favorites.exists?(user_id: user.id)

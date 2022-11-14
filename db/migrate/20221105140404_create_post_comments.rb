@@ -5,6 +5,8 @@ class CreatePostComments < ActiveRecord::Migration[6.1]
       t.integer :user_id, null: false
       # 投稿IDを保存するカラム
       t.integer :post_image_id, null: false
+      # コメントを保存するカラム
+      t.text :comment
       t.timestamps
     end
   end

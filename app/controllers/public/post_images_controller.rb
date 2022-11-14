@@ -25,6 +25,8 @@ class Public::PostImagesController < ApplicationController
    @post_image = PostImage.find(params[:id])
    # ユーザー＝投稿したユーザー
    @user = @post_image.user
+   # 空のモデルを用意する
+   @post_comment = PostComment.new
   end
 
   def edit

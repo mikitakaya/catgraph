@@ -40,19 +40,45 @@
     <p>本文：<%= safe_join(@post_image.body.split("\n"),tag(:br)) %></p>
     <p><%= l @post_image.created_at %></p>
 
-    <% if @post_image.favorited_by?(current_user) %>
-     <p>
-      <%= link_to post_image_favorites_path(@post_image), method: :delete do %>
-       ♥<%= @post_image.favorites.count %> いいね
+    <div class="count">
+     <div class="favorites">
+      <% if @post_image.favorited_by?(current_user) %>
+       <p>
+        <%= link_to post_image_favorites_path(@post_image), method: :delete do %>
+         ♥<%= @post_image.favorites.count %> いいね
+        <% end %>
+       </p>
+      <% else %>
+       <p>
+        <%= link_to post_image_favorites_path(@post_image), method: :post do %>
+         ♡<%= @post_image.favorites.count %> いいね
+        <% end %>
+       </p>
       <% end %>
-     </p>
-    <% else %>
-     <p>
-      <%= link_to post_image_favorites_path(@post_image), method: :post do %>
-       ♡<%= @post_image.favorites.count %> いいね
+     </div>
+     <p>コメント件数：<%= @post_image.post_comments.count %></p>
+    </div>
+
+    <div class="comments">
+     <% @post_image.post_comments.each do |post_comment| %>
+      <%= image_tag post_comment.user.get_profile_image(50,50) %>
+      <%= post_comment.user.name %>
+      <%= l post_comment.created_at %>
+
+      <% if post_comment.user == current_user %>
+       <%= link_to "削除", post_image_post_comment_path(post_comment.post_image, post_comment), method: :delete, class: "btn btn-primary" %><br />
       <% end %>
-     </p>
-    <% end %>
+
+      <%= post_comment.comment %>
+     <% end %>
+    </div>
+    <div class="form">
+     <%= form_with model: [@post_image, @post_comment] do |f| %>
+      <%= f.text_area :comment, placeholder: "コメントを入力してください" %>
+      <%= f.submit "送信" %>
+     <% end %>
+    </div>
+
    </div>
 
   </div>

@@ -14,6 +14,7 @@ class User < ApplicationRecord
   has_many :post_comments, dependent: :destroy
   # user（1）はfavorite（N）を複数持っている
   has_many :favorites, dependent: :destroy
+  has_many :favorited_post_images, through: :likes, source: :post
 
   def self.guest
     find_or_create_by!(name: 'ゲスト' ,email: 'cg_guest@example.com') do |user|
@@ -29,6 +30,10 @@ class User < ApplicationRecord
     profile_image.attach(io: File.open(file_path), filename: 'default-image.jpg', content_type: 'image/jpeg')
    end
    profile_image.variant(resize_to_limit: [width, height]).processed
+  end
+
+  def favorited_by?(post_image_id)
+   favorites.where(post_image_id: post_image_id).exists?
   end
 
   # ステータス true:退会、false:有効
