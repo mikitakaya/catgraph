@@ -1,4 +1,6 @@
 class Public::PostImagesController < ApplicationController
+  before_action :set_user, only: [:new, :index]
+
   def new
    # 空のモデルを用意する
    @post_image = PostImage.new
@@ -16,7 +18,6 @@ class Public::PostImagesController < ApplicationController
   end
 
   def index
-   @user = current_user
    # 1ページあたりの表示件数を「8件」に設定
    @post_images = PostImage.page(params[:page]).per(8)
   end
@@ -54,6 +55,11 @@ class Public::PostImagesController < ApplicationController
   end
 
   private
+
+  def set_user
+   @user = current_user
+  end
+
   # 投稿データのストロングパラメータ
   def post_image_params
    params.require(:post_image).permit(:user_id, :title, :body, :image)
