@@ -1,5 +1,4 @@
 class Public::PostImagesController < ApplicationController
-  before_action :set_user, only: [:new, :index]
 
   def new
    # 空のモデルを用意する
@@ -55,10 +54,6 @@ class Public::PostImagesController < ApplicationController
   end
 
   private
-
-  def set_user
-   @user = current_user
-  end
 
   # 投稿データのストロングパラメータ
   def post_image_params
