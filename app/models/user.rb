@@ -16,6 +16,10 @@ class User < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :favorited_post_images, through: :likes, source: :post
 
+  # フォローをした、されたの関係
+  has_many :relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
+  has_many :reverse_of_relationships, classs_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
+
   def self.guest
     find_or_create_by!(name: 'ゲスト' ,email: 'cg_guest@example.com') do |user|
       user.password = SecureRandom.urlsafe_base64
