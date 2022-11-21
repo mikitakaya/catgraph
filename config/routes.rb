@@ -27,9 +27,15 @@ Rails.application.routes.draw do
 
     # public/users
     resources :users, only: [:show, :edit, :update] do
+      # いいね一覧
       collection do
         get :favorites
       end
+
+      # public/relationships
+      resource :relationships, only: [:create, :destroy]
+      get 'followings' => 'relationships#followings', as: 'followings'
+      get 'followers' => 'relationships#followers', as: 'followers'
     end
     get 'users/unsubscribe' => "users#unsubscribe", as: "unsubscribe"
     patch 'users/withdraw' => "users#withdraw", as: "withdraw"
@@ -43,10 +49,7 @@ Rails.application.routes.draw do
       resources :post_comments, only: [:create, :destroy]
     end
 
-    # public/relationships
-    resources :relationships, only: [:create, :destroy]
-    get 'followings' => 'relationships#followings', as: 'followings'
-    get 'followers' => 'relationships#followers', as: 'followers'
+
   end
 
   # 管理者用

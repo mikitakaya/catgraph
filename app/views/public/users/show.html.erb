@@ -28,6 +28,14 @@
       <%= link_to "編集する", edit_user_path(@user), class: "btn btn-success" %>
      <% end %>
     <% end %>
+
+    <% if @user != current_user %>
+     <% if current_user.following?(@user) %>
+      <%= link_to "フォロー中", user_relationships_path(@user.id), class: "btn btn-success", method: :delete %>
+     <% else %>
+      <%= link_to "フォローする", user_relationships_path(@user.id), class: "btn btn-primary", method: :post %>
+     <% end %>
+    <% end %>
    </div>
 
    <div class="info">

@@ -1,9 +1,9 @@
 class Public::UsersController < ApplicationController
 
   def show
-  # 1ページあたりの表示件数を「6件」に設定
-   @post_images = @user.post_images.page(params[:page]).per(6)
    @user = User.find(params[:id])
+   # 1ページあたりの表示件数を「6件」に設定
+   @post_images = @user.post_images.page(params[:page]).per(6)
   end
 
   def edit

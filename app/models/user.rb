@@ -18,7 +18,11 @@ class User < ApplicationRecord
 
   # フォローをした、されたの関係
   has_many :relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
-  has_many :reverse_of_relationships, classs_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
+  has_many :reverse_of_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
+
+  # 一覧画面で使用
+  has_many :followings, through: :relationships, source: :followed
+  has_many :followers, through: :reverse_of_relationships, source: :follower
 
   def self.guest
     find_or_create_by!(name: 'ゲスト' ,email: 'cg_guest@example.com') do |user|
@@ -38,6 +42,21 @@ class User < ApplicationRecord
 
   def favorited_by?(post_image_id)
    favorites.where(post_image_id: post_image_id).exists?
+  end
+
+  # フォローをする
+  def follow(user_id)
+   relationships.create(followed_id: user_id)
+  end
+
+  # フォローを外す
+  def unfollow(user_id)
+   relationships.find_by(followed_id: user_id).destroy
+  end
+
+  # フォローをしているか判定
+  def following?(user)
+   followings.include?(user)
   end
 
   # ステータス true:退会、false:有効
