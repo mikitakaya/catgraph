@@ -36,6 +36,11 @@
       <%= link_to "フォローする", user_relationships_path(@user.id), class: "btn btn-primary", method: :post %>
      <% end %>
     <% end %>
+
+    <!-- ユーザーはログイン中ユーザーをフォローしていますか？ -->
+    <% if user.following?(current_user) %>
+     <p>フォローされています</p>
+    <% end %>
    </div>
 
    <div class="info">

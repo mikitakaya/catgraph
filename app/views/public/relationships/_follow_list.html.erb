@@ -1,17 +1,48 @@
+<style>
+ .profile_image {
+   border-radius: 50%; /* プロフィール画像の形を丸にする */
+   object-fit: cover; /* 中央でトリミング */
+  }
+</style>
+
 <% if users.exists? %>
  <% users.each do |user| %>
   <table>
-   <thead>
+   <tbody style="display:flex;">
+    <%= link_to user_path(user.id) do %>
      <tr>
-      <th>name</th>
-      <th></th>
-      <th></th>
+      <th class="profile_image">
+       <%= image_tag user.get_profile_image(100, 100), class: "profile_image" %>
+      </th>
      </tr>
-   </thead>
-   
-   <tbody>
+
+     <tr>
+      <th><%= user.name %><br />
+      <%= user.username %></th>
+     </tr>
+    <% end %>
+
     <tr>
-     <td><%= user.name %></td>
+     <td>
+      <%= user.introduction %>
+     </td>
+    </tr>
+
+    <tr>
+     <th>
+      <% if user != current_user %>
+       <% if current_user.following?(user) %>
+        <%= link_to "フォロー中", user_relationships_path(user.id), class: "btn btn-success", method: :delete %>
+       <% else %>
+        <%= link_to "フォローする", user_relationships_path(user.id), class: "btn btn-primary", method: :post %>
+       <% end %>
+      <% end %><br />
+
+      <!-- ユーザーはログイン中ユーザーをフォローしていますか？ -->
+      <% if user.following?(current_user) %>
+       <p>フォローされています</p>
+      <% end %>
+     </th>
     </tr>
    </tbody>
   </table>
