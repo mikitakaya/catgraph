@@ -1,2 +1,64 @@
-<h1>Admin::PostImages#show</h1>
-<p>Find me in app/views/admin/post_images/show.html.erb</p>
+<div class="container">
+ <div class="row">
+  <style>
+   .post_image {
+    width: 600px;
+    height: 600px;
+    object-fit: contain; /* ボックスに収まるようにリサイズする */
+   }
+
+   .profile_image {
+    border-radius: 50%; /* プロフィール画像の形を丸にする */
+   }
+  </style>
+
+  <div class="col-lg-7">
+   <div class="image">
+    <%= image_tag @post_image.image, class: "post_image" %>
+   </div>
+  </div>
+
+  <div class="col-lg-5">
+   <div class="field">
+    <%= link_to admin_user_path(@user) do %>
+     <%= image_tag @user.get_profile_image(70,70), class: "profile_image" %>
+     <%= @user.name %>
+    <% end %>
+
+    <div class="btn">
+     <%= link_to "削除", admin_post_image_path(@post_image), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-danger" %>
+    </div>
+   </div>
+
+   <div class="text">
+    <p>タイトル：<%= @post_image.title %></p>
+    <!-- text_areaに入力されたまま出力する -->
+    <p>本文：<%= safe_join(@post_image.body.split("\n"),tag(:br)) %></p>
+    <p><%= l @post_image.created_at %></p>
+
+    <div class="count">
+     <div class="favorites">
+      <p>
+       ♡<%= @post_image.favorites.count %> いいね
+      </p>
+     </div>
+     <p>コメント件数：<%= @post_image.post_comments.count %></p>
+    </div>
+
+    <div class="comments">
+     <% @post_image.post_comments.each do |post_comment| %>
+      <%= link_to admin_user_path(post_comment.user.id) do %>
+       <%= image_tag post_comment.user.get_profile_image(50,50), class: "profile_image" %>
+       <%= post_comment.user.name %>
+      <% end %>
+
+      <%= l post_comment.created_at %>
+      <%= link_to "削除", admin_post_image_post_comment_path(post_comment.post_image, post_comment), method: :delete, class: "btn btn-primary" %><br />
+      <%= post_comment.comment %><br />
+     <% end %>
+    </div>
+   </div>
+
+  </div>
+ </div>
+</div>

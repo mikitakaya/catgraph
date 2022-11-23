@@ -12,29 +12,29 @@
    <%= render "public/shared/error_messages", resource: resource %>
 
    <div class="field">
-    <%= f.label :name, "名前" %><br />
+    <%= f.label :name, "名前" %>
     <%= f.text_field :name %>
    </div>
 
    <div class="field">
-    <%= f.label :username, "ユーザー名" %><br />
+    <%= f.label :username, "ユーザー名" %>
     <%= f.text_field :username %>
    </div>
 
    <div class="field">
-    <%= f.label :email, "メールアドレス" %><br />
+    <%= f.label :email, "メールアドレス" %>
     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
    </div>
 
    <div class="field">
     <label for="password">
      パスワード<% if @minimum_password_length %>（<%= @minimum_password_length %>文字以上）<% end %>
-    </label><br />
+    </label>
     <%= f.password_field :password, autocomplete: "new-password" %>
    </div>
 
    <div class="field">
-    <label for="password_confirmation">パスワード（確認用）</label> <br />
+    <label for="password_confirmation">パスワード（確認用）</label>
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
    </div>
 

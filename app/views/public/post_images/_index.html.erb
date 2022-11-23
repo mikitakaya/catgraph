@@ -30,8 +30,9 @@
 
    <!-- ログインユーザーの名前が「ゲスト」の場合、表示しない -->
    <% if current_user.name != "ゲスト" %>
-    <%= paginate post_images %>
+    <%= paginate @post_images %>
    <% end %>
   </div>
  </div>
 </div>
+

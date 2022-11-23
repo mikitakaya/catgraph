@@ -61,10 +61,12 @@ Rails.application.routes.draw do
     resources :users, only: [:index, :show, :edit, :update]
 
     # admin/post_images
-    resources :post_images, only: [:index, :show, :destroy]
+    resources :post_images, only: [:show, :destroy] do
+     # admin/post_comments
+     resources :post_comments, only: [:destroy]
+    end
 
-    # admin/post_comments
-    resources :post_comments, only: [:destroy]
+
   end
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
