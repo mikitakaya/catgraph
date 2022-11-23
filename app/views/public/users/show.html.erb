@@ -38,15 +38,21 @@
     <% end %>
 
     <!-- ユーザーはログイン中ユーザーをフォローしていますか？ -->
-    <% if user.following?(current_user) %>
+    <% if @user.following?(current_user) %>
      <p>フォローされています</p>
     <% end %>
    </div>
 
    <div class="info">
     <%= @post_images.count %>投稿
-    ◯フォロワー
-    ◯フォロー中
+    <!-- フォロワー一覧リンク -->
+    <%= link_to user_followers_path(@user) do %>
+     <%= @user.followers.count %>フォロワー
+    <% end %>
+    <!-- フォロー中一覧リンク -->
+    <%= link_to user_followings_path(@user) do %>
+     <%= @user.followings.count %>フォロー中
+    <% end %>
     <table>
      <tbody>
       <tr>

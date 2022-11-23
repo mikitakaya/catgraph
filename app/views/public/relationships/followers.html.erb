@@ -1,1 +1,21 @@
-<%= render 'follow_list', users: @users %>
+<div class="container">
+ <div class="row">
+  <style>
+
+  </style>
+
+  <div class="col-lg-12" style="display:flex;">
+   <h3>
+    <span>フォロワー一覧</span>
+   </h3>
+
+   <div class="following_btn">
+    <%= link_to "フォロー一覧", user_followings_path(@user), class: "btn btn-secondary" %>
+   </div>
+  </div>
+
+  <div class="col-lg-12">
+   <%= render 'follow_list', users: @users %>
+  </div>
+ </div>
+</div>

@@ -10,13 +10,13 @@
    </h3>
 
    <div class="follower_btn">
-    <%= link_to "フォロワー一覧", user_followers_path(current_user.id), class: "btn btn-secondary" %>
+    <%= link_to "フォロワー一覧", user_followers_path(@user), class: "btn btn-secondary" %>
    </div>
   </div>
 
   <div class="col-lg-12">
    <%= render 'follow_list', users: @users %>
   </div>
-  
+
  </div>
 </div>

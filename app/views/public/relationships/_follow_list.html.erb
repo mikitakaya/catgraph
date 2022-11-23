@@ -3,26 +3,26 @@
    border-radius: 50%; /* プロフィール画像の形を丸にする */
    object-fit: cover; /* 中央でトリミング */
   }
+
+  .user_show {
+   cursor: pointer;
+  }
 </style>
 
 <% if users.exists? %>
  <% users.each do |user| %>
   <table>
    <tbody style="display:flex;">
-    <%= link_to user_path(user.id) do %>
-     <tr>
-      <th class="profile_image">
-       <%= image_tag user.get_profile_image(100, 100), class: "profile_image" %>
-      </th>
-     </tr>
+    <tr onclick='window.location="<%= user_path(user) %>"' role="link", class="user_show">
+     <th class="profile_image">
+       <%= image_tag user.get_profile_image(70, 70), class: "profile_image" %>
+     </th>
 
-     <tr>
-      <th><%= user.name %><br />
-      <%= user.username %></th>
-     </tr>
-    <% end %>
+     <th>
+      <%= user.name %><br />
+      <%= user.username %>
+     </th>
 
-    <tr>
      <td>
       <%= user.introduction %>
      </td>
