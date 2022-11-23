@@ -8,10 +8,10 @@
    <h3>"<%= @word %>"の検索結果</h3>
    <!-- 検索対象モデルがUserの場合 -->
    <% if @model == "user" %>
-    <%= render 'relationships/follow_list', users: @records %>
+    <%= render 'public/relationships/follow_list', users: @records %>
    <% elsif @model == "post_image" %>
    <!-- 検索対象モデルがPostImageの場合 -->
-    <%= render 'post_images/index', post_images: @records %>
+    <%= render 'public/post_images/index', post_images: @records %>
    <% end %>
   </div>
  </div>

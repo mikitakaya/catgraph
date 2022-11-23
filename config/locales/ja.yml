@@ -9,3 +9,9 @@ ja:
   pagination:
    next: "Next>"
    last: "Last>>"
+
+ enums:
+  user:
+   is_deleted:
+    active: "有効"
+    no_active: "退会"

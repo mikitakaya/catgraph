@@ -6,7 +6,7 @@ class SearchesController < ApplicationController
    if @model == "user"
     @records = User.search(@word)
    else
-    @records = PostImage.search(@word)
+    @records = PostImage.search(@word).page(params[:page]).per(8).order(id: "DESC")
    end
   end
 end

@@ -55,7 +55,7 @@
    </h3>
 
    <div class="favorites">
-    <% @favorite_post_images.each do |post_image| %>
+    <% @favorited_post_images.each do |post_image| %>
     <div class="img">
      <%= link_to post_image_favorites_path(post_image), class: "cancel_button", method: :delete do %>
       <div class="cancel">
@@ -74,7 +74,7 @@
     <% end %>
 
    </div>
-   <%= paginate @favorite_post_images %>
+   <%= paginate @favorited_post_images %>
   </div>
 
  </div>

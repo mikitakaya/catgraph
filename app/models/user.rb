@@ -14,7 +14,7 @@ class User < ApplicationRecord
   has_many :post_comments, dependent: :destroy
   # user（1）はfavorite（N）を複数持っている
   has_many :favorites, dependent: :destroy
-  has_many :favorited_post_images, through: :likes, source: :post
+  has_many :favorited_post_images, through: :favorites, source: :post_image
 
   # フォローをした、されたの関係
   has_many :relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
@@ -59,8 +59,10 @@ class User < ApplicationRecord
    followings.include?(user)
   end
 
+  # wordに基づいて検索する
   def self.search(word)
-   return User.all unless search
+   # wordでヒット数0の場合（unless word）、全ユーザー情報を返します（return User.all）
+   return User.all unless word
    @user = User.where("name LIKE?","%#{word}%")
   end
 

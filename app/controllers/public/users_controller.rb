@@ -23,8 +23,9 @@ class Public::UsersController < ApplicationController
   end
 
   def favorites
-   favorited_image_ids = Favorite.where(user_id: current_user.id).pluck(:post_image_id)
-   @favorite_post_images = PostImage.where(id: favorited_image_ids).page(params[:page]).per(8)
+   favorited_image_ids = current_user.favorited_post_images.reverse.pluck(:id)
+   @favorited_post_images = PostImage.where(id: favorited_image_ids)
+                                    .order_as_specified(id: favorited_image_ids).page(params[:page]).per(8)
   end
 
   def search
