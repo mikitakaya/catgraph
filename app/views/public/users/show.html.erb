@@ -44,14 +44,17 @@
    </div>
 
    <div class="info">
-    <%= @post_images.count %>投稿
-    <!-- フォロワー一覧リンク -->
-    <%= link_to user_followers_path(@user) do %>
-     <%= @user.followers.count %>フォロワー
-    <% end %>
-    <!-- フォロー中一覧リンク -->
-    <%= link_to user_followings_path(@user) do %>
-     <%= @user.followings.count %>フォロー中
+    <!-- ログインユーザーの名前が「ゲスト」の場合、編集ボタンは表示しない -->
+    <% if current_user.name != "ゲスト" %>
+     <%= @post_images.count %>投稿
+     <!-- フォロワー一覧リンク -->
+     <%= link_to user_followers_path(@user) do %>
+      <%= @user.followers.count %>フォロワー
+     <% end %>
+     <!-- フォロー中一覧リンク -->
+     <%= link_to user_followings_path(@user) do %>
+      <%= @user.followings.count %>フォロー中
+     <% end %>
     <% end %>
     <table>
      <tbody>
