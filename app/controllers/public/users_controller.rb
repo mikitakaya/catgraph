@@ -27,6 +27,10 @@ class Public::UsersController < ApplicationController
    @favorite_post_images = PostImage.where(id: favorited_image_ids).page(params[:page]).per(8)
   end
 
+  def search
+   @users = User.search(params[:word])
+  end
+
   private
 
   # ユーザーデータのストロングパラメータ

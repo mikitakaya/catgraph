@@ -13,4 +13,10 @@ class PostImage < ApplicationRecord
   def favorited_by?(user)
     favorites.exists?(user_id: user.id)
   end
+
+  def self.search(word)
+   return PostImage.all unless search
+   @post_image = PostImage.where("title or body LIKE?", "%#{word}%")
+  end
+
 end

@@ -1,0 +1,18 @@
+<div class="container">
+ <div class="row">
+  <style>
+
+  </style>
+
+  <div class="col-lg-12">
+   <h3>"<%= @word %>"の検索結果</h3>
+   <!-- 検索対象モデルがUserの場合 -->
+   <% if @model == "user" %>
+    <%= render 'relationships/follow_list', users: @records %>
+   <% elsif @model == "post_image" %>
+   <!-- 検索対象モデルがPostImageの場合 -->
+    <%= render 'post_images/index', post_images: @records %>
+   <% end %>
+  </div>
+ </div>
+</div>

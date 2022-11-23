@@ -15,7 +15,11 @@
   </div>
 
   <div class="col-lg-12">
-   <%= render 'follow_list', users: @users %>
+   <% if @users.exists? %>
+    <%= render 'follow_list', users: @users %>
+   <% else %>
+    <p>ユーザーはいません</p>
+   <% end %>
   </div>
 
  </div>

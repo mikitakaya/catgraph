@@ -53,6 +53,10 @@ class Public::PostImagesController < ApplicationController
    redirect_to post_images_path
   end
 
+  def search
+   @post_images = PostImage.search(params[:word])
+  end
+
   private
 
   # 投稿データのストロングパラメータ

@@ -59,6 +59,11 @@ class User < ApplicationRecord
    followings.include?(user)
   end
 
+  def self.search(word)
+   return User.all unless search
+   @user = User.where("name LIKE?","%#{word}%")
+  end
+
   # ステータス true:退会、false:有効
   enum is_deleted: { no_active: true, active: false}
 end

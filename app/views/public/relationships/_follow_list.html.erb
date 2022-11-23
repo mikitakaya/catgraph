@@ -9,7 +9,6 @@
   }
 </style>
 
-<% if users.exists? %>
  <% users.each do |user| %>
   <table>
    <tbody style="display:flex;">
@@ -47,6 +46,3 @@
    </tbody>
   </table>
  <% end %>
-<% else %>
- <p>ユーザーはいません</p>
-<% end %>

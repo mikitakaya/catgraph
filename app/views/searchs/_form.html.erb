@@ -1,0 +1,10 @@
+<!-- ログインしているユーザーですか？ -->
+<% if user_signed_in? %>
+ <div class="search_from">
+  <%= form_with url: search_path, method: :get, local: true do |f| %>
+   <%= f.text_field :word %>
+   <%= f.select :model, options_for_select({ "ユーザー" => "user", "投稿" => "post_image" }) %>
+   <%= f.submit "検索" %>
+  <% end %>
+ </div>
+<% end %>
