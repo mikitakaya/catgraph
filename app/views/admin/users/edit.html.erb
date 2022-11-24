@@ -1,2 +1,57 @@
-<h1>Admin::Users#edit</h1>
-<p>Find me in app/views/admin/users/edit.html.erb</p>
+<div class="container">
+ <div class="row">
+  <style>
+   textarea {
+    width: 50%;
+   }
+  </style>
+
+  <div class="col-lg-12">
+   <h3>
+    <span>
+     <%= @user.name %>さんのユーザー情報編集
+    </span>
+   </h3>
+  </div>
+
+  <div class="co-lg-12">
+   <%= form_with model: @user, url: admin_user_path(@user.id), method: :patch do |f| %>
+   <div class="field">
+    <%= f.label :id, "会員ID" %>
+    <%= @user.id %>
+   </div>
+
+   <div class="field">
+    <%= f.label :name, "名前" %>
+    <%= f.text_field :name, autofocus: true, placeholder: "名前", class: "text_field" %>
+   </div>
+
+   <div class="field">
+    <%= f.label :username, "ユーザー名"%>
+    <%= f.text_field :username, placeholder: "ユーザー名", class: "text_field" %>
+   </div>
+
+   <div class="field">
+    <%= f.label :introduction, "自己紹介" %>
+    <%= f.text_area :introduction, size: "1x8", placeholder: "自己紹介文を入力してみましょう", class: "text_field" %>
+   </div>
+
+   <div class="field">
+    <%= f.label :email, "メールアドレス" %>
+    <%= f.text_field :email, placeholder: "sample@example.com", class: "text_field" %>
+   </div>
+
+   <div class="field">
+    <%= f.label :is_deleted, "ステータス" %>
+    <%= f.radio_button :is_deleted, "active" %> <text>有効</text>
+    <%= f.radio_button :is_deleted, "no_active" %> <text>退会</text>
+   </div>
+
+   <div class="action">
+    <label></label>
+    <%= f.submit "変更内容を保存する", class: "btn btn-success" %>
+   </div>
+   <% end %>
+  </div>
+ </div>
+</div>
