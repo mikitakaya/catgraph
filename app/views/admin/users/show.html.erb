@@ -1,2 +1,99 @@
-<h1>Admin::Users#show</h1>
-<p>Find me in app/views/admin/users/show.html.erb</p>
+<div class="container">
+ <div class="row">
+  <style>
+   .profile_image {
+    border-radius: 50%; /* プロフィール画像の形を丸にする */
+    object-fit: cover; /* 中央でトリミング */
+    width: 100px;
+    height: 100px;
+   }
+
+   .post_image {
+    width: 200px;
+    height: 200px;
+    object-fit: cover; /* 中央でトリミング */
+   }
+
+   .pagination {
+    justify-content: center;
+   }
+  </style>
+
+  <div class="col-lg-12">
+   <h3>
+    <span><%= @user.name %>さんのユーザー詳細</span>
+   </h3>
+  </div>
+
+  <div class="col-lg-5">
+   <div class="profile">
+    プロフィール写真
+    <%= image_tag @user.get_profile_image(100, 100), class: "profile_image" %><br />
+    <%= link_to "編集する", edit_admin_user_path(@user), class: "btn btn-success" %>
+   </div>
+
+   <div class="info">
+    <table>
+     <tbody>
+      <tr>
+       <th>ユーザーID</th>
+       <td><%= @user.id %></td>
+      </tr>
+
+      <tr>
+       <th>名前</th>
+       <td><%= @user.name %></td>
+      </tr>
+
+      <tr>
+       <th>ユーザー名</th>
+       <td><%= @user.username %></td>
+      </tr>
+
+      <tr>
+       <th>自己紹介</th>
+       <td><%= @user.introduction %></td>
+      </tr>
+
+      <tr>
+       <th>メールアドレス</th>
+       <td><%= @user.email %></td>
+      </tr>
+
+      <tr>
+       <th>ステータス</th>
+       <!-- ユーザーのステータスはactive（有効）ですか -->
+       <% if @user.is_deleted == "active" %>
+        <td style="color: #28a745; font-weight: bold;">
+         <%= @user.is_deleted_i18n %>
+        </td>
+       <% else %>
+        <td style="font-weight: bold;">
+         <%= @user.is_deleted_i18n %>
+        </td>
+       <% end %>
+      </tr>
+     </tbody>
+    </table>
+   </div>
+  </div>
+
+  <div class="col-lg-7">
+   <!-- post_imageが無い場合 -->
+   <% if @post_images.empty? %>
+    <h3>投稿がありません</h3>
+   <!-- post_imageがある場合 -->
+   <% else %>
+    <% @post_images.each do |post_image| %>
+     <div class="post_images" style="display: inline-block;">
+      <%= link_to admin_post_image_path(post_image.id) do %>
+       <%= image_tag post_image.image, class: "post_image" %>
+      <% end %>
+     </div>
+    <% end %>
+    <%= paginate @post_images %>
+   <% end %>
+
+  </div>
+ </div>
+</div>

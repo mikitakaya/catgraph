@@ -4,6 +4,8 @@
    .profile_image {
     border-radius: 50%; /* プロフィール画像の形を丸にする */
     object-fit: cover; /* 中央でトリミング */
+    width: 70px;
+    height: 70px;
    }
 
   </style>
@@ -48,7 +50,8 @@
        <%= user.email %>
       </td>
 
-      <% if user.is_deleted == "no_active" %>
+      <!-- ユーザーのステータスはactive（有効）ですか -->
+      <% if user.is_deleted == "active" %>
        <td style="color: #28a745; font-weight: bold;">
         <%= user.is_deleted_i18n %>
        </td>
@@ -61,7 +64,10 @@
     </tbody>
     <% end %>
    </table>
+   <%= paginate @users %>
   </div>
+
+
 
  </div>
 </div>

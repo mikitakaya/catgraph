@@ -4,6 +4,8 @@
    .profile_image {
     border-radius: 50%; /* プロフィール画像の形を丸にする */
     object-fit: cover; /* 中央でトリミング */
+    width: 100px;
+    height: 100px;
    }
 
    .post_image {
@@ -11,14 +13,26 @@
     height: 200px;
     object-fit: cover; /* 中央でトリミング */
    }
+
+   .pagination {
+    justify-content: center;
+   }
   </style>
 
-  <div class="col-lg-5 col-md-5">
+  <div class="col-lg-12">
    <h3>
-    <span>マイページ</span>
+    <span>
+     <% if @user == current_user %>
+      マイページ
+     <% else %>
+      <%= @user.name %>さんのユーザー詳細
+     <% end %>
+     </span>
    </h3>
+  </div>
 
-   <div class="profile_image">
+  <div class="col-lg-5">
+   <div class="profile">
     プロフィール写真
     <%= image_tag @user.get_profile_image(100, 100), class: "profile_image" %><br />
     <!-- ユーザー＝ログインユーザーの場合、編集ボタンを表示する -->
