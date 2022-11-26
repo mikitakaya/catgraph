@@ -13,6 +13,23 @@
    <script src="https://kit.fontawesome.com/6eb889a2d4.js" crossorigin="anonymous"></script>
   </head>
 
+  <style>
+   body {
+    color: rgba(0, 0, 0, 0.7);
+    background-color: #f6edf0;
+   }
+
+   .color, footer {
+    background-color: #e8cbd5;
+   }
+
+   footer {
+    height: 56px;
+    text-align: center;
+   }
+
+  </style>
+
   <body>
    <header class="color">
     <nav class="navbar navbar-expand-lg navbar-light">
@@ -115,7 +132,9 @@
    <%= yield %>
   </main>
 
-  <footer></footer>
+  <footer>
+   <%= link_to "top", root_path %>
+  </footer>
 
   </body>
 </html>
