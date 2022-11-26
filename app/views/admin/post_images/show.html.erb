@@ -10,6 +10,12 @@
    .profile_image {
     border-radius: 50%; /* プロフィール画像の形を丸にする */
    }
+
+   .text {
+    width: 400px;
+    height: 600px;
+    overflow: scroll;
+   }
   </style>
 
   <div class="col-lg-7">
@@ -19,18 +25,18 @@
   </div>
 
   <div class="col-lg-5">
-   <div class="field">
-    <%= link_to admin_user_path(@user) do %>
-     <%= image_tag @user.get_profile_image(70,70), class: "profile_image" %>
-     <%= @user.name %>
-    <% end %>
-
-    <div class="btn">
-     <%= link_to "削除", admin_post_image_path(@post_image), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-danger" %>
-    </div>
-   </div>
-
    <div class="text">
+    <div class="field">
+     <%= link_to admin_user_path(@user) do %>
+      <%= image_tag @user.get_profile_image(70,70), class: "profile_image" %>
+      <%= @user.name %>
+     <% end %>
+
+     <div class="btn">
+      <%= link_to "削除", admin_post_image_path(@post_image), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-danger" %>
+     </div>
+    </div>
+
     <p>タイトル：<%= @post_image.title %></p>
     <!-- text_areaに入力されたまま出力する -->
     <p>本文：<%= safe_join(@post_image.body.split("\n"),tag(:br)) %></p>

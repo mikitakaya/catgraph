@@ -10,6 +10,16 @@
    .profile_image {
     border-radius: 50%; /* プロフィール画像の形を丸にする */
    }
+
+   .favorites > p {
+    display: inline-block;
+   }
+
+   .text {
+    width: 400px;
+    height: 500px;
+    overflow: scroll;
+   }
   </style>
 
   <div class="col-lg-7">
@@ -19,26 +29,28 @@
   </div>
 
   <div class="col-lg-5">
-   <div class="field">
+   <div class="text">
+    <div class="field">
     <%= link_to user_path(@user.id) do %>
      <%= image_tag @user.get_profile_image(70,70), class: "profile_image" %>
      <%= @user.name %>
     <% end %>
 
-    <div class="btn">
-     <!-- 投稿者＝ログインユーザーの場合、以下を表示する -->
-     <% if @post_image.user == current_user %>
-      <%= link_to "編集", edit_post_image_path(@post_image.id), class: "btn btn-success" %>
-      <%= link_to "削除", post_image_path(@post_image), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-danger" %>
-     <% end %>
+     <div class="actions">
+      <!-- 投稿者＝ログインユーザーの場合、以下を表示する -->
+      <% if @post_image.user == current_user %>
+       <%= link_to "編集", edit_post_image_path(@post_image.id), class: "btn btn-success" %>
+       <%= link_to "削除", post_image_path(@post_image), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-danger" %>
+      <% end %>
+     </div>
     </div>
-   </div>
 
-   <div class="text">
-    <p>タイトル：<%= @post_image.title %></p>
-    <!-- text_areaに入力されたまま出力する -->
-    <p>本文：<%= safe_join(@post_image.body.split("\n"),tag(:br)) %></p>
-    <p><%= l @post_image.created_at %></p>
+    <div class="post">
+     <p>タイトル：<%= @post_image.title %></p>
+     <!-- text_areaに入力されたまま出力する -->
+     <p>本文：<%= safe_join(@post_image.body.split("\n"),tag(:br)) %></p>
+     <p><%= l @post_image.created_at %></p>
+    </div>
 
     <div class="count">
      <div class="favorites">
@@ -55,8 +67,8 @@
         <% end %>
        </p>
       <% end %>
+      <p>コメント件数：<%= @post_image.post_comments.count %></p>
      </div>
-     <p>コメント件数：<%= @post_image.post_comments.count %></p>
     </div>
 
     <div class="comments">
@@ -68,19 +80,19 @@
       <%= l post_comment.created_at %>
 
       <% if post_comment.user == current_user %>
-       <%= link_to "削除", post_image_post_comment_path(post_comment.post_image, post_comment), method: :delete, class: "btn btn-primary" %><br />
-      <% end %>
+       <%= link_to "削除", post_image_post_comment_path(post_comment.post_image, post_comment), method: :delete, class: "btn btn-primary" %>
+      <% end %><br />
 
-      <%= post_comment.comment %><br />
+      <%= safe_join(post_comment.comment.split("\n"),tag(:br)) %><br />
      <% end %>
     </div>
-    <div class="form">
-     <%= form_with model: [@post_image, @post_comment] do |f| %>
-      <%= f.text_area :comment, placeholder: "コメントを入力してください" %>
-      <%= f.submit "送信" %>
-     <% end %>
-    </div>
+   </div>
 
+   <div class="form">
+    <%= form_with model: [@post_image, @post_comment] do |f| %>
+     <%= f.text_area :comment, placeholder: "コメントを入力してください" %>
+     <%= f.submit "送信" %>
+    <% end %>
    </div>
 
   </div>
