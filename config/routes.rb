@@ -37,8 +37,8 @@ Rails.application.routes.draw do
       get 'followings' => 'relationships#followings', as: 'followings'
       get 'followers' => 'relationships#followers', as: 'followers'
     end
-    get 'users/unsubscribe' => "users#unsubscribe", as: "unsubscribe"
-    patch 'users/withdraw' => "users#withdraw", as: "withdraw"
+    get 'users/:id/unsubscribe' => "users#unsubscribe", as: "unsubscribe"
+    patch 'users/:id/withdraw' => "users#withdraw", as: "withdraw"
 
     # public/post_images
     resources :post_images do
