@@ -1,2 +1,62 @@
-<h1>Public::Homes#top</h1>
-<p>Find me in app/views/public/homes/top.html.erb</p>
+<div class="container">
+ <div class="row">
+  <style>
+   .top {
+    height: 600px;
+    background-image: url("<%= asset_path('top.jpg') %>");
+    background-size: cover;
+   }
+
+   .post_image {
+    width: 230px;
+    height: 230px;
+    object-fit: cover; /* 中央でトリミング */
+    display: inline-block;
+   }
+
+   .index_link {
+    text-align: right;
+   }
+
+  </style>
+
+  <div class="col-lg-6">
+   <div class="top">
+    <h5>
+     ようこそ！Catgraphへ！<br />
+     このサイトは「猫の写真だけ」を<br />
+     共有し合うサイトです。<br />
+     投稿や写真のお気に入り登録をするには<br />
+     会員登録が必要です。
+    </h5>
+   </div>
+
+  </div>
+
+  <div class="col-lg-6">
+   <h3>
+    <span>新着投稿</span>
+   </h3>
+
+   <div class="post">
+    <% @post_images.each do |post_image| %>
+     <% if user_signed_in? %>
+      <%= link_to post_image_path(post_image.id) do %>
+       <%= image_tag post_image.image, class: "post_image" %>
+      <% end %>
+     <% else %>
+      <%= image_tag post_image.image, class: "post_image" %>
+     <% end %>
+    <% end %>
+
+
+   </div>
+
+   <div class="index_link">
+    <% if user_signed_in? %>
+     <%= link_to "全ての投稿を見る >", post_images_path %>
+    <% end %>
+   </div>
+  </div>
+ </div>
+</div>

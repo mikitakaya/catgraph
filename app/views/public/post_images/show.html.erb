@@ -88,12 +88,15 @@
     </div>
    </div>
 
+   <!-- ログインユーザーの名前が「ゲスト」の場合、表示しない -->
+   <% if current_user.name != "ゲスト" %>
    <div class="form">
     <%= form_with model: [@post_image, @post_comment] do |f| %>
      <%= f.text_area :comment, placeholder: "コメントを入力してください" %>
      <%= f.submit "送信" %>
     <% end %>
    </div>
+   <% end %>
 
   </div>
  </div>
