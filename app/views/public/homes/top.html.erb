@@ -40,22 +40,22 @@
 
    <div class="post">
     <% @post_images.each do |post_image| %>
-     <% if user_signed_in? %>
+     <!--% if user_signed_in? %>-->
       <%= link_to post_image_path(post_image.id) do %>
        <%= image_tag post_image.image, class: "post_image" %>
       <% end %>
-     <% else %>
-      <%= image_tag post_image.image, class: "post_image" %>
+     <!--% else %>-->
+     <!-- %= image_tag post_image.image, class: "post_image" %>-->
      <% end %>
-    <% end %>
+    <!--% end %>-->
 
 
    </div>
 
    <div class="index_link">
-    <% if user_signed_in? %>
+    <!--% if user_signed_in? %>-->
      <%= link_to "全ての投稿を見る >", post_images_path %>
-    <% end %>
+    <!--% end %>-->
    </div>
   </div>
  </div>

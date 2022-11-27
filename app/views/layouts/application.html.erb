@@ -30,16 +30,28 @@
     display:flex;
     flex-direction: column;
     align-items: flex-end;
+    padding-top: 10px;
    }
 
    .searches {
      padding: 10px 10px 10px 0;
     }
 
+   .search_from > input, select {
+    margin: 0 10px;
+   }
+
    /* タブレット横置きサイズ（1024px）以下の際に適用される設定 */
    @media screen and (max-width:1024px) {
     .searches {
      padding-right: 0;
+    }
+   }
+
+   /* タブレット縦置きサイズ（768px）以下の際に適用される設定 */
+   @media screen and (max-width:480px) {
+    .word {
+     width: 120px;
     }
    }
   </style>
