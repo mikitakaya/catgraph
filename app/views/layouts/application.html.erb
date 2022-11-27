@@ -16,18 +16,32 @@
   <style>
    body {
     color: rgba(0, 0, 0, 0.7);
-    background-color: #f6edf0;
    }
 
    .color, footer {
-    background-color: #e8cbd5;
+    background-color: #f6edf0;
    }
 
    footer {
-    height: 56px;
     text-align: center;
    }
 
+   .menu {
+    display:flex;
+    flex-direction: column;
+    align-items: flex-end;
+   }
+
+   .searches {
+     padding: 10px 10px 10px 0;
+    }
+
+   /* タブレット横置きサイズ（1024px）以下の際に適用される設定 */
+   @media screen and (max-width:1024px) {
+    .searches {
+     padding-right: 0;
+    }
+   }
   </style>
 
   <body>
@@ -35,11 +49,11 @@
     <nav class="navbar navbar-expand-lg navbar-light">
      <div class="container">
 
-      <!-- アイコン -->
-      <!--%= link_to '/', class: "navbar-brand" do %>-->
-       <!--%= image_tag "logo(2).png", size: "90x30" %>-->
-      <!--% end %>-->
+      <%= link_to '/' do %>
+       <%= image_tag "logo.png", size: "80x80" %>
+      <% end %>
 
+      <div class="menu">
       <!-- ナビゲーションバー -->
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
        <span class="navbar-toggler-icon"></span>
@@ -117,12 +131,13 @@
 
       </ul>
      </div>
+
+     <div class="searches" align="right">
+      <%= render "searches/form" %>
+     </div>
+     </div>
     </div>
    </nav>
-
-   <div class="container">
-    <div align="right"><%= render "searches/form" %></div>
-   </div>
   </header>
 
   <main>
@@ -133,7 +148,9 @@
   </main>
 
   <footer>
-   <%= link_to "top", root_path %>
+   <%= link_to '/' do %>
+    <%= image_tag "logo.png", size: "150x150" %>
+   <% end %>
   </footer>
 
   </body>
