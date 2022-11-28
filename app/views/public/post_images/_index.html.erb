@@ -1,11 +1,17 @@
 <div class="container">
  <div class="row">
   <style>
+   .post {
+    max-width: 930px;
+    display: flex;
+    flex-wrap: wrap;
+			 margin: 0 auto;
+   }
+
    .post_image {
     width: 230px;
     height: 230px;
     object-fit: cover; /* 中央でトリミング */
-    display: inline-block;
    }
 
    .pagination {
@@ -20,7 +26,7 @@
   </div>
 
   <div class="col-lg-12">
-   <div class="post" style="text-align: center;">
+   <div class="post">
     <% post_images.each do |post_image| %>
       <%= link_to post_image_path(post_image.id) do %>
        <%= image_tag post_image.image, class: "post_image" %>

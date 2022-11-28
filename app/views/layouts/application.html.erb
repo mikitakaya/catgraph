@@ -41,6 +41,19 @@
     margin: 0 10px;
    }
 
+   li {
+    padding: 0 5px;
+   }
+
+   .pagination {
+    justify-content: center;
+    margin: 30px 0;
+   }
+
+   .pagination > span {
+    margin: 5px;
+   }
+
    /* タブレット横置きサイズ（1024px）以下の際に適用される設定 */
    @media screen and (max-width:1024px) {
     .searches {
@@ -48,7 +61,7 @@
     }
    }
 
-   /* タブレット縦置きサイズ（768px）以下の際に適用される設定 */
+   /* タブレット縦置きサイズ（480px）以下の際に適用される設定 */
    @media screen and (max-width:480px) {
     .word {
      width: 120px;
@@ -96,48 +109,75 @@
 
         <!-- trueの場合、ここからユーザー用のヘッダー -->
         <li>
-         <%= link_to "マイページ", user_path(current_user.id), class: "nav-link" %>
+         <%= link_to user_path(current_user.id), class: "nav-link" do %>
+          <i class="fa-solid fa-house-user"></i>
+          マイページ
+         <% end %>
         </li>
 
         <!-- ログインユーザーの名前が「ゲスト」の場合、表示しない -->
         <% if current_user.name != "ゲスト" %>
          <li>
-          <%= link_to "新規投稿", new_post_image_path, class: "nav-link" %>
+          <%= link_to new_post_image_path, class: "nav-link" do %>
+           <i class="fa-solid fa-camera-retro"></i>
+           新規投稿
+          <%end %>
          </li>
         <% end %>
 
         <li>
-         <%= link_to "投稿一覧", post_images_path, class: "nav-link" %>
+         <%= link_to post_images_path, class: "nav-link" do %>
+          <i class="fa-regular fa-images"></i>
+          投稿一覧
+         <% end %>
         </li>
 
         <!-- ログイン中ユーザーの名前が「ゲスト」の場合、表示しない -->
         <% if current_user.name != "ゲスト" %>
          <li>
-          <%= link_to "お気に入り",  favorites_users_path, class: "nav-link" %>
+          <%= link_to favorites_users_path, class: "nav-link" do %>
+           <i class="fa-solid fa-heart"></i>
+           お気に入り
+          <% end %>
          </li>
         <% end %>
 
         <li>
-         <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "nav-link" %>
+         <%= link_to destroy_user_session_path, method: :delete, class: "nav-link" do %>
+          <i class="fas fa-sign-out-alt"></i>
+          ログアウト
+         <% end %>
         </li>
         <!-- ここまでユーザー用のヘッダー -->
 
        <!-- ここから管理者もユーザーもログアウト状態用のヘッダー -->
        <% else %>
         <li>
-         <%= link_to "About", about_path, class: "nav-link" %>
+         <%= link_to about_path, class: "nav-link" do %>
+          <i class="fa-solid fa-paw"></i>
+          About
+         <% end %>
         </li>
 
         <li>
-         <%= link_to "新規登録", new_user_registration_path, class: "nav-link" %>
+         <%= link_to new_user_registration_path, class: "nav-link" do %>
+          <i class="fas fa-user-plus"></i>
+          新規登録
+         <% end %>
         </li>
 
         <li>
-         <%= link_to "ログイン", new_user_session_path, class: "nav-link" %>
+         <%= link_to new_user_session_path, class: "nav-link" do %>
+          <i class="fas fa-sign-in-alt"></i>
+          ログイン
+         <% end %>
         </li>
 
         <li>
-         <%= link_to 'ゲストログイン', users_guest_sign_in_path, method: :post, class: "nav-link" %>
+         <%= link_to users_guest_sign_in_path, method: :post, class: "nav-link" do %>
+          <i class="fa-solid fa-shield-cat"></i>
+          ゲストログイン
+         <% end %>
         </li>
        <% end %>
 
