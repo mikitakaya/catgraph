@@ -5,18 +5,40 @@
     width: 600px;
     height: 600px;
     object-fit: contain; /* ボックスに収まるようにリサイズする */
+    margin: 30px 0 50px;
    }
 
    .profile_image {
     border-radius: 50%; /* プロフィール画像の形を丸にする */
    }
 
+  .field {
+   margin-bottom: 30px;
+  }
+
    .text {
     width: 400px;
     height: 600px;
     overflow: scroll;
+    margin-top: 30px;
    }
-  </style>
+
+   .btn {
+    float: right; /* 右寄せ */
+   }
+
+   .count {
+    display: flex;
+   }
+
+   /* タブレット横置きサイズ（1024px）以下の際に適用される設定 */
+   @media screen and (max-width: 1024px) {
+    .text {
+     margin-top: 0;
+    }
+   }
+
+</style>
 
   <div class="col-lg-7">
    <div class="image">
@@ -28,7 +50,7 @@
    <div class="text">
     <div class="field">
      <%= link_to admin_user_path(@user) do %>
-      <%= image_tag @user.get_profile_image(70,70), class: "profile_image" %>
+      <%= image_tag @user.get_profile_image(50,50), class: "profile_image" %>
       <%= @user.name %>
      <% end %>
 
@@ -43,18 +65,14 @@
     <p><%= l @post_image.created_at %></p>
 
     <div class="count">
-     <div class="favorites">
-      <p>
-       ♡<%= @post_image.favorites.count %> いいね
-      </p>
-     </div>
+     <p style="margin-right: 70px;">♡<%= @post_image.favorites.count %> いいね</p>
      <p>コメント件数：<%= @post_image.post_comments.count %></p>
     </div>
 
     <div class="comments">
      <% @post_image.post_comments.each do |post_comment| %>
       <%= link_to admin_user_path(post_comment.user.id) do %>
-       <%= image_tag post_comment.user.get_profile_image(50,50), class: "profile_image" %>
+       <%= image_tag post_comment.user.get_profile_image(40,40), class: "profile_image" %>
        <%= post_comment.user.name %>
       <% end %>
 
