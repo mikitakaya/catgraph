@@ -6,6 +6,7 @@
     height: 600px;
     object-fit: contain; /* ボックスに収まるようにリサイズする */
     margin: 30px 0 50px;
+    filter: drop-shadow(10px 10px 10px #aaa); /* 影をつける */
    }
 
    .profile_image {
@@ -56,9 +57,20 @@
    @media screen and (max-width: 1024px) {
     .text {
      margin-top: 0;
+     }
+
+    .post_image, .text {
+     width: 90%;
+     height: 90%;
+     display: inline-block;
+     text-align: left;
+    }
+
+    .col-lg-5, .image {
+     text-align: center;
+     position: relative;
     }
    }
-
 </style>
 
   <div class="col-lg-7">
