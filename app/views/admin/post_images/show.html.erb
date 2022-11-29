@@ -10,17 +10,14 @@
 
    .profile_image {
     border-radius: 50%; /* プロフィール画像の形を丸にする */
+    margin-right: 5px;
    }
-
-  .field {
-   margin-bottom: 30px;
-  }
 
    .text {
     width: 400px;
     height: 600px;
     overflow: scroll;
-    margin-top: 30px;
+    margin: 30px 0 50px;
    }
 
    .btn {
@@ -29,6 +26,30 @@
 
    .count {
     display: flex;
+    margin-bottom: 20px;
+   }
+
+   p {
+    margin-bottom: 10px;
+   }
+
+   .all_comment {
+    border-top: 3px solid #d9d9d9;
+    border-bottom: 3px solid #d9d9d9;
+   }
+
+   .comment {
+    padding: 15px 10px;
+    border-bottom: 2px solid #d9d9d9;
+   }
+
+   .comment:last-child {
+    border-bottom: 0;
+   }
+
+   .post_time {
+    display: inline-block;
+    margin-left: 20px;
    }
 
    /* タブレット横置きサイズ（1024px）以下の際に適用される設定 */
@@ -48,7 +69,7 @@
 
   <div class="col-lg-5">
    <div class="text">
-    <div class="field">
+    <div class="field" style="margin-bottom: 20px;">
      <%= link_to admin_user_path(@user) do %>
       <%= image_tag @user.get_profile_image(50,50), class: "profile_image" %>
       <%= @user.name %>
@@ -59,28 +80,40 @@
      </div>
     </div>
 
-    <p>タイトル：<%= @post_image.title %></p>
-    <!-- text_areaに入力されたまま出力する -->
-    <p>本文：<%= safe_join(@post_image.body.split("\n"),tag(:br)) %></p>
-    <p><%= l @post_image.created_at %></p>
+    <div class="field">
+     <p>タイトル：<%= @post_image.title %></p>
+     <!-- text_areaに入力されたまま出力する -->
+     <p style="margin-bottom: 60px;">本文：<%= safe_join(@post_image.body.split("\n"),tag(:br)) %></p>
+     <p><%= l @post_image.created_at %></p>
 
-    <div class="count">
-     <p style="margin-right: 70px;">♡<%= @post_image.favorites.count %> いいね</p>
-     <p>コメント件数：<%= @post_image.post_comments.count %></p>
+     <div class="count">
+      <p style="margin-right: 70px;">♡<%= @post_image.favorites.count %> いいね</p>
+      <p>コメント件数：<%= @post_image.post_comments.count %></p>
+     </div>
     </div>
 
-    <div class="comments">
-     <% @post_image.post_comments.each do |post_comment| %>
-      <%= link_to admin_user_path(post_comment.user.id) do %>
-       <%= image_tag post_comment.user.get_profile_image(40,40), class: "profile_image" %>
-       <%= post_comment.user.name %>
+    <% if @post_image.post_comments.empty? %>
+    <% else %>
+     <div class="all_comment">
+      <% @post_image.post_comments.each do |post_comment| %>
+       <div class="comment">
+        <div style="margin-bottom: 10px;">
+         <%= link_to admin_user_path(post_comment.user.id) do %>
+          <%= image_tag post_comment.user.get_profile_image(40,40), class: "profile_image" %>
+          <%= post_comment.user.name %>
+         <% end %>
+
+         <div class="post_time">
+          <%= l post_comment.created_at %>
+         </div>
+         <%= link_to "削除", admin_post_image_post_comment_path(post_comment.post_image, post_comment), method: :delete, class: "btn btn-primary" %><br />
+        </div>
+        <%= safe_join(post_comment.comment.split("\n"),tag(:br)) %><br />
+       </div>
       <% end %>
+     </div>
+    <% end %>
 
-      <%= l post_comment.created_at %>
-      <%= link_to "削除", admin_post_image_post_comment_path(post_comment.post_image, post_comment), method: :delete, class: "btn btn-primary" %><br />
-      <%= post_comment.comment %><br />
-     <% end %>
-    </div>
    </div>
 
   </div>
