@@ -54,18 +54,22 @@
 
     <div class="count">
      <div class="favorites">
-      <% if @post_image.favorited_by?(current_user) %>
-       <p>
-        <%= link_to post_image_favorites_path(@post_image), method: :delete do %>
-         ♥<%= @post_image.favorites.count %> いいね
-        <% end %>
-       </p>
+      <% if user_signed_in? %>
+       <% if @post_image.favorited_by?(current_user) %>
+        <p>
+         <%= link_to post_image_favorites_path(@post_image), method: :delete do %>
+          ♥<%= @post_image.favorites.count %> いいね
+         <% end %>
+        </p>
+       <% else %>
+        <p>
+         <%= link_to post_image_favorites_path(@post_image), method: :post do %>
+          ♡<%= @post_image.favorites.count %> いいね
+         <% end %>
+        </p>
+       <% end %>
       <% else %>
-       <p>
-        <%= link_to post_image_favorites_path(@post_image), method: :post do %>
-         ♡<%= @post_image.favorites.count %> いいね
-        <% end %>
-       </p>
+       ♡<%= @post_image.favorites.count %> いいね
       <% end %>
       <p>コメント件数：<%= @post_image.post_comments.count %></p>
      </div>
@@ -88,14 +92,16 @@
     </div>
    </div>
 
-   <!-- ログインユーザーの名前が「ゲスト」の場合、表示しない -->
-   <% if current_user.name != "ゲスト" %>
-   <div class="form">
-    <%= form_with model: [@post_image, @post_comment] do |f| %>
-     <%= f.text_area :comment, placeholder: "コメントを入力してください" %>
-     <%= f.submit "送信" %>
+   <% if user_signed_in? %>
+    <!-- ログインユーザーの名前が「ゲスト」の場合、表示しない -->
+    <% if current_user.name != "ゲスト" %>
+    <div class="form">
+     <%= form_with model: [@post_image, @post_comment] do |f| %>
+      <%= f.text_area :comment, placeholder: "コメントを入力してください" %>
+      <%= f.submit "送信" %>
+     <% end %>
+    </div>
     <% end %>
-   </div>
    <% end %>
 
   </div>
