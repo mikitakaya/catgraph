@@ -16,8 +16,39 @@
     padding-left: 10%;
    }
 
+   table {
+    width: 800px;
+    margin: 0 auto;
+    border-bottom: 3px solid #d9d9d9;
+   }
+
    td, th {
     padding: 10px;
+    word-break: break-all;
+   }
+
+   .name, .email {
+    width: 200px;
+   }
+
+   .id, .status {
+    width: 100px;
+   }
+
+   thead {
+    border-top: 3px solid #d9d9d9;
+    border-bottom: 3px solid #d9d9d9;
+   }
+
+   td {
+    border-bottom: 2px solid #d9d9d9;
+   }
+
+   /* タブレット横置きサイズ（1024px）以下の際に適用される設定 */
+   @media screen and (max-width: 1024px) {
+    table {
+     width: 100%;
+    }
    }
 
   </style>
@@ -27,31 +58,31 @@
     <span>ユーザー一覧</span>
    </h3>
 
-   <table align="center" style="width: 800px;">
+   <table>
     <thead>
      <tr>
-      <th>ユーザーID</th>
+      <th class="id" style="padding-left: 20px;">ユーザーID</th>
       <th>名前</th>
-      <th></th>
-      <th>メールアドレス</th>
-      <th>ステータス</th>
+      <th class="name"></th>
+      <th class="email">メールアドレス</th>
+      <th class="status" style="padding-right: 20px;">ステータス</th>
      </tr>
     </thead>
 
     <% @users.each do |user| %>
     <tbody>
      <tr>
-      <td>
+      <td style="padding-left: 20px;">
        <%= user.id %>
       </td>
 
-      <td style="padding-right: 0px; width: 70px;">
+      <td style="padding-right: 10px; width: 70px;">
        <%= link_to admin_user_path(user) do %>
         <%= image_tag user.get_profile_image(70,70), class: "profile_image" %>
        <% end %>
       </td>
 
-      <td>
+      <td style="padding-left: 0px;">
        <%= link_to admin_user_path(user) do %>
         <%= user.name %><br />
         <%= user.username %>
@@ -62,16 +93,18 @@
        <%= user.email %>
       </td>
 
-      <!-- ユーザーのステータスはactive（有効）ですか -->
-      <% if user.is_deleted == "active" %>
-       <td style="color: #28a745; font-weight: bold;">
-        <%= user.is_deleted_i18n %>
-       </td>
-      <% else %>
-       <td style="font-weight: bold;">
-        <%= user.is_deleted_i18n %>
-       </td>
-      <% end %>
+      <td>
+       <!-- ユーザーのステータスはactive（有効）ですか -->
+       <% if user.is_deleted == "active" %>
+        <div style="color: #28a745; font-weight: bold; padding-right: 20px;">
+         <%= user.is_deleted_i18n %>
+        </div>
+       <% else %>
+        <div style="font-weight: bold; padding-right: 20px;">
+         <%= user.is_deleted_i18n %>
+        </div>
+       <% end %>
+      </td>
      </tr>
     </tbody>
     <% end %>

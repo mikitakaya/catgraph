@@ -1,12 +1,15 @@
 <div class="container">
  <div class="row">
   <style>
+  .post_all, .text {
+   width: 1000px;
+   margin: 0 auto;
+  }
+
    /* postクラスの親要素 */
    .post_all {
     display: flex; /* Flexboxの利用 */
     flex-wrap: wrap; /* Flexコンテナーを超えた際、子要素を折り返す */
-    width: 1000px;
-    margin: 0 auto;
    }
 
    /* 写真とリンクをまとめたもの */
@@ -32,40 +35,61 @@
     height: 230px;
    }
 
-   h3 > span {
-    padding-left: 5%;
-   }
-
    .pagination {
     justify-content: center;
    }
 
    /* タブレット横置きサイズ（1024px）以下の際に適用される設定 */
    @media screen and (max-width: 1024px) {
-    h3 > span {
-     padding-left: 2%;
+    .post_all, .text {
+     width: 640px;
     }
+
+    .post > a, .post_image {
+     width: 150px;
+     height: 150px;
+    }
+
+    .post {
+     margin: 5px;
+   }
 
    /* タブレット縦置きサイズ（768px）以下の際に適用される設定 */
    @media screen and (max-width:768px) {
-    .post_all {
-     width: 1000px;
+    .post_all, .text {
+     width: 340px;
     }
-    
+
     .post > a, .post_image {
-     width: 230px;
-     height: 230px;
+     width: 160px;
+     height: 160px;
+    }
+
+    .post {
+     margin: 5px;
+    }
+   }
+
+   /* スマートフォンサイズ（425px）以下の際に適用される設定 */
+   @media screen and (max-width:425px) {
+    .post_all, .text {
+     width: 250px;
+    }
+
+    .post > a, .post_image {
+     width: 115px;
+     height: 115px;
     }
    }
   </style>
 
   <div class="col-lg-12">
-   <h3 style="margin: 30px 0;">
-    <span>投稿一覧</span>
-   </h3>
-  </div>
+   <div class="text">
+    <h3 style="margin: 30px 0;">
+     <span>投稿一覧</span>
+    </h3>
+   </div>
 
-  <div class="col-lg-12">
    <div class="post_all">
     <% @post_images.each do |post_image| %>
      <div class="post">
