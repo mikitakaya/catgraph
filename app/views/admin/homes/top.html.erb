@@ -1,22 +1,39 @@
 <div class="container">
  <div class="row">
   <style>
+   /* postクラスの親要素 */
    .post_all {
-    display: flex;
-    flex-wrap: wrap;
-    text-align: center;
+    display: flex; /* Flexboxの利用 */
+    flex-wrap: wrap; /* Flexコンテナーを超えた際、子要素を折り返す */
+    width: 1000px;
+    margin: 0 auto;
    }
 
-   .post_image {
-    padding: 5px;
+   /* 写真とリンクをまとめたもの */
+   /* post_imageクラスの親要素、post_allクラスの子要素 */
+   .post {
     text-align: left;
-    width: 230px;
-    height: 230px;
+    margin: 10px;
+   }
+
+   /* 写真自体 */
+   /* post_imageクラスの子要素 */
+   .post_image {
     object-fit: cover; /* 中央でトリミング */
    }
 
+   .post > a {
+    text-decoration: none;
+    display:inline-block;
+   }
+
+   .post > a, .post_image {
+    width: 230px;
+    height: 230px;
+   }
+
    h3 > span {
-    padding-left: 10%;
+    padding-left: 5%;
    }
 
    .pagination {
@@ -31,8 +48,13 @@
 
    /* タブレット縦置きサイズ（768px）以下の際に適用される設定 */
    @media screen and (max-width:768px) {
-    .post {
-     max-width: 730px;
+    .post_all {
+     width: 1000px;
+    }
+    
+    .post > a, .post_image {
+     width: 230px;
+     height: 230px;
     }
    }
   </style>
@@ -45,15 +67,13 @@
 
   <div class="col-lg-12">
    <div class="post_all">
-
-    <div class="post">
-     <% @post_images.each do |post_image| %>
+    <% @post_images.each do |post_image| %>
+     <div class="post">
       <%= link_to admin_post_image_path(post_image.id) do %>
        <%= image_tag post_image.image, class: "post_image" %>
       <% end %>
-     <% end %>
-    </div>
-
+     </div>
+    <% end %>
    </div>
    <%= paginate @post_images %>
   </div>
