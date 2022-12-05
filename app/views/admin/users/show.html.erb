@@ -11,24 +11,24 @@
    .post_all {
     display: flex;
     flex-wrap: wrap;
+    width: 630px;
+    margin: 0 auto;
    }
 
    .post {
+    text-align: left;
     margin: 5px;
    }
 
    .post_image {
     object-fit: cover; /* 中央でトリミング */
-   }
-
-   .post_images > a, .post_image {
     width: 200px;
     height: 200px;
    }
 
    .profile {
     display: flex;
-    margin-bottom: 40px;
+    margin: 20px 0 40px;
     padding-left: 20px;
    }
 
@@ -41,31 +41,68 @@
    }
 
    th {
-    width: 170px;
-    padding-left: 20px;
+    width: 160px;
+    padding: 0 10px 0 20px;
    }
 
    td {
-    padding: 12px 0;
-    padding-right: 30px;
+    padding: 10px 0;
+    padding-right: 20px;
    }
 
    table {
     border-top: 3px solid #d9d9d9;
     border-bottom: 3px solid #d9d9d9;
-    margin-right: 30px;
+    margin: 0 30px 50px 0;
+   }
+
+   h4 {
+    margin: 30px 0 20px
+   }
+
+   /* 1200px以下の際に適用される設定 */
+   @media screen and (max-width: 1200px) {
+    h4 {
+     width: 630px;
+     margin: 30px auto 10px;
+    }
+
+    .profile, .info {
+     width: 630px;
+     margin: 20px auto 40px;
+    }
+   }
+
+   /* タブレット縦置きサイズ（768px）以下の際に適用される設定 */
+   @media screen and (max-width:768px) {
+    h4 {
+     width: 400px;
+    }
+
+    .profile, .info {
+     width: 400px;
+    }
+
+    .post_all {
+     width: 400px;
+    }
+
+    .post_image {
+     width: 190px;
+     height: 190px;
+    }
    }
   </style>
 
-  <div class="col-lg-12">
-   <h4 style="margin: 30px 0 20px">
+  <div class="col-xl-12">
+   <h4>
     <span>
      <%= @user.name %>さんのユーザー詳細
      </span>
    </h4>
   </div>
 
-  <div class="col-lg-5 col-md-12">
+  <div class="col-xl-5 col-lg-12">
    <div class="profile">
     <div style="margin: 20px 70px 0 0;">
      プロフィール写真<br />
@@ -122,7 +159,7 @@
    </div>
   </div>
 
-  <div class="col-lg-7 col-md-12">
+  <div class="col-xl-7 col-lg-12">
    <!-- post_imageが無い場合 -->
    <% if @post_images.empty? %>
     <h3>投稿がありません</h3>

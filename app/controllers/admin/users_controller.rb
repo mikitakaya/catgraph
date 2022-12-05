@@ -6,7 +6,7 @@ class Admin::UsersController < ApplicationController
   def show
    @user = User.find(params[:id])
    # 1ページあたりの表示件数を「6件」に設定
-   @post_images = @user.post_images.page(params[:page]).per(6)
+   @post_images = @user.post_images.page(params[:page]).per(6).order(id: "DESC")
   end
 
   def edit

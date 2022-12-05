@@ -23,16 +23,13 @@
    /* post_imageクラスの子要素 */
    .post_image {
     object-fit: cover; /* 中央でトリミング */
+    width: 230px;
+    height: 230px;
    }
 
    .post > a {
     text-decoration: none;
     display:inline-block;
-   }
-
-   .post > a, .post_image {
-    width: 230px;
-    height: 230px;
    }
 
    .pagination {
@@ -45,7 +42,7 @@
      width: 640px;
     }
 
-    .post > a, .post_image {
+    .post_image {
      width: 150px;
      height: 150px;
     }
@@ -57,28 +54,16 @@
    /* タブレット縦置きサイズ（768px）以下の際に適用される設定 */
    @media screen and (max-width:768px) {
     .post_all, .text {
-     width: 340px;
+     width: 400px;
     }
 
-    .post > a, .post_image {
-     width: 160px;
-     height: 160px;
+    .post_image {
+     width: 190px;
+     height: 190px;
     }
 
     .post {
      margin: 5px;
-    }
-   }
-
-   /* スマートフォンサイズ（425px）以下の際に適用される設定 */
-   @media screen and (max-width:425px) {
-    .post_all, .text {
-     width: 250px;
-    }
-
-    .post > a, .post_image {
-     width: 115px;
-     height: 115px;
     }
    }
   </style>
