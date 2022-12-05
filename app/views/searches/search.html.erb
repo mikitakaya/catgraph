@@ -5,7 +5,7 @@
   </style>
 
   <div class="col-lg-12">
-   <h3>"<%= @word %>"の検索結果</h3>
+   <h4>"<%= @word %>"の検索結果</h4>
    <!-- 検索対象モデルがUserの場合 -->
    <% if @model == "user" %>
     <%= render 'public/relationships/follow_list', users: @records %>

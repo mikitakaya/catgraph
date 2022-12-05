@@ -4,34 +4,76 @@
    .profile_image {
     border-radius: 50%; /* プロフィール画像の形を丸にする */
     object-fit: cover; /* 中央でトリミング */
-    width: 100px;
-    height: 100px;
+    width: 150px;
+    height: 150px;
+   }
+
+   .post_all {
+    display: flex;
+    flex-wrap: wrap;
+   }
+
+   .post {
+    margin: 5px;
    }
 
    .post_image {
+    object-fit: cover; /* 中央でトリミング */
+   }
+
+   .post_images > a, .post_image {
     width: 200px;
     height: 200px;
-    object-fit: cover; /* 中央でトリミング */
+   }
+
+   .profile {
+    display: flex;
+    margin-bottom: 40px;
+    padding-left: 20px;
    }
 
    .pagination {
     justify-content: center;
    }
+
+   th, td {
+    border-bottom: 2px solid #d9d9d9;
+   }
+
+   th {
+    width: 170px;
+    padding-left: 20px;
+   }
+
+   td {
+    padding: 12px 0;
+    padding-right: 30px;
+   }
+
+   table {
+    border-top: 3px solid #d9d9d9;
+    border-bottom: 3px solid #d9d9d9;
+    margin-right: 30px;
+   }
   </style>
 
   <div class="col-lg-12">
-   <h3>
+   <h4 style="margin: 30px 0 20px">
     <span>
      <%= @user.name %>さんのユーザー詳細
      </span>
-   </h3>
+   </h4>
   </div>
 
-  <div class="col-lg-5">
+  <div class="col-lg-5 col-md-12">
    <div class="profile">
-    プロフィール写真
-    <%= image_tag @user.get_profile_image(100, 100), class: "profile_image" %><br />
-    <%= link_to "編集する", edit_admin_user_path(@user), class: "btn btn-success" %>
+    <div style="margin: 20px 70px 0 0;">
+     プロフィール写真<br />
+     <div style="margin-top: 65px;">
+      <%= link_to "編集する", edit_admin_user_path(@user), class: "btn btn-success" %>
+     </div>
+    </div>
+    <%= image_tag @user.get_profile_image(150, 150), class: "profile_image" %><br />
    </div>
 
    <div class="info">
@@ -80,19 +122,21 @@
    </div>
   </div>
 
-  <div class="col-lg-7">
+  <div class="col-lg-7 col-md-12">
    <!-- post_imageが無い場合 -->
    <% if @post_images.empty? %>
     <h3>投稿がありません</h3>
    <!-- post_imageがある場合 -->
    <% else %>
-    <% @post_images.each do |post_image| %>
-     <div class="post_images" style="display: inline-block;">
-      <%= link_to admin_post_image_path(post_image.id) do %>
-       <%= image_tag post_image.image, class: "post_image" %>
-      <% end %>
-     </div>
-    <% end %>
+    <div class="post_all">
+     <% @post_images.each do |post_image| %>
+      <div class="post">
+       <%= link_to admin_post_image_path(post_image.id) do %>
+        <%= image_tag post_image.image, class: "post_image" %>
+       <% end %>
+      </div>
+     <% end %>
+    </div>
     <%= paginate @post_images %>
    <% end %>
 
