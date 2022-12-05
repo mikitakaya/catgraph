@@ -1,14 +1,17 @@
 <div class="container">
  <div class="row">
   <style>
+   h4 {
+    margin-top: 30px;
+    padding-left: 10%;
+   }
+
    main > .container {
     height: 500px;
-
    }
 
    .text {
     text-align: center;
-    position: relative;
    }
 
    .new_admin {
@@ -18,17 +21,39 @@
 
    label {
     width: 200px;
-    margin: 10px;
+    margin: 10px 10px 10px 0;
    }
 
    .field > input {
     width: 350px;
    }
+
+   /* タブレット縦置きサイズ（768px）以下の際に適用される設定 */
+   @media screen and (max-width:768px) {
+    h4 {
+     padding-left: 5%;
+    }
+
+    label {
+     width: 120px;
+    }
+
+    .field > input {
+     width: 250px;
+    }
+   }
+
+   /* タブレット縦置きサイズ（425px）以下の際に適用される設定 */
+   @media screen and (max-width:425px) {
+    h4 {
+     padding: 0;
+    }
+   }
   </style>
 
   <div class="col-lg-12">
-   <h4 style="margin-top: 30px;">
-    <span style="padding-left: 10%;">
+   <h4>
+    <span>
      管理者ログイン
     </span>
    </h4>
