@@ -45,7 +45,7 @@ class Public::SessionsController < Devise::SessionsController
     # 取得したアカウントのis_deletedがno_active（true、退会）の場合
     if @user.is_deleted == "no_active"
      # 退会済みのため、新規登録画面へリダイレクトする
-     redirect_to new_user_registration_path
+     redirect_to new_user_registration_path, notice: '退会済みのため、新規登録が必要です。'
     end
    end
   end
