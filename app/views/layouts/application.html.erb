@@ -200,11 +200,9 @@
   </header>
 
   <main>
-   <div class="container" style="margin-top: 20px;">
-    <p id="notice">
-     <%= flash[:notice] %>
-    </p>
-   </div>
+   <p id="notice" style="margin: 20px 0 0 5%;">
+    <%= flash[:notice] %>
+   </p>
 
    <%= yield %>
   </main>

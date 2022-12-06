@@ -1,13 +1,13 @@
 <div class="container">
  <div class="row">
   <style>
-   main > .container {
-    height: 550px;
+   .login {
+    margin-bottom: 15%;
    }
 
    h4 {
     margin-top: 30px;
-    padding-left: 10%;
+    padding-left: 8%;
    }
 
    .text {
@@ -31,6 +31,34 @@
    .login > .field {
     margin-left: 15%;
    }
+
+   /* タブレット縦置きサイズ（768px）以下の際に適用される設定 */
+   @media screen and (max-width:768px) {
+    .text {
+     margin: 0 auto;
+    }
+
+    .text, .field > input, .login > .field {
+     width: 330px;
+    }
+
+    .login > .field {
+     margin-left: 10%;
+    }
+
+    .actions > label {
+     width: 0;
+     margin: 0;
+    }
+
+    .actions {
+     text-align: center;
+    }
+
+    h4 {
+     padding-left: 3%;
+    }
+   }
   </style>
 
   <div class="col-lg-12">
@@ -44,17 +72,17 @@
 
      <div class="field">
       <%= f.label :name, "名前" %>
-      <%= f.text_field :name %>
+      <%= f.text_field :name, autofocus: true, placeholder: "令和ちゃん" %>
      </div>
 
      <div class="field">
       <%= f.label :username, "ユーザー名" %>
-      <%= f.text_field :username %>
+      <%= f.text_field :username, placeholder: "reiwa_chan" %>
      </div>
 
      <div class="field">
       <%= f.label :email, "メールアドレス" %>
-      <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+      <%= f.email_field :email, autocomplete: "email", placeholder: "sample@example.com" %>
      </div>
 
      <div class="field">
@@ -69,7 +97,7 @@
       <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
      </div>
 
-     <div class="actions">
+     <div class="actions", style="margin: 30px 0 50px;">
       <label></label>
       <%= f.submit "新規登録" %>
      </div>
@@ -88,7 +116,6 @@
       からログインしてください。
      </div>
     </div>
-
 
   </div>
  </div>

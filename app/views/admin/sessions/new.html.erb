@@ -3,7 +3,7 @@
   <style>
    h4 {
     margin-top: 30px;
-    padding-left: 10%;
+    padding-left: 8%;
    }
 
    main > .container {
@@ -31,22 +31,28 @@
    /* タブレット縦置きサイズ（768px）以下の際に適用される設定 */
    @media screen and (max-width:768px) {
     h4 {
-     padding-left: 5%;
+     padding-left: 3%;
     }
 
-    label {
-     width: 120px;
+    .text {
+     margin: 0 auto;
     }
 
-    .field > input {
-     width: 250px;
+    .text, .field > input {
+     width: 330px;
     }
-   }
 
-   /* タブレット縦置きサイズ（425px）以下の際に適用される設定 */
-   @media screen and (max-width:425px) {
-    h4 {
-     padding: 0;
+    .login > .field {
+     margin-left: 10%;
+    }
+
+    .actions > label {
+     width: 0;
+     margin: 0;
+    }
+
+    .actions {
+     text-align: center;
     }
    }
   </style>
