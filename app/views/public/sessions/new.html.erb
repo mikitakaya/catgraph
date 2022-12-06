@@ -1,6 +1,60 @@
 <div class="container">
  <div class="row">
   <style>
+   .sign_up {
+    margin-bottom: 170px;
+   }
+
+   h4 {
+    margin: 30px 0 20px;
+    padding-left: 8%;
+   }
+
+   .text {
+    text-align: center;
+   }
+
+   .new_user {
+    display: inline-block;
+    text-align: left;
+   }
+
+   label {
+    width: 200px;
+    margin: 10px 10px 10px 0;
+   }
+
+   .field > input {
+    width: 350px;
+   }
+
+   /* タブレット縦置きサイズ（768px）以下の際に適用される設定 */
+   @media screen and (max-width:768px) {
+    .text {
+     margin: 0 auto;
+    }
+
+    .text, .field > input, .sign_up > .field {
+     width: 330px;
+    }
+
+    .login > .field {
+     margin-left: 10%;
+    }
+
+    .actions > label {
+     width: 0;
+     margin: 0;
+    }
+
+    .actions {
+     text-align: center;
+    }
+
+    h4 {
+     padding-left: 3%;
+    }
+   }
 
   </style>
 
@@ -11,31 +65,39 @@
     </span>
    </h4>
 
-   <%= form_with model: @user, url: user_session_path do |f| %>
-   <div class="field">
-    <%= f.label :email, "メールアドレス" %>
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+   <p style="margin-left: 10%;">会員の方はこちらからログイン</p>
+
+   <div class="text">
+    <%= form_with model: @user, url: user_session_path, class: "new_user" do |f| %>
+    <div class="field">
+     <%= f.label :email, "メールアドレス" %>
+     <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "sample@example.com", autofocus: true %>
+    </div>
+
+    <div class="field">
+     <%= f.label :password, "パスワード" %>
+     <%= f.password_field :password, autocomplete: "current-password" %>
+    </div>
+
+    <div class="actions", style="margin: 30px 0 50px;">
+     <label></label>
+     <%= f.submit "ログイン" %>
+    </div>
+    <% end %>
    </div>
 
-   <div class="field">
-    <%= f.label :password, "パスワード" %>
-    <%= f.password_field :password, autocomplete: "current-password" %>
+   <div class="sign_up">
+    <h4>
+     <span>
+      会員登録がお済みでない方
+     </span>
+    </h4>
+    <div class="field", style="margin-left: 10%;">
+     <%= link_to "こちら", new_user_registration_path, class: "sign_up" %>
+     から新規登録を行なってください。
+    </div>
    </div>
 
-   <div class="actions">
-    <%= f.submit "ログイン" %>
-   </div>
-   <% end %>
-
-   <h4>
-    <span>
-     会員登録がお済みでない方
-    </span>
-   </h4>
-   <div class="field">
-    <%= link_to "こちら", new_user_registration_path, class: "sign_up" %>
-    から新規登録を行なってください。
-   </div>
   </div>
  </div>
 </div>

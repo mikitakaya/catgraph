@@ -28,10 +28,6 @@
     width: 350px;
    }
 
-   .login > .field {
-    margin-left: 15%;
-   }
-
    /* タブレット縦置きサイズ（768px）以下の際に適用される設定 */
    @media screen and (max-width:768px) {
     .text {
@@ -111,7 +107,7 @@
        すでに登録済みの方
       </span>
      </h4>
-     <div class="field">
+     <div class="field", style="margin-left: 10%;">
       <%= link_to "こちら", new_user_session_path, class: "login" %>
       からログインしてください。
      </div>
