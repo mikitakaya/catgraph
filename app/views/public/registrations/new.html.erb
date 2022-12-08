@@ -28,6 +28,12 @@
     width: 350px;
    }
 
+   .btn {
+    border: 2px solid #666666;
+    background-color: #999999;
+    color: white;
+   }
+
    /* タブレット縦置きサイズ（768px）以下の際に適用される設定 */
    @media screen and (max-width:768px) {
     .text {
@@ -95,7 +101,7 @@
 
      <div class="actions", style="margin: 30px 0 50px;">
       <label></label>
-      <%= f.submit "新規登録" %>
+      <%= f.submit "新規登録", class: "btn" %>
      </div>
      <% end %>
     </div>

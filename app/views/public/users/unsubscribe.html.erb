@@ -14,9 +14,15 @@
     margin-bottom: 50px;
    }
 
-   .btn-success {
+   .btn {
     margin-right: 30px;
    }
+
+   .btn-danger {
+   color: #fff;
+   background-color: #dc3545;
+   border-color: #dc3545;
+  }
 
    /* タブレット縦置きサイズ（768px）以下の際に適用される設定 */
    @media screen and (max-width: 768px) {
@@ -39,7 +45,7 @@
     </p>
 
     <div class="actions">
-     <%= link_to "退会しない", user_path(@user.id), class: "btn btn-success" %>
+     <%= link_to "退会しない", user_path(@user.id), class: "btn" %>
      <%= link_to "退会する", withdraw_path(@user.id), method: :patch, "data-confirm" => "本当に退会しますか？", class: "btn btn-danger" %>
     </div>
    </div>
