@@ -1,35 +1,84 @@
 <div class="container">
  <div class="row">
   <style>
-   textarea {
-    width: 50%;
+   h4 {
+    margin: 30px 0 30px 5%;
+   }
+
+   .edit {
+    width: 700px;
+    margin: 0 auto;
+   }
+
+   .text_field {
+    width: 60%;
+   }
+
+   label {
+    width: 140px;
+    vertical-align: top;
+    padding-left: 10px;
+   }
+
+   .field {
+    padding: 10px 0;
+   }
+
+   .action {
+    margin: 20px auto 100px;
+    text-align: center;
+   }
+
+   .btn {
+    border: 2px solid #666666;
+    background-color: #999999;
+    color: white;
+   }
+
+   /* タブレット横置きサイズ（1024px）以下の際に適用される設定 */
+   @media screen and (max-width: 1024px) {
+    h4 {
+     margin-left: 0;
+    }
+   }
+
+   /* タブレット縦置きサイズ（768px）以下の際に適用される設定 */
+   @media screen and (max-width: 768px) {
+    .edit {
+     width: 380px;
+    }
+
+    label {
+     width: 90px;
+    }
    }
   </style>
 
   <div class="col-lg-12">
-   <h3>
+   <h4>
     <span>投稿編集</span>
-   </h3>
+   </h4>
   </div>
 
   <div class="col-lg-12">
-   <%= form_with model: @post_image do |f| %>
-    <div class="field">
-     <%= f.label :image, "画像" %>
-     <%= f.file_field :image, accept: "image/*" %>
-    </div>
+   <div class="edit">
+    <%= form_with model: @post_image do |f| %>
+     <div class="field">
+      <%= f.label :title, "タイトル" %>
+      <%= f.text_field :title, placeholder: "タイトル", class: "text_field" %>
+     </div>
 
-    <div class="field">
-     <%= f.label :title, "タイトル" %>
-     <%= f.text_field :title %>
-    </div>
+     <div class="field">
+      <%= f.label :body, "本文" %>
+      <%= f.text_area :body, size: "1x8", placeholder: "こちらに本文を記述します", class: "text_field" %>
+     </div>
 
-    <div class="field">
-     <%= f.label :body, "本文" %>
-     <%= f.text_area :body %>
-    </div>
-    <%= f.submit "変更を保存" %>
-   <% end %>
+     <div class="action">
+      <%= f.submit "変更を保存", class: "btn" %>
+     </div>
+    <% end %>
+   </div>
+
   </div>
  </div>
 </div>
