@@ -1,44 +1,109 @@
 <div class="container">
  <div class="row">
   <style>
-   .post {
-    max-width: 930px;
-    display: flex;
-    flex-wrap: wrap;
-			 margin: 0 auto;
+  .post_all, .text {
+   width: 920px;
+   margin: 0 auto;
+  }
+
+   /* postクラスの親要素 */
+   .post_all {
+    display: flex; /* Flexboxの利用 */
+    flex-wrap: wrap; /* Flexコンテナーを超えた際、子要素を折り返す */
    }
 
+   /* 写真とリンクをまとめたもの */
+   /* post_imageクラスの親要素、post_allクラスの子要素 */
+   .post {
+    text-align: left;
+    margin: 5px;
+   }
+
+   /* 写真自体 */
+   /* post_imageクラスの子要素 */
    .post_image {
-    width: 230px;
-    height: 230px;
     object-fit: cover; /* 中央でトリミング */
+    width: 220px;
+    height: 220px;
+   }
+
+   .post > a {
+    text-decoration: none;
+    display:inline-block;
    }
 
    .pagination {
     justify-content: center;
    }
+
+   /* タブレット横置きサイズ（1024px）以下の際に適用される設定 */
+   @media screen and (max-width: 1024px) {
+    .post_all, .text {
+     width: 640px;
+    }
+
+    .post_image {
+     width: 150px;
+     height: 150px;
+    }
+
+    .post {
+     margin: 5px;
+   }
+
+   /* タブレット縦置きサイズ（768px）以下の際に適用される設定 */
+   @media screen and (max-width:768px) {
+    .post_all, .text {
+     width: 400px;
+    }
+
+    .post_image {
+     width: 190px;
+     height: 190px;
+    }
+
+    .post {
+     margin: 5px;
+    }
+   }
   </style>
 
   <div class="col-lg-12">
-   <h4>
-    <span>投稿一覧</span>
-   </h4>
-  </div>
+   <div class="text">
+    <h4 style="margin: 30px 0;">
+     <span>投稿一覧</span>
+    </h4>
+   </div>
 
-  <div class="col-lg-12">
-   <div class="post">
+   <div class="post_all">
     <% post_images.each do |post_image| %>
-      <%= link_to post_image_path(post_image.id) do %>
-       <%= image_tag post_image.image, class: "post_image" %>
+     <div class="post">
+      <!-- 管理者としてログインしていますか？ -->
+      <% if admin_signed_in? %>
+       <%= link_to admin_post_image_path(post_image.id) do %>
+        <%= image_tag post_image.image, class: "post_image" %>
+       <% end %>
+      <!-- 管理者以外 -->
+      <% else %>
+       <%= link_to post_image_path(post_image.id) do %>
+        <%= image_tag post_image.image, class: "post_image" %>
+       <% end %>
       <% end %>
+
+     </div>
     <% end %>
    </div>
 
-   <!-- ログインユーザーの名前が「ゲスト」の場合、表示しない -->
-   <% if current_user.name != "ゲスト" %>
+   <!-- ユーザーとしてログインしていますか？ -->
+   <% if user_signed_in? %>
+    <!-- ユーザーの名前が「ゲスト」の場合、表示しない -->
+    <% if current_user.name != "ゲスト" %>
+     <%= paginate post_images %>
+    <% end %>
+    <!-- 管理者としてログインしていますか？ -->
+   <% elsif admin_signed_in? %>
     <%= paginate post_images %>
    <% end %>
   </div>
  </div>
 </div>
-

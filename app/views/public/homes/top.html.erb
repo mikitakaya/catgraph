@@ -123,11 +123,10 @@
    </div>
 
    <div class="index_link">
-    <% if user_signed_in? %>
-     <%= link_to "全ての投稿を見る >", post_images_path %>
-    <% elsif admin_signed_in? %>
+    <% if admin_signed_in? %>
      <%= link_to "全ての投稿を見る >", admin_top_path %>
     <% else %>
+     <%= link_to "全ての投稿を見る >", post_images_path %>
     <% end %>
    </div>
   </div>
