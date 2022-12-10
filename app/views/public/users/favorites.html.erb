@@ -1,16 +1,23 @@
 <div class="container">
  <div class="row">
   <style>
-   .favorites {
-    max-width: 930px;
+   .col-lg-12 {
+    margin-bottom: 30px;
+   }
+
+   .post_all, .text {
+    max-width: 920px;
+			 margin: 0 auto 30px;
+   }
+
+   .post_all {
     display: flex;
     flex-wrap: wrap;
-			 margin: 0 auto;
    }
 
    .post_image {
-    width: 230px;
-    height: 230px;
+    width: 220px;
+    height: 220px;
     object-fit: cover; /* 中央でトリミング */
    }
 
@@ -18,9 +25,11 @@
     justify-content: center;
    }
 
-   .img {
+   .post {
     position: relative;
-    width: 230px;
+    width: 220px;
+    text-align: left;
+    margin: 5px;
    }
 
    .cancel {
@@ -48,32 +57,75 @@
     transform: translate(150%, -10%);
    }
 
+   .pagination {
+    justify-content: center;
+    margin-bottom: 30px;
+   }
+
+   /* タブレット横置きサイズ（1024px）以下の際に適用される設定 */
+   @media screen and (max-width: 1024px) {
+    .post_all, .text {
+     width: 640px;
+    }
+
+    .post_image, .post {
+     width: 150px;
+     height: 150px;
+    }
+
+    .post {
+     margin: 5px;
+    }
+   }
+
+   /* タブレット縦置きサイズ（768px）以下の際に適用される設定 */
+   @media screen and (max-width:768px) {
+    .post_all, .text {
+     width: 380px;
+    }
+
+    .post_image, .post {
+     width: 180px;
+     height: 180px;
+    }
+
+    .post {
+     margin: 5px;
+    }
+   }
   </style>
 
   <div class="col-lg-12">
-   <h4>
-    <span>お気に入り一覧</span>
-   </h4>
+   <div class="text">
+    <h4 style="margin: 30px 0;">
+     <span>お気に入り一覧</span>
+    </h4>
+   </div>
 
-   <div class="favorites">
-    <% @favorited_post_images.each do |post_image| %>
-    <div class="img">
-     <%= link_to post_image_favorites_path(post_image), class: "cancel_button", method: :delete do %>
-      <div class="cancel">
-       <h3>
-        <span>
-         ×
-        </span>
-       </h3>
-      </div>
-     <% end %>
+   <div class="post_all">
+    <% if @favorited_post_images.empty? %>
+     <h6 style="margin: 50px 0 100px 20px;">
+      お気に入り登録された写真はありません
+     </h6>
+    <% else %>
+     <% @favorited_post_images.each do |post_image| %>
+     <div class="post">
+      <%= link_to post_image_favorites_path(post_image), class: "cancel_button", method: :delete do %>
+       <div class="cancel">
+        <h3>
+         <span>
+          ×
+         </span>
+        </h3>
+       </div>
+      <% end %>
 
-     <%= link_to post_image_path(post_image.id) do %>
-      <%= image_tag post_image.image, class: "post_image" %>
+      <%= link_to post_image_path(post_image.id) do %>
+       <%= image_tag post_image.image, class: "post_image" %>
+      <% end %>
+     </div>
      <% end %>
-    </div>
     <% end %>
-
    </div>
    <%= paginate @favorited_post_images %>
   </div>

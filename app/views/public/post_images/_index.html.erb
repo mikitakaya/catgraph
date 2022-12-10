@@ -1,9 +1,13 @@
 <div class="container">
  <div class="row">
   <style>
+  .col-lg-12 {
+    margin-bottom: 30px;
+   }
+
   .post_all, .text {
    width: 920px;
-   margin: 0 auto;
+   margin: 0 auto 30px;
   }
 
    /* postクラスの親要素 */
@@ -32,10 +36,6 @@
     display:inline-block;
    }
 
-   .pagination {
-    justify-content: center;
-   }
-
    /* タブレット横置きサイズ（1024px）以下の際に適用される設定 */
    @media screen and (max-width: 1024px) {
     .post_all, .text {
@@ -54,12 +54,12 @@
    /* タブレット縦置きサイズ（768px）以下の際に適用される設定 */
    @media screen and (max-width:768px) {
     .post_all, .text {
-     width: 400px;
+     width: 380px;
     }
 
     .post_image {
-     width: 190px;
-     height: 190px;
+     width: 180px;
+     height: 180px;
     }
 
     .post {
