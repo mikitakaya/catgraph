@@ -14,17 +14,16 @@
     margin-right: 5px;
    }
 
-   .favorites > p {
-    display: inline-block;
-    margin-right: 70px;
+   .all {
+    width: 400px;
+    margin: 30px 0 50px;
    }
 
    .text {
-    width: 400px;
-    height: 500px;
     overflow: scroll;
-    margin: 30px 0 50px;
+    height: 500px;
    }
+
    .count {
     display: flex;
     margin-bottom: 20px;
@@ -54,10 +53,38 @@
    }
 
    .btn-danger {
-   color: #fff;
-   background-color: #dc3545;
-   border-color: #dc3545;
-  }
+    color: #fff;
+    background-color: #dc3545;
+    border-color: #dc3545;
+   }
+
+   .col-lg-5 {
+    height: 100%;
+   }
+
+   .form > .btn {
+    margin-bottom: 30px;
+   }
+
+   textarea {
+    width: 70%;
+    margin-right: 20px;
+   }
+
+   /* 1200px以下の際に適用される設定 */
+   @media screen and (max-width: 1200px) {
+    .post_image, .all {
+     width: 90%;
+     height: 90%;
+     display: inline-block;
+     text-align: left;
+    }
+
+    .col-lg-5, .image {
+     text-align: center;
+     position: relative;
+    }
+   }
   </style>
 
   <div class="col-lg-7">
@@ -67,88 +94,92 @@
   </div>
 
   <div class="col-lg-5">
-   <div class="text">
-    <div class="field" style="margin-bottom: 20px;">
-    <%= link_to user_path(@user.id) do %>
-     <%= image_tag @user.get_profile_image(50,50), class: "profile_image" %>
-     <%= @user.name %>
-    <% end %>
-
-     <div class="actions" style="float: right;">
-      <!-- 投稿者＝ログインユーザーの場合、以下を表示する -->
-      <% if @post_image.user == current_user %>
-       <%= link_to "編集", edit_post_image_path(@post_image.id), class: "btn" %>
-       <%= link_to "削除", post_image_path(@post_image), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-danger" %>
+   <div class="all">
+    <div class="text" style="margin-bottom: 50px;">
+     <div class="field" style="margin-bottom: 20px;">
+      <%= link_to user_path(@user.id) do %>
+       <%= image_tag @user.get_profile_image(50,50), class: "profile_image" %>
+       <%= @user.name %>
       <% end %>
+
+      <div class="actions" style="float: right;">
+       <!-- 投稿者＝ログインユーザーの場合、以下を表示する -->
+       <% if @post_image.user == current_user %>
+        <%= link_to "編集", edit_post_image_path(@post_image.id), class: "btn" %>
+        <%= link_to "削除", post_image_path(@post_image), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-danger" %>
+       <% end %>
+      </div>
+
      </div>
-    </div>
 
-    <div class="post">
-     <p>タイトル：<%= @post_image.title %></p>
-     <!-- text_areaに入力されたまま出力する -->
-     <p style="margin-bottom: 60px;">本文：<%= safe_join(@post_image.body.split("\n"),tag(:br)) %></p>
-     <p><%= l @post_image.created_at %></p>
-    </div>
+     <div class="post">
+      <p>タイトル：<%= @post_image.title %></p>
+      <!-- text_areaに入力されたまま出力する -->
+      <p style="margin-bottom: 60px;">本文：<%= safe_join(@post_image.body.split("\n"),tag(:br)) %></p>
+      <p><%= l @post_image.created_at %></p>
+     </div>
 
-    <div class="count">
-     <div class="favorites">
-      <% if user_signed_in? %>
-       <% if @post_image.favorited_by?(current_user) %>
-        <p>
+     <div class="count">
+      <p style="margin-right: 70px;">
+       <% if user_signed_in? %>
+        <% if @post_image.favorited_by?(current_user) %>
          <%= link_to post_image_favorites_path(@post_image), method: :delete do %>
           ♥<%= @post_image.favorites.count %> いいね
          <% end %>
-        </p>
-       <% else %>
-        <p>
+        <% else %>
          <%= link_to post_image_favorites_path(@post_image), method: :post do %>
           ♡<%= @post_image.favorites.count %> いいね
          <% end %>
-        </p>
+        <% end %>
+       <% else %>
+        ♡<%= @post_image.favorites.count %> いいね
        <% end %>
-      <% else %>
-       ♡<%= @post_image.favorites.count %> いいね
-      <% end %>
+      </p>
       <p>コメント件数：<%= @post_image.post_comments.count %></p>
      </div>
-    </div>
 
-    <% if @post_image.post_comments.empty? %>
-    <% else %>
-     <div class="all_comment"></div>
-      <% @post_image.post_comments.each do |post_comment| %>
-       <div class="comment">
-        <div style="margin-bottom: 10px;">
-         <%= link_to admin_user_path(post_comment.user.id) do %>
-          <%= image_tag post_comment.user.get_profile_image(40,40), class: "profile_image" %>
-          <%= post_comment.user.name %>
-         <% end %>
-         <%= l post_comment.created_at %>
+     <% if @post_image.post_comments.empty? %>
+     <% else %>
+      <div class="all_comment">
+       <% @post_image.post_comments.each do |post_comment| %>
+        <div class="comment">
+         <div style="margin-bottom: 10px;">
+          <%= link_to admin_user_path(post_comment.user.id) do %>
+           <%= image_tag post_comment.user.get_profile_image(40,40), class: "profile_image" %>
+           <%= post_comment.user.name %>
+          <% end %>
 
-         <% if post_comment.user == current_user %>
-          <%= link_to "削除", post_image_post_comment_path(post_comment.post_image, post_comment), method: :delete, class: "btn btn-danger" %>
-         <% end %><br />
+          <div class="post_time">
+           <%= l post_comment.created_at %>
+          </div>
+
+          <% if post_comment.user == current_user %>
+           <div style="float: right;">
+            <%= link_to "削除", post_image_post_comment_path(post_comment.post_image, post_comment), method: :delete, class: "btn btn-danger" %>
+           </div>
+          <% end %><br />
+         </div>
 
          <%= safe_join(post_comment.comment.split("\n"),tag(:br)) %><br />
         </div>
-       </div>
-      <% end %>
-     </div>
-    <% end %>
-   </div>
-
-   <% if user_signed_in? %>
-    <!-- ログインユーザーの名前が「ゲスト」の場合、表示しない -->
-    <% if current_user.name != "ゲスト" %>
-    <div class="form">
-     <%= form_with model: [@post_image, @post_comment] do |f| %>
-      <%= f.text_area :comment, placeholder: "コメントを入力してください" %>
-      <%= f.submit "送信" %>
+       <% end %>
+      </div>
      <% end %>
     </div>
-    <% end %>
-   <% end %>
 
+    <% if user_signed_in? %>
+     <!-- ログインユーザーの名前が「ゲスト」の場合、表示しない -->
+     <% if current_user.name != "ゲスト" %>
+      <%= form_with model: [@post_image, @post_comment] do |f| %>
+       <div class="form" style="padding: 0 10px">
+        <%= f.text_area :comment, placeholder: "コメントを入力してください" %>
+        <%= f.submit "送信", class: "btn" %>
+       </div>
+      <% end %>
+     <% end %>
+    <% end %>
+   </div>
   </div>
+
  </div>
 </div>

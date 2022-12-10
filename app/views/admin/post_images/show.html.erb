@@ -110,7 +110,9 @@
          <div class="post_time">
           <%= l post_comment.created_at %>
          </div>
-         <%= link_to "削除", admin_post_image_post_comment_path(post_comment.post_image, post_comment), method: :delete, class: "btn" %><br />
+         <div style="float: right;">
+          <%= link_to "削除", admin_post_image_post_comment_path(post_comment.post_image, post_comment), method: :delete, class: "btn" %><br />
+         </div>
         </div>
         <%= safe_join(post_comment.comment.split("\n"),tag(:br)) %><br />
        </div>
