@@ -21,7 +21,7 @@
 
    .text {
     overflow: scroll;
-    height: 500px;
+    height: 450px;
    }
 
    .count {
@@ -96,12 +96,18 @@
   <div class="col-lg-5">
    <div class="all">
     <div class="text" style="margin-bottom: 50px;">
+
      <div class="field" style="margin-bottom: 20px;">
-      <%= link_to user_path(@user.id) do %>
+      <!-- ログイン済みユーザーですか？、尚且つ、ログインユーザーの名前が「ゲスト」の場合、表示しない -->
+      <% if user_signed_in? && current_user.name != "ゲスト" %>
+       <%= link_to user_path(@user.id) do %>
+        <%= image_tag @user.get_profile_image(50,50), class: "profile_image" %>
+        <%= @user.name %>
+       <% end %>
+      <% else %>
        <%= image_tag @user.get_profile_image(50,50), class: "profile_image" %>
        <%= @user.name %>
       <% end %>
-
       <div class="actions" style="float: right;">
        <!-- 投稿者＝ログインユーザーの場合、以下を表示する -->
        <% if @post_image.user == current_user %>
@@ -109,7 +115,6 @@
         <%= link_to "削除", post_image_path(@post_image), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-danger" %>
        <% end %>
       </div>
-
      </div>
 
      <div class="post">
@@ -121,7 +126,8 @@
 
      <div class="count">
       <p style="margin-right: 70px;">
-       <% if user_signed_in? %>
+       <!-- ログイン済みユーザーですか？、尚且つ、ログインユーザーの名前が「ゲスト」の場合、表示しない -->
+       <% if user_signed_in? && current_user.name != "ゲスト" %>
         <% if @post_image.favorited_by?(current_user) %>
          <%= link_to post_image_favorites_path(@post_image), method: :delete do %>
           ♥<%= @post_image.favorites.count %> いいね
@@ -138,13 +144,21 @@
       <p>コメント件数：<%= @post_image.post_comments.count %></p>
      </div>
 
+     <!-- post_imageは存在するが、属するpost_commentsは空ですか？ -->
      <% if @post_image.post_comments.empty? %>
+     <!-- post_commentsは存在する場合 -->
      <% else %>
       <div class="all_comment">
        <% @post_image.post_comments.each do |post_comment| %>
         <div class="comment">
          <div style="margin-bottom: 10px;">
-          <%= link_to admin_user_path(post_comment.user.id) do %>
+          <!-- ログイン済みユーザーですか？、尚且つ、ログインユーザーの名前が「ゲスト」の場合、表示しない -->
+          <% if user_signed_in? && current_user.name != "ゲスト" %>
+           <%= link_to admin_user_path(post_comment.user.id) do %>
+            <%= image_tag post_comment.user.get_profile_image(40,40), class: "profile_image" %>
+            <%= post_comment.user.name %>
+           <% end %>
+          <% else %>
            <%= image_tag post_comment.user.get_profile_image(40,40), class: "profile_image" %>
            <%= post_comment.user.name %>
           <% end %>
@@ -159,7 +173,6 @@
            </div>
           <% end %><br />
          </div>
-
          <%= safe_join(post_comment.comment.split("\n"),tag(:br)) %><br />
         </div>
        <% end %>
@@ -167,16 +180,17 @@
      <% end %>
     </div>
 
-    <% if user_signed_in? %>
-     <!-- ログインユーザーの名前が「ゲスト」の場合、表示しない -->
-     <% if current_user.name != "ゲスト" %>
-      <%= form_with model: [@post_image, @post_comment] do |f| %>
-       <div class="form" style="padding: 0 10px">
-        <%= f.text_area :comment, placeholder: "コメントを入力してください" %>
-        <%= f.submit "送信", class: "btn" %>
-       </div>
-      <% end %>
+    <!-- ログイン済みユーザーですか？、尚且つ、ログインユーザーの名前が「ゲスト」の場合、表示しない -->
+    <% if user_signed_in? && current_user.name != "ゲスト" %>
+     <%= form_with model: [@post_image, @post_comment] do |f| %>
+      <div class="form" style="padding: 0 10px">
+       <%= f.text_area :comment, placeholder: "コメントを入力してください" %>
+       <%= f.submit "送信", class: "btn" %>
+      </div>
      <% end %>
+    <% else %>
+     <p>新規登録すると、写真のお気に入り追加や</br>
+        コメントの投稿ができます</p>
     <% end %>
    </div>
   </div>

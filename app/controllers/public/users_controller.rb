@@ -1,4 +1,7 @@
 class Public::UsersController < ApplicationController
+ before_action :correct_user, only: [:edit, :update]
+ # ログイン認証が済んでいない場合、userに関するページにアクセス不可、ログイン画面に画面遷移する
+ before_action :authenticate_user!
 
   def show
    @user = User.find(params[:id])
@@ -9,15 +12,18 @@ class Public::UsersController < ApplicationController
    if @user.name == "ゲスト" && current_user.name != "ゲスト"
     # ログインユーザーのマイページにリダイレクトする
     redirect_to user_path(current_user.id)
+   # ゲストユーザーは、ゲストユーザー以外のshowページを開こうとした場合
+   elsif @user.name != "ゲスト" && current_user.name == "ゲスト"
+    redirect_to user_path(current_user.id)
    end
   end
 
   def edit
    @user = User.find(params[:id])
-   if @user == current_user
-    render :edit
-   else
-    redirect_to user_path(@user.id)
+   # 取得したユーザーの名前が「ゲスト」の場合
+   if @user.name == "ゲスト"
+    # マイページにリダイレクトする（編集ページを表示しない）
+    redirect_to user_path(current_user.id)
    end
   end
 
@@ -55,6 +61,13 @@ class Public::UsersController < ApplicationController
   # ユーザーデータのストロングパラメータ
   def user_params
    params.require(:user).permit(:name, :username, :introduction, :email, :is_deleted, :profile_image)
+  end
+
+  def correct_user
+   # レコードを取得
+   @user = User.find(params[:id])
+   # 取得したユーザーとログイン中ユーザーが一致しない場合、ユーザーの詳細ページにリダイレクトする
+   redirect_to(user_path) unless @user == current_user
   end
 
 end

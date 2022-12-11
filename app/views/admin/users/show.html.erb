@@ -8,32 +8,10 @@
     height: 150px;
    }
 
-   .post_all {
-    display: flex;
-    flex-wrap: wrap;
-    width: 630px;
-    margin: 0 auto;
-   }
-
-   .post {
-    text-align: left;
-    margin: 5px;
-   }
-
-   .post_image {
-    object-fit: cover; /* 中央でトリミング */
-    width: 200px;
-    height: 200px;
-   }
-
    .profile {
     display: flex;
     margin: 20px 0 40px;
     padding-left: 20px;
-   }
-
-   .pagination {
-    justify-content: center;
    }
 
    th, td {
@@ -60,6 +38,10 @@
     margin: 30px 0 20px
    }
 
+   .btn {
+    width: 128px;
+   }
+
    /* 1200px以下の際に適用される設定 */
    @media screen and (max-width: 1200px) {
     h4 {
@@ -71,25 +53,20 @@
      width: 630px;
      margin: 20px auto 40px;
     }
+
+    table {
+     margin-right: 0;
+    }
    }
 
    /* タブレット縦置きサイズ（768px）以下の際に適用される設定 */
    @media screen and (max-width:768px) {
     h4 {
-     width: 400px;
+     width: 390px;
     }
 
     .profile, .info {
-     width: 400px;
-    }
-
-    .post_all {
-     width: 400px;
-    }
-
-    .post_image {
-     width: 190px;
-     height: 190px;
+     width: 390px;
     }
    }
   </style>
@@ -106,7 +83,7 @@
    <div class="profile">
     <div style="margin: 20px 70px 0 0;">
      プロフィール写真<br />
-     <div style="margin-top: 65px;">
+     <div style="margin-top: 65px; width: 130px;">
       <%= link_to "編集する", edit_admin_user_path(@user), class: "btn" %>
      </div>
     </div>
@@ -159,24 +136,6 @@
    </div>
   </div>
 
-  <div class="col-xl-7 col-lg-12">
-   <!-- post_imageが無い場合 -->
-   <% if @post_images.empty? %>
-    <h3>投稿がありません</h3>
-   <!-- post_imageがある場合 -->
-   <% else %>
-    <div class="post_all">
-     <% @post_images.each do |post_image| %>
-      <div class="post">
-       <%= link_to admin_post_image_path(post_image.id) do %>
-        <%= image_tag post_image.image, class: "post_image" %>
-       <% end %>
-      </div>
-     <% end %>
-    </div>
-    <%= paginate @post_images %>
-   <% end %>
-
-  </div>
+  <%= render 'public/users/show', post_images: @post_images %>
  </div>
 </div>
