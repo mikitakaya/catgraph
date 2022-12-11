@@ -2,12 +2,23 @@
  table {
   width: 800px;
   margin: 0 auto 30px;
+  border-top: 3px solid #d9d9d9;
   border-bottom: 3px solid #d9d9d9;
+ }
+
+ tbody {
+  border-bottom: 2px solid #d9d9d9;
+ }
+
+ tbody:last-child {
+  border-bottom: 0;
  }
 
  .profile_image {
    border-radius: 50%; /* プロフィール画像の形を丸にする */
    object-fit: cover; /* 中央でトリミング */
+   width: 70px;
+   height: 70px;
   }
 
   .user_show {
@@ -27,15 +38,59 @@
   .user {
    width: 150px;
    padding-left: 0px;
+   word-break: break-all;
   }
 
   .follow {
-   width: 200px;
+   display: flex;
+   align-items: center;
   }
 
   .introduction {
    width: 400px;
    word-break: break-all;
+  }
+
+  .follow > th > .btn {
+   width: 128px;
+  }
+
+  .follow > th > p {
+   margin-top: 2px;
+   display: inline-block;
+   padding: 5px 9px;
+   background-color: #b7b7b7;
+   border-radius: 3px;
+   color: #fff;
+   font-size: 11px;
+   margin-bottom: 0;
+  }
+
+  /* 991px以下の際に適用される設定 */
+  @media screen and (max-width:991px) {
+   .introduction {
+    width: 300px;
+   }
+
+   table {
+    width: 100%;
+   }
+  }
+
+  /* タブレット縦置きサイズ（768px）以下の際に適用される設定 */
+  @media screen and (max-width:768px) {
+   .follow > th > .btn, .follow > th > p {
+    width: 80px;
+   }
+
+   .follow > th > .btn {
+    font-size: 13px;
+   }
+
+   .follow > th > p {
+    padding: 3px 5px;
+    font-size: 10px;
+   }
   }
 </style>
 
@@ -57,8 +112,8 @@
     </td>
    </tr>
 
-   <tr>
-    <th class="follow">
+   <tr class="follow">
+    <th>
      <% if user != current_user %>
       <% if current_user.following?(user) %>
        <%= link_to "フォロー中", user_relationships_path(user.id), class: "btn btn-light", method: :delete %>
@@ -76,3 +131,5 @@
   </tbody>
  <% end %>
 </table>
+
+<%= paginate users %>

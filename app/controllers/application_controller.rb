@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
     admin_top_path
    else
     # 上記に当てはまらない（顧客）場合、ルートパス
-    root_path
+    user_path(@user.id)
    end
   end
 
