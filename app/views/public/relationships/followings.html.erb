@@ -26,6 +26,7 @@
   <div class="col-lg-12" style="margin-bottom: 30px;">
    <% if @users.exists? %>
     <%= render 'follow_list', users: @users %>
+    <%= paginate @users %>
    <% else %>
     <p>ユーザーはいません</p>
    <% end %>

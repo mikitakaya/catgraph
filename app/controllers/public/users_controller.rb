@@ -4,10 +4,21 @@ class Public::UsersController < ApplicationController
    @user = User.find(params[:id])
    # 1ページあたりの表示件数を「6件」に設定
    @post_images = @user.post_images.page(params[:page]).per(6).order(id: "DESC")
+   # 取得したユーザー名がゲストで、尚且つ、ログイン中ユーザー名がゲストではない場合
+   # ゲストユーザー以外が、ゲストユーザーのshowページを開こうとした場合
+   if @user.name == "ゲスト" && current_user.name != "ゲスト"
+    # ログインユーザーのマイページにリダイレクトする
+    redirect_to user_path(current_user.id)
+   end
   end
 
   def edit
-   @user = current_user
+   @user = User.find(params[:id])
+   if @user == current_user
+    render :edit
+   else
+    redirect_to user_path(@user.id)
+   end
   end
 
   def update

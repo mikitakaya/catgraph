@@ -63,7 +63,8 @@ class User < ApplicationRecord
   def self.search(word)
    # wordでヒット数0の場合（unless word）、全ユーザー情報を返します（return User.all）
    return User.all unless word
-   @user = User.where("name LIKE?","%#{word}%")
+   # 検査買う結果に「ゲスト」は含まない（where.not(name: "ゲスト")）
+   @user = User.where("name LIKE?","%#{word}%").where.not(name: "ゲスト")
   end
 
   # ステータス true:退会、false:有効
