@@ -25,23 +25,42 @@
     height: 165px;
    }
 
-   .material1 {
+   .material1, .material2, .material3, .material4 {
     position: absolute;
-    width: 180px;
-    height: 180px;
-    box-shadow: inset 0 0 10px 15px #FFF;
    }
 
-   .material1 > img {
-    width: 180px;
-    height: 180px;
-    border-radius: 50%;
-    right: 20px;
-    bottom: 20px;
+   .material1 {
+    width: 250px;
+    height: 250px;
+    right: -80px;
+    bottom: 0px;
    }
+
+   .material2 {
+    width: 409px;
+    height: 231px;
+    top: -70px;
+    left: -300px;
+   }
+
+   .material3 {
+    width: 150px;
+    height: 150px;
+    top: 60px;
+    left: -300px;
+   }
+
+   .material4 {
+    width: 200px;
+    height: 200px;
+    left: -230px;
+    bottom: 80px;
+   }
+
   </style>
 
   <div class="col-lg-12">
+
    <div class="field">
     <div class="text">
      <h1>
@@ -55,11 +74,10 @@
      </p>
     </div>
 
-    <div class="material1">
-     <img src="<%= asset_path('material1.jpg') %>" />
-    </div>
-    <div class="material2"></div>
-    <div class="material3"></div>
+    <img class="material1" src="<%= asset_path('material1.png') %>" />
+    <img class="material2" src="<%= asset_path('material2.png') %>" />
+    <img class="material3" src="<%= asset_path('material3.png') %>" />
+    <img class="material4" src="<%= asset_path('material4.png') %>" />
     <div class="material4"></div>
     <div class="material5"></div>
 
