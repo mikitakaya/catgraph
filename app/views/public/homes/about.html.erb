@@ -1,15 +1,15 @@
-<div class="container">
- <div class="row">
+<!--<div class="container">-->
+ <!--<div class="row">-->
   <style>
    .field {
-    text-align: center;
     position: relative;
     margin: 50px auto;
     background-image: url("<%= asset_path('lace_pink.png') %>");
-    width: 650px;
+    /*width: 50vw;*/
     height: 650px;
+    /*width: 650px;*/
     background-size: cover;
-    position: relative;
+    max-width: 100%;
    }
 
    .text {
@@ -23,10 +23,19 @@
     margin: auto;
     width: 415px;
     height: 165px;
+    text-align: center;
+    height: 100vh;
+    padding-top: 31vh;
    }
 
-   .material1, .material2, .material3, .material4 {
+   p > img {
+    /*width: 100%;*/
+    max-width: 100%;
+   }
+
+   .material1, .material2, .material3, .material4, .material5 {
     position: absolute;
+    overflow: hidden;
    }
 
    .material1 {
@@ -44,10 +53,10 @@
    }
 
    .material3 {
-    width: 150px;
-    height: 150px;
+    width: 120px;
+    height: 120px;
     top: 60px;
-    left: -300px;
+    left: -280px;
    }
 
    .material4 {
@@ -57,10 +66,23 @@
     bottom: 80px;
    }
 
+   .material5 {
+    width: 200px;
+    height: 200px;
+    top: 120px;
+    right: -250px;
+   }
+
+    1200px以下の際に適用される設定
+   @media screen and (max-width:1200px) {
+
+   }
+
   </style>
 
-  <div class="col-lg-12">
+  <!--<div class="col-12">-->
 
+  <div id="test">
    <div class="field">
     <div class="text">
      <h1>
@@ -73,15 +95,32 @@
       少しでも癒しを感じてもらえたら…と思います。
      </p>
     </div>
+    <div style="overflow: hidden; width: 600px;">
+     <p  class="material1">
+      <img src="<%= asset_path('material1.png') %>" />
+     </p>
 
-    <img class="material1" src="<%= asset_path('material1.png') %>" />
-    <img class="material2" src="<%= asset_path('material2.png') %>" />
-    <img class="material3" src="<%= asset_path('material3.png') %>" />
-    <img class="material4" src="<%= asset_path('material4.png') %>" />
-    <div class="material4"></div>
-    <div class="material5"></div>
+      <p class="material2">
+       <img src="<%= asset_path('material2.png') %>" />
+      </p>
 
+      <p class="material3">
+       <img src="<%= asset_path('material3.png') %>" />
+      </p>
+
+      <p class="material4">
+       <img src="<%= asset_path('material4.png') %>" />
+      </p>
+
+      <p class="material5">
+       <img src="<%= asset_path('material5.png') %>" />
+      </p>
+    </div>
    </div>
   </div>
- </div>
-</div>
+
+
+
+  <!--</div>-->
+ <!--</div>-->
+<!--</div>-->
