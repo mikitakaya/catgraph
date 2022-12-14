@@ -83,13 +83,17 @@
    margin-bottom: 0;
   }
 
-  .field {
+  .detail .field {
    margin-right: 20px;
    width: 111px;
   }
 
   .field:last-child {
    margin-right: 0;
+  }
+
+  .profile .field {
+   margin-right: 100px;
   }
 
    /* 1200px以下の際に適用される設定 */
@@ -112,11 +116,27 @@
    /* タブレット縦置きサイズ（768px）以下の際に適用される設定 */
    @media screen and (max-width:768px) {
     h4 {
-     width: 390px;
+     width: 530px;
     }
 
     .profile, .info, .detail {
-     width: 390px;
+     width: 530px;
+    }
+   }
+
+   /* スマートフォンサイズ（425px）以下の際に適用される設定 */
+   @media screen and (max-width:425px) {
+    h4 {
+     width: 330px;
+    }
+
+    .profile, .info, .detail {
+     width: 330px;
+    }
+
+    .profile .field {
+     width: 128px;
+     margin: 20px 30px 0 0;
     }
    }
   </style>
@@ -135,7 +155,7 @@
 
   <div class="col-xl-5 col-lg-12">
    <div class="profile">
-    <div style="margin: 20px 70px 0 0;">
+    <div class="field">
      プロフィール写真<br />
      <div class="actions" style="margin-top: 65px;">
       <!-- ユーザー＝ログインユーザーの場合、編集ボタンを表示する -->

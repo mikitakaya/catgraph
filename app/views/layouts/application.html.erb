@@ -73,10 +73,17 @@
     }
    }
 
-   /* タブレット縦置きサイズ（480px）以下の際に適用される設定 */
-   @media screen and (max-width:480px) {
+   /* タブレット縦置きサイズ（768px）以下の際に適用される設定 */
+   @media screen and (max-width:768px) {
     .word {
-     width: 120px;
+     width: 130px;
+    }
+   }
+
+   /* スマートフォンサイズ（425px）以下の際に適用される設定 */
+   @media screen and (max-width:425px) {
+    .word {
+     width: 100px;
     }
    }
   </style>
@@ -85,7 +92,6 @@
    <header class="color">
     <nav class="navbar navbar-expand-lg navbar-light">
      <div class="container">
-
       <%= link_to '/' do %>
        <%= image_tag "logo.png", size: "80x80" %>
       <% end %>

@@ -2,13 +2,14 @@
  <div class="row">
   <style>
    .top {
+    width: 100%;
     height: 600px;
     background-image: url("<%= asset_path('top.jpg') %>");
     background-size: cover;
    }
 
    .top, h4, .index_link {
-    margin: 20px 0 40px;
+    margin-top: 20px;
    }
 
    h4 {
@@ -27,6 +28,7 @@
    .post_all {
     display: flex;
     flex-wrap: wrap;
+    width: 420px;
    }
 
    .post {
@@ -46,6 +48,10 @@
     padding-right: 20px;
    }
 
+   footer {
+    margin-top: 40px;
+   }
+
    /* タブレット横置きサイズ（1024px）以下の際に適用される設定 */
    @media screen and (max-width: 1024px) {
     .post_all {
@@ -53,8 +59,8 @@
      margin: 0 auto;
     }
 
-    h4 {
-     margin-top: 0;
+    .top {
+     margin-bottom: 0;
     }
    }
 
@@ -79,6 +85,20 @@
     .text {
      padding: 15px 0 0 15px;
     }
+
+    .post {
+     text-align: left;
+     margin: 2px;
+    }
+
+    .post_all {
+     width: 328px;
+    }
+
+    .post_image {
+     width: 160px;
+     height: 160px;
+    }
    }
   </style>
 
@@ -101,7 +121,7 @@
 
   </div>
 
-  <div class="col-lg-6">
+  <div class="col-lg-6" style="padding: 0 30px;">
    <h4>
     <span>新着投稿</span>
    </h4>
