@@ -1,126 +1,199 @@
-<!--<div class="container">-->
- <!--<div class="row">-->
-  <style>
-   .field {
-    position: relative;
-    margin: 50px auto;
-    background-image: url("<%= asset_path('lace_pink.png') %>");
-    /*width: 50vw;*/
-    height: 650px;
-    /*width: 650px;*/
-    background-size: cover;
-    max-width: 100%;
-   }
+<style>
+ /* フラッシュメッセージの幅を消す */
+ main > p {
+  display: none;
+ }
 
-   .text {
-    display: inline-block;
-    text-align: left;
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    margin: auto;
-    width: 415px;
-    height: 165px;
-    text-align: center;
-    height: 100vh;
-    padding-top: 31vh;
-   }
+ .box {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+ }
 
-   p > img {
-    /*width: 100%;*/
-    max-width: 100%;
-   }
+ .box .container {
+  width: 600px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  position: relative;
+  padding: 50px 0 170px;
+  z-index: 0;
+  }
 
-   .material1, .material2, .material3, .material4, .material5 {
-    position: absolute;
-    overflow: hidden;
-   }
+  img {
+   max-width: 100%;
+  }
 
-   .material1 {
-    width: 250px;
-    height: 250px;
-    right: -80px;
-    bottom: 0px;
-   }
+ .box-img01 {
+  margin: 0;
+  position: absolute;
+  width: 409px;
+  height: 231px;
+  top: 0px;
+  left: -350px;
+ }
 
-   .material2 {
-    width: 409px;
-    height: 231px;
-    top: -70px;
-    left: -300px;
-   }
+ .box-img02 {
+  margin: 0;
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  top: 130px;
+  left: -350px;
+ }
 
-   .material3 {
-    width: 120px;
-    height: 120px;
-    top: 60px;
-    left: -280px;
-   }
+ .box-img03 {
+  margin: 0;
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  bottom: 150px;
+  left: -220px;
+ }
 
-   .material4 {
-    width: 200px;
-    height: 200px;
-    left: -230px;
-    bottom: 80px;
-   }
+ .box-img04 {
+  margin: 0;
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  top: 200px;
+  right: -260px;
+ }
 
-   .material5 {
-    width: 200px;
-    height: 200px;
-    top: 120px;
-    right: -250px;
-   }
+ .box-img05 {
+  margin: 0;
+  position: absolute;
+  width: 250px;
+  height: 250px;
+  bottom: 100px;
+  right: -70px;
+  z-index: 1; /* fieldクラスの上に来るように設定*/
+ }
 
-    1200px以下の際に適用される設定
-   @media screen and (max-width:1200px) {
+ .field {
+  width: 600px;
+  height: 600px;
+  background-image: url("<%= asset_path('lace_pink.png') %>");
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+ }
 
-   }
+ .text {
+  width: 420px;
+  height: 165px;
+  margin: 0 auto;
+  text-align: left;
+ }
 
-  </style>
+ /* タブレット横置きサイズ（1024px）以下の際に適用される設定 */
+ @media screen and (max-width:1024px) {
+  .box .container {
+   width: 500px;
+  }
 
-  <!--<div class="col-12">-->
+  .field {
+   width: 500px;
+   height: 500px;
+  }
 
-  <div id="test">
-   <div class="field">
-    <div class="text">
-     <h1>
-      About
-     </h1>
-     <p>
-      Catgraphは「猫の写真だけ」を共有し合うサイトです。<br />
-      いつでもどこでも猫さんの写真を、投稿・閲覧可能です。<br />
-      日々移り変わる日常の中で、猫さんの写真を通じて、<br />
-      少しでも癒しを感じてもらえたら…と思います。
-     </p>
-    </div>
-    <div style="overflow: hidden; width: 600px;">
-     <p  class="material1">
-      <img src="<%= asset_path('material1.png') %>" />
-     </p>
+  .text {
+   width: 390px;
+  }
 
-      <p class="material2">
-       <img src="<%= asset_path('material2.png') %>" />
-      </p>
+  .text h1 {
+   font-size: 30px;
+  }
 
-      <p class="material3">
-       <img src="<%= asset_path('material3.png') %>" />
-      </p>
+  .text p {
+   font-size: 15px;
+  }
+ }
 
-      <p class="material4">
-       <img src="<%= asset_path('material4.png') %>" />
-      </p>
+ /* 500px以下の際に適用される設定 */
+ @media screen and (max-width:500px) {
+  .box .container {
+   width: 400px;
+  }
 
-      <p class="material5">
-       <img src="<%= asset_path('material5.png') %>" />
-      </p>
-    </div>
+  .field {
+   width: 400px;
+   height: 400px;
+  }
+
+  .text {
+   width: 340px;
+  }
+
+  .text h1 {
+   font-size: 25px;
+  }
+
+  .text p {
+   font-size: 13px;
+  }
+
+  .box-img01 {
+   display: none;
+  }
+
+  .box-img02 {
+
+  }
+
+  .box-img03 {
+   position: absolute;
+   width: 120px;
+   height: 120px;
+   bottom: 60px;
+   left: 0px;
+  }
+
+  .box-img05 {
+   position: absolute;
+   width: 180px;
+   height: 180px;
+   bottom: 120px;
+   right: -20px;
+  }
+ }
+</style>
+
+<div class="box">
+ <div class="container">
+  <p class="box-img01" style="visibility: visible;">
+   <img src="<%= asset_path('nikukyu.png') %>" />
+  </p>
+
+  <p class="box-img02" style="visibility: visible;">
+   <img src="<%= asset_path('lace_pink02.png') %>" />
+  </p>
+
+  <p class="box-img03">
+   <img src="<%= asset_path('coneko.png') %>" />
+  </p>
+
+  <p class="box-img04">
+   <img src="<%= asset_path('lace_gray.png') %>" />
+  </p>
+
+  <p  class="box-img05" style="visibility: visible;">
+   <img src="<%= asset_path('cat01.png') %>" />
+  </p>
+
+  <div class="field">
+   <div class="text">
+    <h1>
+     About
+    </h1>
+    <p>
+     Catgraphは「猫の写真だけ」を共有し合うサイトです。<br />
+     いつでもどこでも猫さんの写真を、投稿・閲覧可能です。<br />
+     日々移り変わる日常の中で、猫さんの写真を通じて、<br />
+     少しでも癒しを感じてもらえたら…と思います。
+    </p>
    </div>
   </div>
 
-
-
-  <!--</div>-->
- <!--</div>-->
-<!--</div>-->
+ </div>
+</div>
