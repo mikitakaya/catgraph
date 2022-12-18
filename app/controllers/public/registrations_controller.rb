@@ -67,4 +67,11 @@ class Public::RegistrationsController < Devise::RegistrationsController
      redirect_to root_path, alert: 'ゲストユーザーの更新・削除はできません。'
     end
   end
+
+  protected
+
+  # ユーザーデータのストロングパラメータ
+  def user_params
+   devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :username, :email])
+  end
 end

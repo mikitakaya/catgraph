@@ -1,9 +1,4 @@
 ja:
-  activerecord:
-   attributes:
-   models:
-    user: ユーザ
-
   devise:
    registrations:
     new:

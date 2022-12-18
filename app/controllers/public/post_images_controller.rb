@@ -11,9 +11,12 @@ class Public::PostImagesController < ApplicationController
    # 投稿者ID＝ログイン中ユーザー
    @post_image.user_id = current_user.id
    # データをデータベースに保存する
-   @post_image.save
-   # 保存後、投稿の詳細画面にリダイレクトする
-   redirect_to post_image_path(@post_image.id)
+   if @post_image.save
+    # 保存後、投稿の詳細画面にリダイレクトする
+    redirect_to post_image_path(@post_image.id)
+   else
+    render :new
+   end
   end
 
   def index

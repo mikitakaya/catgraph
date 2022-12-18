@@ -1,6 +1,10 @@
 <div class="container">
  <div class="row">
   <style>
+   .field_with_errors {
+    display: contents;
+   }
+
    .login {
     margin-bottom: 15%;
    }
@@ -24,7 +28,7 @@
     margin: 10px 10px 10px 0;
    }
 
-   .field > input {
+   .field > input, .field_with_errors > input {
     width: 350px;
    }
 
@@ -40,7 +44,7 @@
      margin: 0 auto;
     }
 
-    .text, .field > input, .login > .field {
+    .text, .field > input, .login > .field, .field_with_errors > input {
      width: 330px;
     }
 
@@ -70,7 +74,14 @@
 
    <div class="text">
     <%= form_with model: @user, url: user_registration_path, class: "new_user" do |f| %>
-    <%= render "public/shared/error_messages", resource: resource %>
+    <% if @user.errors.any? %>
+     <%= @user.errors.count %>件のエラーが発生しました
+     <ul>
+      <% @user.errors.full_messages.each do |message| %>
+       <li><%= message %></li>
+      <% end %>
+     </ul>
+    <% end %>
 
      <div class="field">
       <%= f.label :name, "名前" %>
