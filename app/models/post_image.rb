@@ -11,6 +11,13 @@ class PostImage < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :favorited_users, through: :favorites, source: :user, dependent: :destroy
 
+  # image、title、bodyのデータは存在しなければならない
+  validates :image, presence: true
+  # titleは最大50文字に制限する
+  validates :title, presence: true, length: { maximum: 50 }
+  # bodyは1〜140文字に制限する
+  validates :body, presence: true, length: { in: 1..140 }
+
   def favorited_by?(user)
     favorites.exists?(user_id: user.id)
   end

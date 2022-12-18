@@ -24,6 +24,14 @@ class User < ApplicationRecord
   has_many :followings, through: :relationships, source: :followed
   has_many :followers, through: :reverse_of_relationships, source: :follower
 
+  # nameとusernameのデータは存在しなければならない、かつ一意性を持たせる
+  # nameは2～20文字の範囲で制限する
+  validates :name, presence: true, uniqueness: true, length: { in: 2..20 }
+  # usernameは6～20文字の範囲で制限する
+  validates :username, presence: true, uniqueness: true, length: { in: 6..20 }
+  # introductionは最大140文字に制限する
+  validates :introduction, length: { maximum: 140 }
+
   def self.guest
     find_or_create_by!(name: 'ゲスト' ,email: 'cg_guest@example.com') do |user|
       user.password = SecureRandom.urlsafe_base64
