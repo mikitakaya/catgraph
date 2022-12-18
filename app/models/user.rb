@@ -6,7 +6,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   # プロフィール画像を「profile_image」というカラムで保存
-  has_one_attached :profile_image
+  has_one_attached :profile_image, dependent: :destroy
   # userが削除された際、post_image・post_comment・favoriteも削除される
   # user（1）はpost_image（N）を複数持っている
   has_many :post_images, dependent: :destroy
@@ -61,10 +61,10 @@ class User < ApplicationRecord
 
   # wordに基づいて検索する
   def self.search(word)
-   # wordでヒット数0の場合（unless word）、全ユーザー情報を返します（return User.all）
+   # wordは未設定の場合（unless word）、全ユーザー情報を返します（return User.all）
    return User.all unless word
-   # 検査買う結果に「ゲスト」は含まない（where.not(name: "ゲスト")）
-   @user = User.where("name LIKE?","%#{word}%").where.not(name: "ゲスト")
+   # 検索結果に「ゲスト」は含まない（where.not(name: "ゲスト")）、ステータスが退会の場合も含まない
+   User.where("name LIKE?","%#{word}%").where.not(name: "ゲスト").where.not(is_deleted: true)
   end
 
   # ステータス true:退会、false:有効

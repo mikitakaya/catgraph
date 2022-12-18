@@ -12,6 +12,8 @@ class Public::UsersController < ApplicationController
    if @user.name == "ゲスト" && current_user.name != "ゲスト"
     # ログインユーザーのマイページにリダイレクトする
     redirect_to user_path(current_user.id)
+   elsif @user.is_deleted == "no_active"
+    redirect_to user_path(current_user.id)
    # ゲストユーザーは、ゲストユーザー以外のshowページを開こうとした場合
    elsif @user.name != "ゲスト" && current_user.name == "ゲスト"
     redirect_to user_path(current_user.id)
@@ -41,6 +43,13 @@ class Public::UsersController < ApplicationController
    @user = current_user
    # ユーザーステータスをtrue（退会）に更新する
    @user.update(is_deleted: true)
+   # @user.destroy
+   @user.profile_image.destroy
+   @user.post_images.destroy_all
+   @user.post_comments.destroy_all
+   @user.favorites.destroy_all
+   @user.relationships.destroy_all
+   @user.reverse_of_relationships.destroy_all
    reset_session
    flash[:notice] = "退会処理を実行いたしました"
    redirect_to root_path
