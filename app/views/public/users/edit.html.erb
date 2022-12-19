@@ -1,9 +1,5 @@
 <div class="container">
  <style>
-  .field_with_errors {
-   display: contents;
- }
-
   .text_field {
    width: 60%;
    height: 100%;
@@ -78,7 +74,7 @@
   }
  </style>
 
- <%= form_with model: @user, url: user_path(@user.id), method: :patch do |f| %>
+ <%= form_with model: @user do |f| %>
   <div class="row">
    <div class="col-12">
     <h4>

@@ -109,7 +109,7 @@
     <% else %>
      <% @favorited_post_images.each do |post_image| %>
      <div class="post">
-      <%= link_to post_image_favorites_path(post_image), class: "cancel_button", method: :delete do %>
+      <%= link_to post_image_favorites_path(post_image), class: "cancel_button", method: :delete, "data-confirm" => "お気に入り登録を削除しますか？" do %>
        <div class="cancel">
         <h3>
          <span>

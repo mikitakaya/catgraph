@@ -42,21 +42,21 @@ class Public::PostImagesController < ApplicationController
    # レコードを1件だけ取得
    @post_image = PostImage.find(params[:id])
    # データを更新する
-   @post_image.update(post_image_params)
-   # 更新後、投稿詳細画面にリダイレクトする
-   redirect_to post_image_path(@post_image.id)
+   if @post_image.update(post_image_params)
+    # 更新後、投稿詳細画面にリダイレクトする
+    redirect_to post_image_path(@post_image.id), notice: "投稿内容を更新しました"
+   else
+    render :edit
+   end
   end
 
   def destroy
    # レコードを1件だけ取得
    @post_image = PostImage.find(params[:id])
    # レコードを削除
-   if @post_image.destroy
-    # レコードを削除後、投稿一覧画面にリダイレクトする
-    redirect_to post_images_path, notice: "投稿を削除しました"
-   else
-    render :show
-   end
+   @post_image.destroy
+   # レコードを削除後、投稿一覧画面にリダイレクトする
+   redirect_to post_images_path, notice: "投稿を削除しました"
   end
 
   def search
