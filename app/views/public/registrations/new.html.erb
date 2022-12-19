@@ -73,7 +73,6 @@
    </h4>
 
    <div class="text">
-    <%= form_with model: @user, url: user_registration_path, class: "new_user" do |f| %>
     <% if @user.errors.any? %>
      <%= @user.errors.count %>件のエラーが発生しました
      <ul>
@@ -83,6 +82,7 @@
      </ul>
     <% end %>
 
+    <%= form_with model: @user, url: user_registration_path, class: "new_user" do |f| %>
      <div class="field">
       <%= f.label :name, "名前" %>
       <%= f.text_field :name, autofocus: true, placeholder: "令和ちゃん" %>

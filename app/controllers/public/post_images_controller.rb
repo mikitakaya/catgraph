@@ -13,7 +13,7 @@ class Public::PostImagesController < ApplicationController
    # データをデータベースに保存する
    if @post_image.save
     # 保存後、投稿の詳細画面にリダイレクトする
-    redirect_to post_image_path(@post_image.id)
+    redirect_to post_image_path(@post_image.id), notice: '新規投稿に成功しました'
    else
     render :new
    end
@@ -51,9 +51,12 @@ class Public::PostImagesController < ApplicationController
    # レコードを1件だけ取得
    @post_image = PostImage.find(params[:id])
    # レコードを削除
-   @post_image.destroy
-   # レコードを削除後、投稿一覧画面にリダイレクトする
-   redirect_to post_images_path
+   if @post_image.destroy
+    # レコードを削除後、投稿一覧画面にリダイレクトする
+    redirect_to post_images_path, notice: "投稿を削除しました"
+   else
+    render :show
+   end
   end
 
   def search

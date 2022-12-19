@@ -1,5 +1,9 @@
 <div class="container">
  <style>
+  .field_with_errors {
+   display: contents;
+ }
+
   .text_field {
    width: 60%;
    height: 100%;
@@ -81,6 +85,15 @@
      <span>プロフィールを編集</span>
     </h4>
    </div>
+
+   <% if @user.errors.any? %>
+    <%= @user.errors.count %>件のエラーが発生しました
+    <ul>
+     <% @user.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+    </ul>
+   <% end %>
   </div>
 
   <div class="row">

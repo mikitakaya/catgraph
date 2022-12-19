@@ -1,6 +1,6 @@
 class Public::UsersController < ApplicationController
  before_action :correct_user, only: [:edit, :update]
- # ログイン認証が済んでいない場合、userに関するページにアクセス不可、ログイン画面に画面遷移する
+ # ログイン認証が済んでいない場合、userに関するページにアクセス不可、ログイン画面に遷移する
  before_action :authenticate_user!
 
   def show
@@ -31,8 +31,11 @@ class Public::UsersController < ApplicationController
 
   def update
    @user = current_user
-   @user.update(user_params)
-   redirect_to user_path(@user.id)
+   if @user.update(user_params)
+    redirect_to user_path(@user.id), notice: 'プロフィールを更新しました'
+   else
+    render :edit
+   end
   end
 
   def unsubscribe
@@ -42,17 +45,19 @@ class Public::UsersController < ApplicationController
   def withdraw
    @user = current_user
    # ユーザーステータスをtrue（退会）に更新する
-   @user.update(is_deleted: true)
-   # @user.destroy
-   @user.profile_image.destroy
-   @user.post_images.destroy_all
-   @user.post_comments.destroy_all
-   @user.favorites.destroy_all
-   @user.relationships.destroy_all
-   @user.reverse_of_relationships.destroy_all
-   reset_session
-   flash[:notice] = "退会処理を実行いたしました"
-   redirect_to root_path
+   if @user.update(is_deleted: true)
+    @user.profile_image.destroy
+    @user.post_images.destroy_all
+    @user.post_comments.destroy_all
+    @user.favorites.destroy_all
+    @user.relationships.destroy_all
+    @user.reverse_of_relationships.destroy_all
+    reset_session
+    flash[:notice] = "退会処理を実行しました"
+    redirect_to root_path
+   else
+    render :unsubscribe
+   end
   end
 
   def favorites

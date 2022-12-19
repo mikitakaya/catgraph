@@ -33,11 +33,6 @@ class User < ApplicationRecord
   # introductionは最大140文字に制限する
   validates :introduction, length: { maximum: 140 }
 
-  validates :email, presence: true, format: { with: VALID_PASSWORD_REGEX }
-  validates :password, presence: true, format: { with: VALID_PASSWORD_REGEX }
-  validates :password_confirmation, format: { with: VALID_PASSWORD_REGEX }
-
-
   def self.guest
     find_or_create_by!(name: 'ゲスト' ,email: 'cg_guest@example.com') do |user|
       user.password = SecureRandom.urlsafe_base64
