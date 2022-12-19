@@ -69,6 +69,14 @@
 
    <div class="text">
     <%= form_with model: @user, url: user_session_path, class: "new_user" do |f| %>
+    <% if @user.errors.any? %>
+     <%= @user.errors.count %>件のエラーが発生しました
+     <ul>
+      <% @user.errors.full_messages.each do |message| %>
+       <li><%= message %></li>
+      <% end %>
+     </ul>
+    <% end %>
     <div class="field">
      <%= f.label :email, "メールアドレス" %>
      <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "sample@example.com", autofocus: true %>

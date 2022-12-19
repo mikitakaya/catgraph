@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   }
   devise_scope :user do
     post 'users/guest_sign_in', to: 'public/sessions#guest_sign_in'
-    # TIPS: ユーザー登録しっぱいのリダイレクトのエラーを防ぐ https://github.com/heartcombo/devise/blob/master/app/controllers/devise/registrations_controller.rb
+    # TIPS: ユーザー登録失敗のリダイレクトのエラーを防ぐ https://github.com/heartcombo/devise/blob/master/app/controllers/devise/registrations_controller.rb
     get '/users', to: 'public/registrations#new'
   end
 
