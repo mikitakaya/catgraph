@@ -24,7 +24,7 @@ class User < ApplicationRecord
   has_many :followings, through: :relationships, source: :followed
   has_many :followers, through: :reverse_of_relationships, source: :follower
 
-  VALID_PASSWORD_REGEX = /\A[\w@-]*[A-Za-z][\w@-]*\z/
+  VALID_PASSWORD_REGEX = /\A[!-~]+\z/
   # nameとusernameのデータは存在しなければならない、かつ一意性を持たせる
   # nameは2～20文字の範囲で制限する
   validates :name, presence: true, uniqueness: true, length: { in: 2..20 }
@@ -78,4 +78,5 @@ class User < ApplicationRecord
 
   # ステータス true:退会、false:有効
   enum is_deleted: { no_active: true, active: false}
+
 end

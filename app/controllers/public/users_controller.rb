@@ -45,19 +45,16 @@ class Public::UsersController < ApplicationController
   def withdraw
    @user = current_user
    # ユーザーステータスをtrue（退会）に更新する
-   if @user.update(is_deleted: true)
-    @user.profile_image.destroy
-    @user.post_images.destroy_all
-    @user.post_comments.destroy_all
-    @user.favorites.destroy_all
-    @user.relationships.destroy_all
-    @user.reverse_of_relationships.destroy_all
-    reset_session
-    flash[:notice] = "退会処理を実行しました"
-    redirect_to root_path
-   else
-    render :unsubscribe
-   end
+   @user.update(is_deleted: true)
+   @user.profile_image.destroy
+   @user.post_images.destroy_all
+   @user.post_comments.destroy_all
+   @user.favorites.destroy_all
+   @user.relationships.destroy_all
+   @user.reverse_of_relationships.destroy_all
+   reset_session
+   flash[:notice] = "退会処理を実行しました"
+   redirect_to root_path
   end
 
   def favorites

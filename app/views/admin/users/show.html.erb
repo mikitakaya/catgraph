@@ -16,36 +16,46 @@
 
    th, td {
     border-bottom: 2px solid #d9d9d9;
+    word-break: break-all;
    }
 
    th {
     width: 160px;
-    padding: 0 10px 0 20px;
+    padding: 10px 10px 10px 20px;
    }
 
    td {
-    padding: 10px 0;
-    padding-right: 20px;
+    padding: 10px 20px 10px 0;
    }
 
    table {
     border-top: 3px solid #d9d9d9;
     border-bottom: 3px solid #d9d9d9;
     margin: 0 30px 50px 0;
+    width: 100%;
    }
 
    h4 {
     margin: 30px 0 20px
    }
 
+   .actions {
+    width: 130px;
+    margin-top: 65px;
+   }
+
    .btn {
     width: 128px;
+   }
+
+   .profile .field {
+    margin-right: 100px;
    }
 
    /* 1200px以下の際に適用される設定 */
    @media screen and (max-width: 1200px) {
     h4 {
-     width: 630px;
+     width: 100%;
      margin: 30px auto 10px;
     }
 
@@ -61,14 +71,42 @@
 
    /* タブレット縦置きサイズ（768px）以下の際に適用される設定 */
    @media screen and (max-width:768px) {
-    h4 {
-     width: 390px;
-    }
-
     .profile, .info {
-     width: 390px;
+     width: 100%;
     }
    }
+
+   /* スマートフォンサイズ（425px）以下の際に適用される設定 */
+   @media screen and (max-width:425px) {
+    .field, .actions {
+     width: 100%;
+    }
+
+    .profile .field {
+     margin: 0;
+    }
+
+    .profile_image {
+     width: 80px;
+     height: 80px;
+    }
+
+    th {
+     width: 120px;
+    }
+
+    main .container, .btn {
+     font-size: 13px;
+    }
+
+    .actions {
+     margin-top: 20px;
+    }
+
+    .btn {
+     width: 105px;
+    }
+
   </style>
 
   <div class="col-xl-12">
@@ -81,9 +119,9 @@
 
   <div class="col-xl-5 col-lg-12">
    <div class="profile">
-    <div style="margin: 20px 70px 0 0;">
+    <div class="field">
      プロフィール写真<br />
-     <div style="margin-top: 65px; width: 130px;">
+     <div class="actions">
       <%= link_to "編集する", edit_admin_user_path(@user), class: "btn" %>
      </div>
     </div>

@@ -25,7 +25,6 @@
 
    td {
     padding: 10px 20px 10px 0;
-    /*width: 255px;*/
    }
 
    table {
@@ -33,21 +32,6 @@
     border-bottom: 3px solid #d9d9d9;
     margin: 0 30px 50px 0;
     width: 100%;
-   }
-
-   .no_image {
-    text-align: center;
-   }
-
-   .camera {
-    border-radius: 50%; /* プロフィール画像の形を丸にする */
-    width: 200px;
-    height: 200px;
-    margin-bottom: 150px;
-   }
-
-   .no_image > h3 {
-    margin-bottom: 70px;
    }
 
    h4 {
@@ -60,6 +44,7 @@
    }
 
    .actions {
+    margin-top: 65px;
     width: 130px;
    }
 
@@ -73,20 +58,16 @@
     border: 2px solid #666666;
    }
 
-   .actions {
-    margin-top: 65px;
-   }
-
    .actions > p {
-   margin-top: 2px;
-   display: inline-block;
-   padding: 5px 9px;
-   background-color: #b7b7b7;
-   border-radius: 3px;
-   color: #fff;
-   font-size: 11px;
-   margin-bottom: 0;
-  }
+    margin-top: 2px;
+    display: inline-block;
+    padding: 5px 9px;
+    background-color: #b7b7b7;
+    border-radius: 3px;
+    color: #fff;
+    font-size: 11px;
+    margin-bottom: 0;
+   }
 
   .detail .field {
    margin-right: 20px;
@@ -104,7 +85,7 @@
    /* 1200px以下の際に適用される設定 */
    @media screen and (max-width: 1200px) {
     h4 {
-     width: 630px;
+     width: 100%;
      margin: 30px auto 10px;
     }
 
@@ -120,11 +101,7 @@
 
    /* タブレット縦置きサイズ（768px）以下の際に適用される設定 */
    @media screen and (max-width:768px) {
-    h4 {
-     width: 530px;
-    }
-
-    h4, .profile, .info, .detail {
+    .profile, .info, .detail {
      width: 100%;
     }
    }

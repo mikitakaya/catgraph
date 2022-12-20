@@ -34,16 +34,16 @@ ja:
 
  errors:
   messages:
-   record_invalid: 'バリデーションに失敗しました: %{errors}'
+   record_invalid: 'バリデーションに失敗しました。: %{errors}'
    restrict_dependent_destroy:
-    has_one: "%{record}が存在しているので削除できません"
-    has_many: "%{record}が存在しているので削除できません"
+    has_one: "%{record}が存在しているので削除できません。"
+    has_many: "%{record}が存在しているので削除できません。"
   models:
    user: ユーザー
    post_image: 投稿
   attributes:
    username:
-    invalid: は半角英数字と記号で作成してください
+    invalid: は半角英数字と記号で作成してください。
    password:
     # invalid: は半角英数字で作成してください
    password_confirmation:
