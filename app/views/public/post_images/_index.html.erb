@@ -94,13 +94,12 @@
     <% end %>
    </div>
 
-   <!-- ユーザーとしてログインしていますか？ -->
    <% if user_signed_in? %>
-    <!-- ユーザーの名前が「ゲスト」の場合、表示しない -->
     <% if current_user.name != "ゲスト" %>
      <%= paginate post_images %>
+    <% elsif current_user.name == "ゲスト" %>
+     <p style="text-align: center;">会員登録後、全ての投稿の閲覧が可能です</p>
     <% end %>
-    <!-- 管理者としてログインしていますか？ -->
    <% elsif admin_signed_in? %>
     <%= paginate post_images %>
    <% end %>
