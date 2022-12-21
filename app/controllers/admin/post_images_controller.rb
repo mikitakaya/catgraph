@@ -12,6 +12,6 @@ class Admin::PostImagesController < ApplicationController
    # レコードを削除
    @post_image.destroy
    # レコードを削除後、投稿一覧画面にリダイレクトする
-   redirect_to admin_top_path
+   redirect_to admin_top_path, notice: "投稿を削除しました"
   end
 end

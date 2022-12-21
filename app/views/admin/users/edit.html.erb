@@ -79,11 +79,14 @@
       <%= f.text_field :email, placeholder: "sample@example.com", class: "text_field" %>
      </div>
 
+     <!-- ゲストユーザーのステータス変更ボタンを非表示にする -->
+     <% if @user.name != "ゲスト" %>
      <div class="field" style="border-bottom: 3px solid #d9d9d9;">
       <%= f.label :is_deleted, "ステータス" %>
       <%= f.radio_button :is_deleted, "active" %> <text>有効</text>
       <%= f.radio_button :is_deleted, "no_active" %> <text>退会</text>
      </div>
+     <% end %>
 
      <div class="action">
       <label></label>

@@ -14,7 +14,7 @@ class Public::PostCommentsController < ApplicationController
 
   def destroy
     PostComment.find(params[:id]).destroy
-    redirect_to post_image_path(params[:post_image_id])
+    redirect_to post_image_path(params[:post_image_id]), notice: "コメントを削除しました"
   end
 
   def post_comment_params
