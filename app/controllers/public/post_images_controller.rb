@@ -1,4 +1,5 @@
 class Public::PostImagesController < ApplicationController
+ before_action :correct_user, only: [:edit, :update]
 
   def new
    # 空のモデルを用意する
@@ -68,6 +69,12 @@ class Public::PostImagesController < ApplicationController
   # 投稿データのストロングパラメータ
   def post_image_params
    params.require(:post_image).permit(:user_id, :title, :body, :image)
+  end
+
+  def correct_user
+   @post_image = PostImage.find(params[:id])
+   @user = @post_image.user
+   redirect_to(post_images_path) unless @user == current_user
   end
 
 end

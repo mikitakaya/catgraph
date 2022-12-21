@@ -151,10 +151,12 @@
        <%= link_to admin_post_image_path(post_image.id) do %>
         <%= image_tag post_image.image, class: "post_image" %>
        <% end %>
-      <% else %>
+      <% elsif user_signed_in? %>
        <%= link_to post_image_path(post_image.id) do %>
         <%= image_tag post_image.image, class: "post_image" %>
        <% end %>
+      <% else %>
+       <%= image_tag post_image.image, class: "post_image" %>
       <% end %>
      </div>
     <% end %>
@@ -163,8 +165,9 @@
    <div class="index_link">
     <% if admin_signed_in? %>
      <%= link_to "全ての投稿を見る >", admin_top_path %>
-    <% else %>
+    <% elsif user_signed_in? %>
      <%= link_to "全ての投稿を見る >", post_images_path %>
+    <% else %>
     <% end %>
    </div>
   </div>
