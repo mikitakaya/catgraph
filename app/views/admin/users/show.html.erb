@@ -158,14 +158,14 @@
 
       <tr>
        <th>ステータス</th>
-       <!-- ユーザーのステータスはactive（有効）ですか -->
-       <% if @user.is_deleted == "active" %>
+       <!-- ユーザーのステータスはfalse（有効）ですか -->
+       <% if @user.is_deleted == false %>
         <td style="color: #28a745; font-weight: bold;">
-         <%= @user.is_deleted_i18n %>
+         有効
         </td>
        <% else %>
         <td style="font-weight: bold;">
-         <%= @user.is_deleted_i18n %>
+         退会
         </td>
        <% end %>
       </tr>

@@ -1,6 +1,10 @@
 <div class="container">
  <div class="row">
   <style>
+   .field_with_errors {
+    display: contents;
+   }
+
    .text_field {
     width: 60%;
    }
@@ -34,6 +38,13 @@
     margin: 30px 0 100px;
    }
 
+   .btn-danger {
+    margin-left: 20px;
+    color: #fff;
+    background-color: #dc3545;
+    border-color: #dc3545;
+   }
+
    /* タブレット縦置きサイズ（768px）以下の際に適用される設定 */
    @media screen and (max-width:768px) {
     .edit {
@@ -49,6 +60,14 @@
      <%= @user.name %>さんのユーザー情報編集
     </span>
    </h4>
+   <% if @user.errors.any? %>
+   <%= @user.errors.count %>件のエラーが発生しました
+   <ul>
+    <% @user.errors.full_messages.each do |message| %>
+     <li><%= message %></li>
+    <% end %>
+   </ul>
+  <% end %>
   </div>
 
   <div class="co-lg-12">
@@ -83,14 +102,15 @@
      <% if @user.name != "ゲスト" %>
      <div class="field" style="border-bottom: 3px solid #d9d9d9;">
       <%= f.label :is_deleted, "ステータス" %>
-      <%= f.radio_button :is_deleted, "active" %> <text>有効</text>
-      <%= f.radio_button :is_deleted, "no_active" %> <text>退会</text>
+      <%= f.radio_button :is_deleted, false %><%= f.label :is_deleted, "有効" %>
+      <%= f.radio_button :is_deleted, true %><%= f.label :is_deleted, "退会" %>
      </div>
      <% end %>
 
      <div class="action">
       <label></label>
       <%= f.submit "変更内容を保存する", class: "btn" %>
+      <%= link_to "削除する", admin_user_path(@user.id), method: :delete, class: "btn btn-danger", "data-confirm" => "ユーザー情報を本当に削除しますか？" %>
      </div>
     <% end %>
    </div>

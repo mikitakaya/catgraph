@@ -60,7 +60,7 @@ Rails.application.routes.draw do
     get '/' => "homes#top", as: "top"
 
     # admin/users
-    resources :users, only: [:index, :show, :edit, :update]
+    resources :users, only: [:index, :show, :edit, :update, :destroy]
 
     # admin/post_images
     resources :post_images, only: [:show, :destroy] do

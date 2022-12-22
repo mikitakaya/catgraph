@@ -94,14 +94,14 @@
       </td>
 
       <td>
-       <!-- ユーザーのステータスはactive（有効）ですか -->
-       <% if user.is_deleted == "active" %>
+       <!-- ユーザーのステータスは有効(false)ですか -->
+       <% if user.is_deleted == false %>
         <div style="color: #28a745; font-weight: bold; padding-right: 20px;">
-         <%= user.is_deleted_i18n %>
+         有効
         </div>
        <% else %>
         <div style="font-weight: bold; padding-right: 20px;">
-         <%= user.is_deleted_i18n %>
+         退会
         </div>
        <% end %>
       </td>
