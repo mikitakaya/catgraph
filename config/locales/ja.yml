@@ -18,6 +18,7 @@ ja:
     user:
      name: 名前
      username: ユーザー名
+     introduction: 自己紹介
      email: メールアドレス
      password: パスワード
      password_confirmation: 確認用パスワード
