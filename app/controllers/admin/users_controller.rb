@@ -46,15 +46,6 @@ class Admin::UsersController < ApplicationController
   end
  end
 
- def destroy
-  # レコードを1件取得
-  @user = User.find(params[:id])
-  # レコードを削除
-  @user.destroy
-  # ユーザー一覧画面へリダイレクト
-  redirect_to admin_users_path, notice: "ユーザー情報を削除しました"
- end
-
  private
 
  # ユーザーデータのストロングパラメータ

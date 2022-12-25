@@ -13,8 +13,8 @@ class PostImage < ApplicationRecord
 
   # image、title、bodyのデータは存在しなければならない
   validates :image, presence: true
-  # titleは最大50文字に制限する
-  validates :title, presence: true, length: { maximum: 50 }
+  # titleは1〜50文字に制限する
+  validates :title, presence: true, length: { in: 1..50 }
   # bodyは1〜140文字に制限する
   validates :body, presence: true, length: { in: 1..140 }
 

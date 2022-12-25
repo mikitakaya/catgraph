@@ -46,7 +46,7 @@
 
    .post_time {
     display: inline-block;
-    margin-left: 20px;
+    margin-top: 10px;
    }
 
    /* 1200px以下の際に適用される設定 */
@@ -105,7 +105,7 @@
          <%= link_to admin_user_path(post_comment.user.id) do %>
           <%= image_tag post_comment.user.get_profile_image(40,40), class: "profile_image" %>
           <%= post_comment.user.name %>
-         <% end %>
+         <% end %><br />
 
          <div class="post_time">
           <%= l post_comment.created_at %>

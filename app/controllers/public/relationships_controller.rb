@@ -4,7 +4,7 @@ class Public::RelationshipsController < ApplicationController
    # ログイン中ユーザーがフォローする
    current_user.follow(params[:user_id])
    # 遷移元画面にリダイレクトする
-   redirect_to request.referer
+   redirect_to request.referer, notice: "フォローしました"
   end
 
   # フォローを外す時
@@ -12,7 +12,7 @@ class Public::RelationshipsController < ApplicationController
    # ログイン中ユーザーがフォローを外す
    current_user.unfollow(params[:user_id])
    # 遷移元画面にリダイレクトする
-   redirect_to request.referer
+   redirect_to request.referer, notice: "フォローを解除しました"
   end
 
   # フォロー一覧
