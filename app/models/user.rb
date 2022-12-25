@@ -26,7 +26,7 @@ class User < ApplicationRecord
 
  VALID_PASSWORD_REGEX = /\A[!-~]+\z/
  # nameとusernameのデータは存在しなければならない、かつ一意性を持たせる
- # nameは2～13文字の範囲で制限する
+ # nameは2～50文字の範囲で制限する
  validates :name, presence: true, uniqueness: true, length: { in: 2..50 }
  # usernameは6～20文字の範囲で制限する
  validates :username, presence: true, uniqueness: true, length: { in: 6..20 }, format: { with: VALID_PASSWORD_REGEX }
