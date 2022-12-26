@@ -14,6 +14,7 @@ ja:
   models:
     user: ユーザー
     post_image: 投稿
+    admin: 管理者
   attributes:
     user:
      name: 名前
@@ -26,6 +27,8 @@ ja:
      image: 画像
      title: タイトル
      body: 本文
+    admin:
+     email: メールアドレス
 
  errors:
   messages:
