@@ -35,9 +35,9 @@ class User < ApplicationRecord
 
  def self.guest
   find_or_create_by!(name: 'ゲスト' ,email: 'cg_guest@example.com') do |user|
-    user.password = SecureRandom.urlsafe_base64
-    user.name = "ゲスト"
-    user.username = "Catgraph_gest"
+   user.password = SecureRandom.urlsafe_base64
+   user.name = "ゲスト"
+   user.username = "Catgraph_gest"
   end
  end
 
