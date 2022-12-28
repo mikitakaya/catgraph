@@ -170,7 +170,7 @@
             <%= image_tag post_comment.user.get_profile_image(40,40), class: "profile_image" %>
             <%= post_comment.user.name %>
            <% end %>
-          <% elsif %>
+          <% elsif admin_signed_in? %>
            <%= link_to admin_user_path(post_comment.user.id) do %>
             <%= image_tag post_comment.user.get_profile_image(40,40), class: "profile_image" %>
             <%= post_comment.user.name %>
