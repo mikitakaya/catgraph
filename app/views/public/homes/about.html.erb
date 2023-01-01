@@ -15,7 +15,7 @@
   margin: 0 auto;
   box-sizing: border-box;
   position: relative;
-  padding: 50px 0 170px;
+  padding: 100px 0 170px;
   z-index: 0;
   }
 
@@ -137,7 +137,6 @@
   }
 
   .box-img03 {
-   position: absolute;
    width: 120px;
    height: 120px;
    bottom: 60px;
@@ -145,7 +144,6 @@
   }
 
   .box-img04 {
-   position: absolute;
    width: 100px;
    height: 100px;
    top: 40px;
@@ -153,10 +151,50 @@
   }
 
   .box-img05 {
-   position: absolute;
    width: 160px;
    height: 160px;
    bottom: 100px;
+   right: -20px;
+  }
+ }
+
+ /* スマートフォンサイズ（425px）以下の際に適用される設定 */
+ @media screen and (max-width: 425px) {
+  .box .container {
+   width: 270px;
+  }
+
+  .field {
+   width: 270px;
+   height: 270px;
+  }
+
+  .text {
+   width: 260px;
+  }
+
+  .text p {
+   font-size: 10px;
+  }
+
+  .box-img03 {
+   width: 100px;
+   height: 100px;
+   bottom: 40px;
+   left: 10px;
+  }
+
+  .box-img04 {
+   width: 90px;
+   height: 90px;
+   top: 90px;
+   left: -30px;
+  }
+
+  .box-img05 {
+   width: 130px;
+   height: 130px;
+   bottom: 110px;
    right: -20px;
   }
  }
