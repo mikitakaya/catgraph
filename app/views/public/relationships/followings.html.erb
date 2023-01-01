@@ -1,25 +1,69 @@
 <div class="container">
  <div class="row">
   <style>
-   h4 {
-    margin: 30px 100px;
+   .field {
+    display: flex;
+    margin: 0 auto;
    }
 
-   /* 1199px以下の際に適用される設定 */
-   @media screen and (max-width:1199px) {
+   h4 {
+    margin: 37px 100px 40px 100px;
+   }
+
+   /* 1200px以下の際に適用される設定 */
+   @media screen and (max-width:1200px) {
     h4 {
      margin-left: 0;
     }
    }
+
+   /* 540px以下の際に適用される設定 */
+   @media screen and (max-width:540px) {
+    .field {
+     width: 390px;
+    }
+
+    h4 {
+     font-size: 18px;
+     margin-right: 30px;
+    }
+
+    .follower_btn > .btn {
+     font-size: 15px;
+    }
+   }
+
+   /* スマートフォンサイズ（425px）以下の際に適用される設定 */
+   @media screen and (max-width: 425px) {
+    .field {
+     width: 250px;
+    }
+
+    h4 {
+     font-size: 15px;
+     margin-right: 0;
+    }
+
+    .follower_btn {
+     width: 160px;
+     text-align: right;
+    }
+
+    .follower_btn > .btn {
+     font-size: 13px;
+    }
+   }
   </style>
 
-  <div class="col-lg-12" style="display:flex;">
-   <h4>
-    <span>フォロー一覧</span>
-   </h4>
+  <div class="col-lg-12">
+   <div class="field">
+    <h4>
+     <span>フォロー一覧</span>
+    </h4>
 
-   <div class="follower_btn" style="margin: 30px 0;">
-    <%= link_to "フォロワー一覧", user_followers_path(@user), class: "btn btn-secondary" %>
+    <div class="follower_btn" style="margin: 30px 0;">
+     <%= link_to "フォロワー一覧", user_followers_path(@user), class: "btn btn-secondary" %>
+    </div>
    </div>
   </div>
 

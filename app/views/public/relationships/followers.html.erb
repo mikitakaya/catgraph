@@ -1,8 +1,17 @@
 <div class="container">
  <div class="row">
   <style>
+   .field {
+    display: flex;
+    margin: 0 auto;
+   }
+
    h4 {
-    margin: 30px 100px;
+    margin: 37px 76px 40px 100px;
+   }
+
+   .following_btn > .btn {
+    width: 140px;
    }
 
    /* 1200px以下の際に適用される設定 */
@@ -11,15 +20,55 @@
      margin-left: 0;
     }
    }
+
+   /* 540px以下の際に適用される設定 */
+   @media screen and (max-width:540px) {
+    .field {
+     width: 390px;
+    }
+
+    h4 {
+     font-size: 18px;
+     margin-right: 30px;
+    }
+
+    .following_btn > .btn {
+     font-size: 15px;
+     width: 119px;
+    }
+   }
+
+   /* スマートフォンサイズ（425px）以下の際に適用される設定 */
+   @media screen and (max-width: 425px) {
+    .field {
+     width: 250px;
+    }
+
+    h4 {
+     font-size: 15px;
+     margin-right: 0;
+    }
+
+    .following_btn {
+     width: 145px;
+     text-align: right;
+    }
+
+    .following_btn > .btn {
+     font-size: 13px;
+    }
+   }
   </style>
 
-  <div class="col-lg-12" style="display:flex;">
-   <h4>
-    <span>フォロワー一覧</span>
-   </h4>
+  <div class="col-lg-12">
+   <div class="field">
+    <h4>
+     <span>フォロワー一覧</span>
+    </h4>
 
-   <div class="following_btn" style="margin: 30px 0;">
-    <%= link_to "フォロー一覧", user_followings_path(@user), class: "btn btn-secondary" %>
+    <div class="following_btn" style="margin: 30px 0;">
+     <%= link_to "フォロー一覧", user_followings_path(@user), class: "btn btn-secondary" %>
+    </div>
    </div>
   </div>
 
