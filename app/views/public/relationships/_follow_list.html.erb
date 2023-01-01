@@ -1,4 +1,8 @@
 <style>
+ h4 {
+  margin: 20px 0;
+ }
+
  table {
   width: 800px;
   margin: 0 auto 30px;
@@ -15,100 +19,191 @@
  }
 
  .profile_image {
-   border-radius: 50%; /* プロフィール画像の形を丸にする */
-   object-fit: cover; /* 中央でトリミング */
-   width: 70px;
-   height: 70px;
-  }
+  border-radius: 50%; /* プロフィール画像の形を丸にする */
+  object-fit: cover; /* 中央でトリミング */
+  width: 70px;
+  height: 70px;
+ }
 
-  .user_show {
-   cursor: pointer;
-  }
+ .user_show {
+  cursor: pointer;
+ }
 
-  .btn-light {
-   color: #212529;
-   background-color: #fff;
-   border: 2px solid #666666;
-  }
+ .btn-light {
+  color: #212529;
+  background-color: #fff;
+  border: 2px solid #666666;
+ }
 
-  th, td {
-   padding: 10px;
-  }
+ th, td {
+  padding: 10px;
+ }
 
+ .user {
+  width: 250px;
+  padding-left: 0px;
+  word-break: break-all;
+ }
+
+ .follow {
+  display: flex;
+  align-items: center;
+ }
+
+ .introduction {
+  width: 300px;
+  word-break: break-all;
+  font-size: 14px;
+ }
+
+ .follow > th > .btn {
+  width: 128px;
+ }
+
+ .follow > th > p {
+  margin-top: 2px;
+  display: inline-block;
+  padding: 5px 9px;
+  background-color: #b7b7b7;
+  border-radius: 3px;
+  color: #fff;
+  font-size: 11px;
+  margin-bottom: 0;
+ }
+
+ /* 991px以下の際に適用される設定 */
+ @media screen and (max-width:991px) {
   .user {
-   width: 250px;
-   padding-left: 0px;
-   word-break: break-all;
-  }
-
-  .follow {
-   display: flex;
-   align-items: center;
+   width: 150px;
   }
 
   .introduction {
-   width: 300px;
-   word-break: break-all;
+   width: 260px;
+  }
+
+  table {
+   width: 100%;
+  }
+ }
+
+ /* 767px以下の際に適用される設定 */
+ @media screen and (max-width:767px) {
+  table {
+   width: 510px;
+  }
+
+  th, td {
+   padding: 10px 5px;
+  }
+
+  .user {
+   width: 80px;
+  }
+
+  .introduction {
+   width: 230px;
+  }
+
+  .user, .introduction {
+   overflow: hidden;
+   text-overflow: ellipsis;
+   white-space: nowrap;
+  }
+
+  .follow > th > .btn, .follow > th > p {
+   width: 110px;
   }
 
   .follow > th > .btn {
-   width: 128px;
+   font-size: 13px;
   }
 
   .follow > th > p {
-   margin-top: 2px;
-   display: inline-block;
-   padding: 5px 9px;
-   background-color: #b7b7b7;
-   border-radius: 3px;
-   color: #fff;
+   padding: 3px 5px;
+   font-size: 10px;
+  }
+
+  .profile_image {
+   width: 50px;
+   height: 50px;
+  }
+ }
+
+ /* 540px以下の際に適用される設定 */
+ @media screen and (max-width:540px) {
+  table {
+   width: 390px;
+  }
+
+  h4 {
+   font-size: 18px;
+  }
+
+  table, .pagination {
+   font-size: 13px;
+  }
+
+  .follow > th > .btn, .follow > th > p {
+   width: 110px;
+  }
+
+  .user {
+   width: 60px;
+  }
+
+  .introduction {
+   width: 130px;
    font-size: 11px;
-   margin-bottom: 0;
+  }
+ }
+
+ /* スマートフォンサイズ（425px）以下の際に適用される設定 */
+ @media screen and (max-width: 425px) {
+  table {
+   width: 250px;
   }
 
-  /* 991px以下の際に適用される設定 */
-  @media screen and (max-width:991px) {
-   .introduction {
-    width: 300px;
+  .user {
+   width: 87px;
    }
 
-   table {
-    width: 100%;
-   }
+  .introduction {
+   display: none;
   }
 
-  /* タブレット縦置きサイズ（768px）以下の際に適用される設定 */
-  @media screen and (max-width:768px) {
-   .follow > th > .btn, .follow > th > p {
-    width: 80px;
-   }
-
-   .follow > th > .btn {
-    font-size: 13px;
-   }
-
-   .follow > th > p {
-    padding: 3px 5px;
-    font-size: 10px;
-   }
+  td {
+   padding: 0;
   }
+
+  .follow > th > .btn, .follow > th > p {
+   width: 83px;
+  }
+
+  .follow > th > .btn {
+   font-size: 11px;
+  }
+ }
 </style>
 
 <table>
  <% users.each do |user| %>
-  <tbody style="display:flex;">
+  <tbody style="display:flex; align-items: center;">
    <tr onclick='window.location="<%= user_path(user) %>"' role="link", class="user_show">
     <th>
      <%= image_tag user.get_profile_image(70, 70), class: "profile_image" %>
     </th>
 
-    <th class="user">
-     <%= user.name %><br />
-     <%= user.username %>
+    <th>
+     <div class="user">
+      <%= user.name %><br />
+      <%= user.username %>
+     </div>
     </th>
 
-    <td class="introduction">
-     <%= user.introduction %>
+    <td>
+     <div class="introduction">
+      <%= user.introduction %>
+     </div>
     </td>
    </tr>
 
