@@ -39,8 +39,8 @@
     color: white;
    }
 
-   /* タブレット横置きサイズ（1024px）以下の際に適用される設定 */
-   @media screen and (max-width: 1024px) {
+   /* 991px以下の際に適用される設定 */
+   @media screen and (max-width: 991px) {
     h4 {
      margin-left: 0;
     }
@@ -60,9 +60,29 @@
      width: 280px;
     }
    }
+
+   /* スマートフォンサイズ（425px）以下の際に適用される設定 */
+   @media screen and (max-width: 425px) {
+    .new_post {
+     width: 250px;
+    }
+
+    label {
+     padding-left: 0;
+     width: 60px;
+    }
+
+    .image {
+     width: 180px;
+    }
+
+    .text_field {
+     width: 70%;
+    }
+   }
   </style>
 
-  <div class="col-12">
+  <div class="col-lg-12">
    <h4>
     <span>新規投稿</span>
    </h4>
