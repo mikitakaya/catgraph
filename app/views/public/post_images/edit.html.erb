@@ -35,8 +35,8 @@
     color: white;
    }
 
-   /* タブレット横置きサイズ（1024px）以下の際に適用される設定 */
-   @media screen and (max-width: 1024px) {
+   /* 991px以下の際に適用される設定 */
+   @media screen and (max-width: 991px) {
     h4 {
      margin-left: 0;
     }
@@ -44,12 +44,36 @@
 
    /* タブレット縦置きサイズ（768px）以下の際に適用される設定 */
    @media screen and (max-width: 768px) {
+    h4 {
+     margin-left: 5%;
+    }
+
     .edit {
      width: 380px;
     }
 
     label {
      width: 90px;
+    }
+   }
+
+   /* スマートフォンサイズ（425px）以下の際に適用される設定 */
+   @media screen and (max-width: 425px) {
+    h4 {
+     margin-left: 0;
+    }
+
+    .edit {
+     width: 250px;
+    }
+
+    label {
+     padding-left: 0;
+     width: 60px;
+    }
+
+    .text_field {
+     width: 70%;
     }
    }
   </style>
@@ -60,17 +84,19 @@
    </h4>
   </div>
 
-  <% if @post_image.errors.any? %>
-  <%= @post_image.errors.count %>件のエラーが発生しました
-   <ul>
-    <% @post_image.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
-    <% end %>
-   </ul>
-  <% end %>
+
 
   <div class="col-lg-12">
    <div class="edit">
+    <% if @post_image.errors.any? %>
+     <%= @post_image.errors.count %>件のエラーが発生しました
+     <ul>
+      <% @post_image.errors.full_messages.each do |message| %>
+       <li><%= message %></li>
+      <% end %>
+     </ul>
+    <% end %>
+
     <%= form_with model: @post_image do |f| %>
      <div class="field">
       <%= f.label :title, "タイトル" %>
