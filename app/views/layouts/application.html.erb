@@ -101,7 +101,7 @@
      font-size: 18px;
     }
 
-    main .container, .btn {
+    main > .container, .btn, .flash {
      font-size: 13px;
     }
    }
@@ -230,7 +230,7 @@
   </header>
 
   <main>
-   <p id="notice" style="margin: 20px 0 0 5%;">
+   <p id="notice" style="margin: 20px 0 0 5%;" class="flash">
     <%= flash[:notice] %>
     <%= flash[:alert] %>
    </p>
