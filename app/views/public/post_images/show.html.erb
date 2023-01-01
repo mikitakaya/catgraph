@@ -19,11 +19,11 @@
     border-radius: 50%; /* プロフィール画像の形を丸にする */
     width: 40px;
     height: 40px;
-    margin-bottom: 10px;
+    margin-right: 5px;
    }
 
    .all {
-    margin: 30px 0 50px;
+    margin: 30px 10px 50px;
     text-align: left;
    }
 
@@ -87,8 +87,7 @@
    /* 1200px以下の際に適用される設定 */
    @media screen and (max-width: 1200px) {
     .post_image {
-     width: 100%;
-     height: 100%;
+     width: 90%;
      display: inline-block;
      text-align: left;
     }
@@ -96,6 +95,32 @@
     .col-lg-5, .image {
      text-align: center;
      position: relative;
+    }
+   }
+
+   /* 991px以下の際に適用される設定 */
+   @media screen and (max-width: 991px) {
+    .post_image {
+     height: 90%;
+    }
+   }
+
+   /* スマートフォンサイズ（425px）以下の際に適用される設定 */
+   @media screen and (max-width: 425px) {
+    .post_image {
+     margin-bottom: 10px;
+    }
+
+    .text {
+     height: 330px;
+    }
+
+    textarea {
+     margin-right: 10px;
+    }
+
+    .btn {
+     font-size: 10px;
     }
    }
   </style>
@@ -126,7 +151,7 @@
       <p>タイトル：<%= @post_image.title %></p>
       <!-- text_areaに入力されたまま出力する -->
       <p style="margin-bottom: 60px;">本文：<%= safe_join(@post_image.body.split("\n"),tag(:br)) %></p>
-      <div class="post_time" style="margin-bottom: 25px;"><%= l @post_image.created_at %></div>
+      <div class="post_time" style="margin: 7px 0 25px 0;"><%= l @post_image.created_at %></div>
       <div class="actions" style="float: right;">
        <!-- 投稿者＝ログインユーザーの場合、以下を表示する -->
        <% if @post_image.user == current_user %>
@@ -137,7 +162,7 @@
      </div>
 
      <div class="count">
-      <p style="margin-right: 70px;">
+      <p style="margin-right: 30px;">
        <!-- ログイン済みユーザーですか？、尚且つ、ログインユーザーの名前が「ゲスト」の場合、表示しない -->
        <% if user_signed_in? && current_user.name != "ゲスト" %>
         <% if @post_image.favorited_by?(current_user) %>
@@ -163,7 +188,7 @@
       <div class="all_comment">
        <% @post_image.post_comments.each do |post_comment| %>
         <div class="comment">
-         <div class="field">
+         <div class="field" style="margin-bottom: 20px;">
           <!-- ログイン済みユーザーですか？、尚且つ、ログインユーザーの名前が「ゲスト」の場合、表示しない -->
           <% if user_signed_in? && current_user.name != "ゲスト" %>
            <%= link_to user_path(post_comment.user.id) do %>
