@@ -1,1 +1,17 @@
-<%= render 'index', post_images: @post_images %>
+<div class="container">
+ <div class="row">
+  <div class="col-lg-12">
+   <%= render 'index', post_images: @post_images %>
+
+   <% if user_signed_in? %>
+    <% if current_user.name != "ゲスト" %>
+     <%= paginate @post_images %>
+    <% elsif current_user.name == "ゲスト" %>
+     <p style="text-align: center;">会員登録後、全ての投稿の閲覧が可能です</p>
+    <% end %>
+   <% elsif admin_signed_in? %>
+    <%= paginate @post_images %>
+   <% end %>
+  </div>
+ </div>
+</div>

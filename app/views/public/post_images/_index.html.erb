@@ -1,124 +1,112 @@
-<div class="container">
- <div class="row">
-  <style>
-  .col-lg-12 {
-    margin-bottom: 30px;
-   }
+<style>
+ .col-lg-12 {
+  margin-bottom: 30px;
+ }
 
+ .post_all, .text {
+  width: 920px;
+  margin: 0 auto 30px;
+ }
+
+ /* postクラスの親要素 */
+ .post_all {
+  display: flex; /* Flexboxの利用 */
+  flex-wrap: wrap; /* Flexコンテナーを超えた際、子要素を折り返す */
+ }
+
+ /* 写真とリンクをまとめたもの */
+ /* post_imageクラスの親要素、post_allクラスの子要素 */
+ .post {
+  text-align: left;
+  margin: 5px;
+ }
+
+ /* 写真自体 */
+ /* post_imageクラスの子要素 */
+ .post_image {
+  object-fit: cover; /* 中央でトリミング */
+  width: 220px;
+  height: 220px;
+ }
+
+ .post > a {
+  text-decoration: none;
+  display:inline-block;
+ }
+
+ .pagination {
+  margin-bottom: 30px;
+ }
+
+ /* タブレット横置きサイズ（1024px）以下の際に適用される設定 */
+ @media screen and (max-width: 1024px) {
   .post_all, .text {
-   width: 920px;
-   margin: 0 auto 30px;
+   width: 640px;
   }
 
-   /* postクラスの親要素 */
-   .post_all {
-    display: flex; /* Flexboxの利用 */
-    flex-wrap: wrap; /* Flexコンテナーを超えた際、子要素を折り返す */
-   }
+  .post_image {
+   width: 150px;
+   height: 150px;
+  }
 
-   /* 写真とリンクをまとめたもの */
-   /* post_imageクラスの親要素、post_allクラスの子要素 */
-   .post {
-    text-align: left;
-    margin: 5px;
-   }
+  .post {
+   margin: 5px;
+ }
 
-   /* 写真自体 */
-   /* post_imageクラスの子要素 */
-   .post_image {
-    object-fit: cover; /* 中央でトリミング */
-    width: 220px;
-    height: 220px;
-   }
+ /* タブレット縦置きサイズ（768px）以下の際に適用される設定 */
+ @media screen and (max-width:768px) {
+  .post_all, .text {
+   width: 380px;
+  }
 
-   .post > a {
-    text-decoration: none;
-    display:inline-block;
-   }
+  .post_image {
+   width: 180px;
+   height: 180px;
+  }
 
-   /* タブレット横置きサイズ（1024px）以下の際に適用される設定 */
-   @media screen and (max-width: 1024px) {
-    .post_all, .text {
-     width: 640px;
-    }
+  .post {
+   margin: 5px;
+  }
+ }
 
-    .post_image {
-     width: 150px;
-     height: 150px;
-    }
+ /* スマートフォンサイズ（425px）以下の際に適用される設定 */
+ @media screen and (max-width: 425px) {
+  .post_all, .text {
+   width: 248px;
+  }
 
-    .post {
-     margin: 5px;
-   }
+  .post_image {
+   width: 120px;
+   height: 120px;
+  }
 
-   /* タブレット縦置きサイズ（768px）以下の際に適用される設定 */
-   @media screen and (max-width:768px) {
-    .post_all, .text {
-     width: 380px;
-    }
+  .post {
+   margin: 2px;
+  }
+ }
+</style>
 
-    .post_image {
-     width: 180px;
-     height: 180px;
-    }
+<div class="text">
+ <h4 style="margin-top: 30px;">
+  <span>投稿一覧</span>
+ </h4>
+</div>
 
-    .post {
-     margin: 5px;
-    }
-   }
-
-   /* スマートフォンサイズ（425px）以下の際に適用される設定 */
-   @media screen and (max-width: 425px) {
-    .post_all, .text {
-     width: 248px;
-    }
-
-    .post_image {
-     width: 120px;
-     height: 120px;
-    }
-
-    .post {
-     margin: 2px;
-    }
-   }
-  </style>
-
-  <div class="col-lg-12">
-   <div class="text">
-    <h4 style="margin: 30px 0;">
-     <span>投稿一覧</span>
-    </h4>
-   </div>
-
-   <div class="post_all">
-    <% post_images.each do |post_image| %>
-     <div class="post">
-      <!-- 管理者としてログインしていますか？ -->
-      <% if admin_signed_in? %>
-       <%= link_to admin_post_image_path(post_image.id) do %>
-        <%= image_tag post_image.image, class: "post_image" %>
-       <% end %>
-      <!-- 管理者以外 -->
-      <% else %>
-       <%= link_to post_image_path(post_image.id) do %>
-        <%= image_tag post_image.image, class: "post_image" %>
-       <% end %>
-      <% end %>
-
-     </div>
+<div class="post_all">
+ <% post_images.each do |post_image| %>
+  <div class="post">
+   <!-- 管理者としてログインしていますか？ -->
+   <% if admin_signed_in? %>
+    <%= link_to admin_post_image_path(post_image.id) do %>
+     <%= image_tag post_image.image, class: "post_image" %>
     <% end %>
-   </div>
-
-   <% if user_signed_in? %>
-    <% if current_user.name != "ゲスト" %>
-     <%= paginate post_images %>
-    <% elsif current_user.name == "ゲスト" %>
-     <p style="text-align: center;">会員登録後、全ての投稿の閲覧が可能です</p>
+   <!-- 管理者以外 -->
+   <% else %>
+    <%= link_to post_image_path(post_image.id) do %>
+     <%= image_tag post_image.image, class: "post_image" %>
     <% end %>
-   <% elsif admin_signed_in? %>
-    <%= paginate post_images %>
    <% end %>
+
   </div>
- </div>
+ <% end %>
 </div>
