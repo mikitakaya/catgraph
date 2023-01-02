@@ -4,6 +4,9 @@
    .profile_image {
     border-radius: 50%; /* プロフィール画像の形を丸にする */
     object-fit: cover; /* 中央でトリミング */
+   }
+
+   .image, .profile_image {
     width: 70px;
     height: 70px;
    }
@@ -12,8 +15,8 @@
     margin-bottom: 30px;
    }
 
-   h4 > span {
-    padding-left: 10%;
+   h4 {
+    margin: 30px 0 30px 5%;
    }
 
    table {
@@ -23,7 +26,7 @@
    }
 
    td, th {
-    padding: 10px;
+    padding: 10px 5px;
     word-break: break-all;
    }
 
@@ -31,8 +34,13 @@
     width: 200px;
    }
 
+   .user, .username {
+    width: 180px;
+    margin: 0;
+   }
+
    .id, .status {
-    width: 100px;
+    width: 120px;
    }
 
    thead {
@@ -46,61 +54,103 @@
 
    /* タブレット横置きサイズ（1024px）以下の際に適用される設定 */
    @media screen and (max-width: 1024px) {
+    h4 {
+     margin-left: 0;
+    }
     table {
      width: 100%;
     }
    }
 
+   /* タブレット縦置きサイズ（768px）以下の際に適用される設定 */
+   @media screen and (max-width:767px) {
+    .user, .username {
+     overflow: hidden;
+     text-overflow: ellipsis;
+     white-space: nowrap;
+    }
+
+    .email {
+     display: none;
+    }
+
+    .image, .profile_image {
+     width: 50px;
+     height: 50px;
+    }
+   }
+
+   /* 540px以下の際に適用される設定 */
+   @media screen and (max-width:540px) {
+    h4 {
+     font-size: 18px;
+    }
+
+    table, .pagination {
+     font-size: 13px;
+    }
+
+    .user, .username {
+     width: 160px;
+    }
+   }
+
+   /* スマートフォンサイズ（425px）以下の際に適用される設定 */
+   @media screen and (max-width: 425px) {
+    .user, .username {
+     width: 95px;
+    }
+   }
   </style>
 
   <div class="col-lg-12">
-   <h4 style="margin: 30px 0;">
+   <h4>
     <span>ユーザー一覧</span>
    </h4>
 
    <table>
     <thead>
      <tr>
-      <th class="id" style="padding-left: 20px;">ユーザーID</th>
+      <th class="id">ユーザーID</th>
       <th>名前</th>
       <th class="name"></th>
       <th class="email">メールアドレス</th>
-      <th class="status" style="padding-right: 20px;">ステータス</th>
+      <th class="status">ステータス</th>
      </tr>
     </thead>
 
     <% @users.each do |user| %>
     <tbody>
      <tr>
-      <td style="padding-left: 20px;">
+      <td>
        <%= user.id %>
       </td>
 
-      <td style="padding-right: 10px; width: 70px;">
+      <td class="image">
        <%= link_to admin_user_path(user) do %>
         <%= image_tag user.get_profile_image(70,70), class: "profile_image" %>
        <% end %>
       </td>
 
-      <td style="padding-left: 0px;">
+      <td>
        <%= link_to admin_user_path(user) do %>
-        <%= user.name %><br />
-        <%= user.username %>
+        <div class="user"><%= user.name %></div>
+        <div class="username"><%= user.username %>
        <% end %>
       </td>
 
-      <td>
+      <td class="email">
        <%= user.email %>
       </td>
 
       <td>
        <!-- ユーザーのステータスは有効(false)ですか -->
        <% if user.is_deleted == false %>
-        <div style="color: #28a745; font-weight: bold; padding-right: 20px;">
+        <div style="color: #28a745; font-weight: bold;">
          有効
         </div>
        <% else %>
-        <div style="font-weight: bold; padding-right: 20px;">
+        <div style="font-weight: bold;">
          退会
         </div>
        <% end %>
@@ -111,8 +161,5 @@
    </table>
    <%= paginate @users %>
   </div>
-
-
-
  </div>
 </div>
