@@ -63,6 +63,7 @@
 
    .post_time {
     display: inline-block;
+    margin-top: 10px;
    }
 
    .btn-danger {
@@ -128,6 +129,10 @@
 
     .all > p {
      font-size: 11px;
+    }
+
+    .post_time {
+     margin-top: 8px;
     }
    }
   </style>
@@ -214,7 +219,7 @@
          </div>
 
          <p style="word-break: break-all;"><%= safe_join(post_comment.comment.split("\n"),tag(:br)) %></p>
-         <div class="post_time" style="margin-top: 10px;">
+         <div class="post_time">
           <%= l post_comment.created_at %>
          </div>
 

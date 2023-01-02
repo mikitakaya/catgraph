@@ -15,21 +15,21 @@
    }
 
    .profile_image {
+    object-fit: cover; /* 中央でトリミング */
     border-radius: 50%; /* プロフィール画像の形を丸にする */
     margin-right: 5px;
     width: 40px;
     height: 40px;
-    margin-bottom: 10px;
    }
 
-   .text {
-    width: 400px;
-    height: 600px;
+   .all {
+    margin: 30px 10px 50px;
+    text-align: left;
     overflow: scroll;
-    margin: 30px 0 50px;
+    height: 600px;
    }
 
-   .text .field, .comment .field {
+   .all .field, .comment .field {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -63,11 +63,14 @@
     margin-top: 10px;
    }
 
+   .col-lg-5 {
+    height: 100%;
+   }
+
    /* 1200px以下の際に適用される設定 */
    @media screen and (max-width: 1200px) {
-    .post_image, .text {
+    .post_image {
      width: 90%;
-     height: 90%;
      display: inline-block;
      text-align: left;
     }
@@ -77,7 +80,37 @@
      position: relative;
     }
    }
-</style>
+
+   /* 991px以下の際に適用される設定 */
+   @media screen and (max-width: 991px) {
+    .post_image {
+     height: 90%;
+    }
+   }
+
+   /* スマートフォンサイズ（425px）以下の際に適用される設定 */
+   @media screen and (max-width: 425px) {
+    .post_image {
+     margin-bottom: 10px;
+    }
+
+    .all {
+     height: 330px;
+    }
+
+    .btn {
+     font-size: 10px;
+    }
+
+    .all > p {
+     font-size: 11px;
+    }
+
+    .post_time {
+     margin-top: 8px;
+    }
+   }
+  </style>
 
   <div class="col-lg-7">
    <div class="image">
@@ -86,7 +119,7 @@
   </div>
 
   <div class="col-lg-5">
-   <div class="text">
+   <div class="all">
     <div class="field" style="margin-bottom: 20px;">
      <%= link_to admin_user_path(@user) do %>
       <%= image_tag @user.get_profile_image(50,50), class: "profile_image" %>
@@ -94,9 +127,7 @@
      <% end %>
     </div>
 
-
-
-    <div class="field">
+    <div class="post">
      <p>タイトル：<%= @post_image.title %></p>
      <!-- text_areaに入力されたまま出力する -->
      <p style="margin-bottom: 60px;">本文：<%= safe_join(@post_image.body.split("\n"),tag(:br)) %></p>
@@ -107,7 +138,7 @@
      </div>
 
      <div class="count">
-      <p style="margin-right: 70px;">♡<%= @post_image.favorites.count.to_s(:delimited) %> いいね</p>
+      <p style="margin-right: 30px;">♡<%= @post_image.favorites.count.to_s(:delimited) %> いいね</p>
       <p>コメント件数：<%= @post_image.post_comments.count.to_s(:delimited) %></p>
      </div>
     </div>
@@ -117,13 +148,13 @@
      <div class="all_comment">
       <% @post_image.post_comments.each do |post_comment| %>
        <div class="comment">
-        <div class="field">
+        <div class="field" style="margin-bottom: 20px;">
          <%= link_to admin_user_path(post_comment.user.id) do %>
           <%= image_tag post_comment.user.get_profile_image(40,40), class: "profile_image" %>
           <%= post_comment.user.name %>
          <% end %>
         </div>
-        <%= safe_join(post_comment.comment.split("\n"),tag(:br)) %><br />
+        <p style="word-break: break-all;"><%= safe_join(post_comment.comment.split("\n"),tag(:br)) %></p>
         <div class="post_time">
          <%= l post_comment.created_at %>
         </div>
@@ -136,7 +167,6 @@
     <% end %>
 
    </div>
-
   </div>
  </div>
 </div>
