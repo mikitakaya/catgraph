@@ -1,4 +1,4 @@
-<div class="container" style="overflow: hidden;">
+<div class="container">
  <div class="row">
   <style>
    .profile_image {
@@ -35,7 +35,8 @@
    }
 
    h4 {
-    margin: 30px 0 20px
+    margin: 30px 0 20px;
+    width: 500px;
    }
 
    .detail {
@@ -44,8 +45,8 @@
    }
 
    .actions {
-    margin-top: 65px;
     width: 130px;
+    margin-top: 65px;
    }
 
    .btn {
@@ -85,11 +86,10 @@
    /* 1200px以下の際に適用される設定 */
    @media screen and (max-width: 1200px) {
     h4 {
-     width: 100%;
      margin: 30px auto 10px;
     }
 
-    .profile, .info {
+    h4, .profile, .info {
      width: 630px;
      margin: 20px auto 40px;
     }
@@ -101,7 +101,7 @@
 
    /* タブレット縦置きサイズ（768px）以下の際に適用される設定 */
    @media screen and (max-width:768px) {
-    .profile, .info, .detail {
+    h4, .profile, .info, .detail {
      width: 100%;
     }
    }
@@ -125,10 +125,6 @@
     .profile_image {
      width: 100px;
      height: 100px;
-    }
-
-    main .container, .btn {
-     font-size: 13px;
     }
 
     .actions {

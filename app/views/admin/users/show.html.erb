@@ -36,7 +36,8 @@
    }
 
    h4 {
-    margin: 30px 0 20px
+    margin: 30px 0 20px;
+    width: 500px;
    }
 
    .actions {
@@ -53,13 +54,12 @@
    }
 
    /* 1200px以下の際に適用される設定 */
-   @media screen and (max-width: 1200px) {
+   @media screen and (max-width: 1199px) {
     h4 {
-     width: 100%;
      margin: 30px auto 10px;
     }
 
-    .profile, .info {
+    h4, .profile, .info {
      width: 630px;
      margin: 20px auto 40px;
     }
@@ -71,15 +71,21 @@
 
    /* タブレット縦置きサイズ（768px）以下の際に適用される設定 */
    @media screen and (max-width:768px) {
-    .profile, .info {
+    h4, .profile, .info {
      width: 100%;
     }
    }
 
    /* スマートフォンサイズ（425px）以下の際に適用される設定 */
    @media screen and (max-width:425px) {
-    .field, .actions {
+    th, td {
+     display: block;
      width: 100%;
+     padding: 10px 20px;
+    }
+
+    th {
+     background-color: #d9d9d9;
     }
 
     .profile .field {
@@ -87,16 +93,8 @@
     }
 
     .profile_image {
-     width: 80px;
-     height: 80px;
-    }
-
-    th {
-     width: 120px;
-    }
-
-    main .container, .btn {
-     font-size: 13px;
+     width: 100px;
+     height: 100px;
     }
 
     .actions {
@@ -106,7 +104,7 @@
     .btn {
      width: 105px;
     }
-
+   }
   </style>
 
   <div class="col-xl-12">
@@ -160,11 +158,11 @@
        <th>ステータス</th>
        <!-- ユーザーのステータスはfalse（有効）ですか -->
        <% if @user.is_deleted == false %>
-        <td style="color: #28a745; font-weight: bold;">
+        <td style="color: #28a745; font-weight: bold; border-bottom: none;">
          有効
         </td>
        <% else %>
-        <td style="font-weight: bold;">
+        <td style="font-weight: bold; border-bottom: none;">
          退会
         </td>
        <% end %>
