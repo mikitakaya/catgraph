@@ -170,18 +170,18 @@
        <% if user_signed_in? && current_user.name != "ゲスト" %>
         <% if @post_image.favorited_by?(current_user) %>
          <%= link_to post_image_favorites_path(@post_image), method: :delete do %>
-          ♥<%= @post_image.favorites.count %> いいね
+          ♥<%= @post_image.favorites.count.to_s(:delimited) %> いいね
          <% end %>
         <% else %>
          <%= link_to post_image_favorites_path(@post_image), method: :post do %>
-          ♡<%= @post_image.favorites.count %> いいね
+          ♡<%= @post_image.favorites.count.to_s(:delimited) %> いいね
          <% end %>
         <% end %>
        <% else %>
-        ♡<%= @post_image.favorites.count %> いいね
+        ♡<%= @post_image.favorites.count.to_s(:delimited) %> いいね
        <% end %>
       </p>
-      <p>コメント件数：<%= @post_image.post_comments.count %></p>
+      <p>コメント件数：<%= @post_image.post_comments.count.to_s(:delimited) %></p>
      </div>
 
      <!-- post_imageは存在するが、属するpost_commentsは空ですか？ -->
