@@ -39,7 +39,7 @@
    }
 
    .detail {
-    padding: 0 20px;
+    padding: 0 20px 10px;
     width: 415px;
    }
 
@@ -108,8 +108,14 @@
 
    /* スマートフォンサイズ（425px）以下の際に適用される設定 */
    @media screen and (max-width:425px) {
-    .field, .actions {
+    th, td {
+     display: block;
      width: 100%;
+     padding: 10px 20px;
+    }
+
+    th {
+     background-color: #d9d9d9;
     }
 
     .profile .field {
@@ -117,12 +123,8 @@
     }
 
     .profile_image {
-     width: 80px;
-     height: 80px;
-    }
-
-    th {
-     width: 120px;
+     width: 100px;
+     height: 100px;
     }
 
     main .container, .btn {
@@ -191,20 +193,20 @@
      <!-- ログインユーザーの名前が「ゲスト」の場合、編集ボタンは表示しない -->
      <% if current_user.name != "ゲスト" %>
       <div class="field">
-       <%= @post_images.count %>投稿
+       <%= @post_images.count.to_s(:delimited) %>投稿
       </div>
 
       <!-- フォロワー一覧リンク -->
       <div class="field">
        <%= link_to user_followers_path(@user) do %>
-        <%= @user.followers.count %>フォロワー
+        <%= @user.followers.count.to_s(:delimited) %>フォロワー
        <% end %>
       </div>
 
       <!-- フォロー中一覧リンク -->
       <div class="field">
        <%= link_to user_followings_path(@user) do %>
-        <%= @user.followings.count %>フォロー中
+        <%= @user.followings.count.to_s(:delimited) %>フォロー中
        <% end %>
       </div>
      <% end %>
@@ -224,7 +226,7 @@
 
       <tr>
        <th>自己紹介</th>
-       <td><%= @user.introduction %></td>
+       <td style="border-bottom: none;"><%= @user.introduction %></td>
       </tr>
 
      </tbody>
