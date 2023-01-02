@@ -107,8 +107,8 @@
      </div>
 
      <div class="count">
-      <p style="margin-right: 70px;">♡<%= @post_image.favorites.count %> いいね</p>
-      <p>コメント件数：<%= @post_image.post_comments.count %></p>
+      <p style="margin-right: 70px;">♡<%= @post_image.favorites.count.to_s(:delimited) %> いいね</p>
+      <p>コメント件数：<%= @post_image.post_comments.count.to_s(:delimited) %></p>
      </div>
     </div>
 
