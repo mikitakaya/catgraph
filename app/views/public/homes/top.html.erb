@@ -62,7 +62,6 @@
     border-radius: 50%; /* プロフィール画像の形を丸にする */
     width: 200px;
     height: 200px;
-    text-align: center;
     margin-bottom: 150px;
    }
 
@@ -164,7 +163,7 @@
 
    <!-- post_imageが無い場合 -->
    <% if @post_images.empty? %>
-    <div class="no_image">
+    <div class="no_image" style="text-align: center;">
      <h3>投稿がありません</h3>
      <%= image_tag 'camera.jpg', class: "camera" %>
     </div>
