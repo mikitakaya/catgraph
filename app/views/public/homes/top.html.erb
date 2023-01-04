@@ -58,6 +58,12 @@
     margin-top: 40px;
    }
 
+   .camera {
+    border-radius: 50%; /* プロフィール画像の形を丸にする */
+    width: 200px;
+    height: 200px;
+   }
+
    /* タブレット横置きサイズ（1024px）以下の際に適用される設定 */
    @media screen and (max-width: 1024px) {
     .post_all {
@@ -147,7 +153,6 @@
      </h5>
     </div>
    </div>
-
   </div>
 
   <div class="col-lg-6">
@@ -155,32 +160,42 @@
     <span>新着投稿</span>
    </h4>
 
-   <div class="post_all">
-    <% @post_images.each do |post_image| %>
-     <div class="post">
-      <% if admin_signed_in? %>
-       <%= link_to admin_post_image_path(post_image.id) do %>
+   <!-- post_imageが無い場合 -->
+   <% if @post_images.empty? %>
+    <div class="no_image">
+     <h3>投稿がありません</h3>
+     <%= image_tag 'camera.jpg', class: "camera" %>
+    </div>
+   <!-- post_imageがある場合 -->
+   <% else %>
+    <div class="post_all">
+     <% @post_images.each do |post_image| %>
+      <div class="post">
+       <% if admin_signed_in? %>
+        <%= link_to admin_post_image_path(post_image.id) do %>
+         <%= image_tag post_image.image, class: "post_image" %>
+        <% end %>
+       <% elsif user_signed_in? %>
+        <%= link_to post_image_path(post_image.id) do %>
+         <%= image_tag post_image.image, class: "post_image" %>
+        <% end %>
+       <% else %>
         <%= image_tag post_image.image, class: "post_image" %>
        <% end %>
-      <% elsif user_signed_in? %>
-       <%= link_to post_image_path(post_image.id) do %>
-        <%= image_tag post_image.image, class: "post_image" %>
-       <% end %>
-      <% else %>
-       <%= image_tag post_image.image, class: "post_image" %>
-      <% end %>
-     </div>
-    <% end %>
-   </div>
+      </div>
+     <% end %>
+    </div>
 
-   <div class="index_link">
-    <% if admin_signed_in? %>
-     <%= link_to "全ての投稿を見る >", admin_top_path %>
-    <% elsif user_signed_in? %>
-     <%= link_to "全ての投稿を見る >", post_images_path %>
-    <% else %>
-    <% end %>
-   </div>
+    <div class="index_link">
+     <% if admin_signed_in? %>
+      <%= link_to "全ての投稿を見る >", admin_top_path %>
+     <% elsif user_signed_in? %>
+      <%= link_to "全ての投稿を見る >", post_images_path %>
+     <% else %>
+     <% end %>
+    </div>
+
+   <% end %>
   </div>
  </div>
 </div>
