@@ -67,6 +67,17 @@
   margin-bottom: 0;
  }
 
+ .cat {
+  border-radius: 50%; /* プロフィール画像の形を丸にする */
+  width: 200px;
+  height: 200px;
+  margin-bottom: 150px;
+ }
+
+ .no_user > h3 {
+  margin: 70px 0;
+ }
+
  /* 991px以下の際に適用される設定 */
  @media screen and (max-width:991px) {
   .user {
@@ -123,6 +134,10 @@
    width: 50px;
    height: 50px;
   }
+
+  .cat {
+   margin-bottom: 100px;
+  }
  }
 
  /* 540px以下の際に適用される設定 */
@@ -174,47 +189,59 @@
   .follow > th > .btn {
    font-size: 11px;
   }
+
+  .no_user > h3 {
+   font-size: 20px;
+   margin-bottom: 40px;
+  }
  }
 </style>
 
-<table>
- <% users.each do |user| %>
-  <tbody style="display:flex; align-items: center;">
-   <tr onclick='window.location="<%= user_path(user) %>"' role="link", class="user_show">
-    <th>
-     <%= image_tag user.get_profile_image(70, 70), class: "profile_image" %>
-    </th>
+<% if users.empty? %>
+ <div class="no_user" style="text-align: center;">
+  <h3>ユーザーはいません</h3>
+  <%= image_tag 'no_user.jpg', class: "cat" %>
+ </div>
+<% else %>
+ <table>
+  <% users.each do |user| %>
+   <tbody style="display:flex; align-items: center;">
+    <tr onclick='window.location="<%= user_path(user) %>"' role="link", class="user_show">
+     <th>
+      <%= image_tag user.get_profile_image(70, 70), class: "profile_image" %>
+     </th>
 
-    <th>
-     <div class="user">
-      <%= user.name %><br />
-      <%= user.username %>
-     </div>
-    </th>
+     <th>
+      <div class="user">
+       <%= user.name %><br />
+       <%= user.username %>
+      </div>
+     </th>
 
-    <td>
-     <div class="introduction">
-      <%= user.introduction %>
-     </div>
-    </td>
-   </tr>
+     <td>
+      <div class="introduction">
+       <%= user.introduction %>
+      </div>
+     </td>
+    </tr>
 
-   <tr class="follow">
-    <th>
-     <% if user != current_user %>
-      <% if current_user.following?(user) %>
-       <%= link_to "フォロー中", user_relationships_path(user.id), class: "btn btn-light", method: :delete %>
-      <% else %>
-       <%= link_to "フォローする", user_relationships_path(user.id), class: "btn", method: :post %>
+    <tr class="follow">
+     <th>
+      <% if user != current_user %>
+       <% if current_user.following?(user) %>
+        <%= link_to "フォロー中", user_relationships_path(user.id), class: "btn btn-light", method: :delete %>
+       <% else %>
+        <%= link_to "フォローする", user_relationships_path(user.id), class: "btn", method: :post %>
+       <% end %>
+      <% end %><br />
+
+      <!-- ユーザーはログイン中ユーザーをフォローしていますか？ -->
+      <% if user.following?(current_user) %>
+       <p>フォローされています</p>
       <% end %>
-     <% end %><br />
-
-     <!-- ユーザーはログイン中ユーザーをフォローしていますか？ -->
-     <% if user.following?(current_user) %>
-      <p>フォローされています</p>
-     <% end %>
-    </th>
-   </tr>
-  </tbody>
- <% end %>
-</table>
+     </th>
+    </tr>
+   </tbody>
+  <% end %>
+ </table>
+<% end %>
