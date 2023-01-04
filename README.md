@@ -71,5 +71,5 @@
 - <a href="http://da-lace.com/">ダ・レース</a>
 - ユーザーID2,6の投稿写真は作成者にて撮影した写真です
 
-# 作成者
+## 作成者
 高屋未来（ https://github.com/mikitakaya ）
