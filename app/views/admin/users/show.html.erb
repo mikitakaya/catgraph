@@ -146,7 +146,7 @@
 
       <tr>
        <th>自己紹介</th>
-       <td><%= @user.introduction %></td>
+       <td><%= safe_join(@user.introduction.split("\n"),tag(:br)) %></td>
       </tr>
 
       <tr>
