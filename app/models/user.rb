@@ -38,7 +38,7 @@ class User < ApplicationRecord
    user.password = SecureRandom.urlsafe_base64
    user.name = "ゲスト"
    user.username = "Catgraph_gest"
-   user.introduction = "ゲストアカウントです。新規投稿や投稿閲覧（一部）に制限がかかっています。"
+   user.introduction = "ゲストアカウントです。\n新規投稿や投稿閲覧（一部）に制限がかかっています。"
   end
  end
 
