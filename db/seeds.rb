@@ -12,26 +12,26 @@ Admin.create(
 )
 
 # user_id:1はゲストユーザーのため、user2から作成
-@users = User.create!(
+users = User.create!(
  [
   # user_id:2 なぎさ
-  {email: 'nagisa@test.com', name: 'なぎさ', username: 'nagi_gisa', introduction: '我が家のチェルシーちゃん（ロシアンブルー）の写真を主にUPします', password: 'nagisapass', profile_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-user2.jpg"), filename:"sample-user2.jpg")},
+  {email: 'nagisa@test.com', name: 'なぎさ', username: 'nagi_gisa', introduction: '我が家のチェルシーちゃん（ロシアンブルー）の写真を主にUPします', password: 'nagisapass', id: 2, profile_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-user2.jpg"), filename:"sample-user2.jpg")},
   # user_id:3 kuro
-  {email: 'kuro.111@test.com', name: 'kuro', username: 'kuro.111', introduction: '猫のジェラートといつも一緒。', password: 'kuropass', profile_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-user3.jpg"), filename:"sample-user3.jpg")},
+  {email: 'kuro.111@test.com', name: 'kuro', username: 'kuro.111', introduction: '猫のジェラートといつも一緒。', password: 'kuropass', id: 3, profile_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-user3.jpg"), filename:"sample-user3.jpg")},
   # user_id:4 エミ ステータス:退会済み
-  {email: 'emiemi@test.com', name: 'エミ', username: 'emiko.mimi', password: 'emikopass', is_deleted: true },
+  {email: 'emiemi@test.com', name: 'エミ', username: 'emiko.mimi', password: 'emikopass', is_deleted: true, id: 4 },
   # user_id:5 めがね
-  {email: 'megane.suki@test.com', name: 'めがね', username: 'megane_moe', introduction: '黒猫トト／三毛猫ネネ', password: 'meganepass', profile_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-user5.jpg"), filename:"sample-user5.jpg")},
+  {email: 'megane.suki@test.com', name: 'めがね', username: 'megane_moe', introduction: '黒猫トト／三毛猫ネネ', password: 'meganepass', id: 5, profile_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-user5.jpg"), filename:"sample-user5.jpg")},
   # user_id:6 ひまり
-  {email: 'himari@test.com', name: 'ひまり', username: 'himamamari', password: 'himaripass', profile_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-user6.jpg"), filename:"sample-user6.jpg")},
+  {email: 'himari@test.com', name: 'ひまり', username: 'himamamari', password: 'himaripass', id: 6, profile_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-user6.jpg"), filename:"sample-user6.jpg")},
   # user_id:7 taro
-  {email: 'taro@test.com', name: 'taro', username: 'ta.taro', introduction: '見る専です。猫ちゃん癒しすぎる…', password: 'taropass', profile_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-user7.jpg"), filename:"sample-user7.jpg")},
+  {email: 'taro@test.com', name: 'taro', username: 'ta.taro', introduction: '見る専です。猫ちゃん癒しすぎる…', password: 'taropass', id: 7, profile_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-user7.jpg"), filename:"sample-user7.jpg")},
   # user_id:8 たみこ
-  {email: 'tami@test.com', name: 'たみこ', username: 'tamitami', introduction: '猫さんぽ', password: 'tamipass', profile_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-user8.jpg"), filename:"sample-user8.jpg")},
+  {email: 'tami@test.com', name: 'たみこ', username: 'tamitami', introduction: '猫さんぽ', password: 'tamipass', id: 8, profile_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-user8.jpg"), filename:"sample-user8.jpg")},
   # user_id:9 おむすび
-  {email: 'omusubi@test.com', name: 'おむすび', username: 'omu_subi', introduction: 'NO CAT NO LIFE!!!!', password: 'omupass', profile_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-user9.jpg"), filename:"sample-user9.jpg")},
+  {email: 'omusubi@test.com', name: 'おむすび', username: 'omu_subi', introduction: 'NO CAT NO LIFE!!!!', password: 'omupass', id: 9, profile_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-user9.jpg"), filename:"sample-user9.jpg")},
   # user_id:10 ゆら
-  {email: 'tamayura@test.com', name: 'ゆら', username: 'yura_tamayura', introduction: "近所の野良猫さんの写真をよく撮ります。\n猫ちゃんしか勝たん〜！！", password: 'yurapass', profile_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-user10.jpg"), filename:"sample-user10.jpg")}
+  {email: 'tamayura@test.com', name: 'ゆら', username: 'yura_tamayura', introduction: "近所の野良猫さんの写真をよく撮ります。\n猫ちゃんしか勝たん〜！！", password: 'yurapass', id: 10, profile_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-user10.jpg"), filename:"sample-user10.jpg")}
  ]
 )
 
@@ -71,13 +71,20 @@ PostImage.create!(
 PostComment.create!(
  [
   # post_image_id:7 user_id:3 kuro
-  {comment: "夏らしい、とても良い写真ですね", post_image_id: 7, user_id: 3 },
+  {comment: '夏らしい、とても良い写真ですね', post_image_id: 7, user_id: 3 },
   # post_image_id:7 user_id:2 なぎさ
-  {comment: "kuroさん\nありがとうございます😊\n私自身も初めてセミを見たので、一緒に固まっちゃいましたw", post_image_id: 7, user_id: 2 },
+  {comment: "kuroさん ありがとうございます😊\n私自身も初めてセミを見たので、一緒に固まっちゃいましたw", post_image_id: 7, user_id: 2 },
 
   # post_image_id:8 user_id:5 めがね
-  {comment: "お家の中にご招待したくなっちゃいますね！", post_image_id: 7, user_id: 5 },
+  {comment: 'お家の中にご招待したくなっちゃいますね！', post_image_id: 8, user_id: 5 },
   # post_image_id:8 user_id:10 ゆら
-  {comment: "めがねさん そうなんです！\nでも賃貸なので、我慢です…(>_<)", post_image_id: 7, user_id: 10 }
+  {comment: "めがねさん そうなんです！\nでも賃貸なので、我慢です…(>_<)", post_image_id: 8, user_id: 10 },
+
+  # post_image_id:13 user_id:7 taro
+  {comment: '躍動感がスゴイっすねwww', post_image_id: 13, user_id: 5 },
+  # post_image_id:13 user_id:2 なぎさ
+  {comment: '我ながら、なかなかいい写真が撮れました😏', post_image_id: 13, user_id: 2 },
+  # post_image_id:13 user_id:7 taro
+  {comment: '葉っぱを押さえつけようとしてる右手が良いですね〜😎', post_image_id: 13, user_id: 5 }
  ]
 )
