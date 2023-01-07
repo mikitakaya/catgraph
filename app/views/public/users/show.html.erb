@@ -222,7 +222,12 @@
 
       <tr>
        <th>自己紹介</th>
-       <td style="border-bottom: none;"><%= safe_join(@user.introduction.split("\n"),tag(:br)) %></td>
+       <td style="border-bottom: none;">
+        <!-- 自己紹介の値は存在しないですか？ -->
+        <% if @user.introduction.nil? %>
+        <% else %>
+         <%= safe_join(@user.introduction.split("\n"),tag(:br)) %></td>
+        <% end %>
       </tr>
 
      </tbody>

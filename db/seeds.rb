@@ -12,7 +12,7 @@ Admin.create(
 )
 
 # user_id:1はゲストユーザーのため、user2から作成
-users = User.create!(
+User.create!(
  [
   # user_id:2 なぎさ
   {email: 'nagisa@test.com', name: 'なぎさ', username: 'nagi_gisa', introduction: '我が家のチェルシーちゃん（ロシアンブルー）の写真を主にUPします', password: 'nagisapass', id: 2, profile_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-user2.jpg"), filename:"sample-user2.jpg")},
@@ -81,10 +81,111 @@ PostComment.create!(
   {comment: "めがねさん そうなんです！\nでも賃貸なので、我慢です…(>_<)", post_image_id: 8, user_id: 10 },
 
   # post_image_id:13 user_id:7 taro
-  {comment: '躍動感がスゴイっすねwww', post_image_id: 13, user_id: 5 },
+  {comment: '躍動感がスゴイっすねwww', post_image_id: 13, user_id: 7 },
   # post_image_id:13 user_id:2 なぎさ
   {comment: '我ながら、なかなかいい写真が撮れました😏', post_image_id: 13, user_id: 2 },
   # post_image_id:13 user_id:7 taro
-  {comment: '葉っぱを押さえつけようとしてる右手が良いですね〜😎', post_image_id: 13, user_id: 5 }
+  {comment: '葉っぱを押さえつけようとしてる右手が良いですね〜😎', post_image_id: 13, user_id: 7 }
  ]
 )
+
+Favorite.create!(
+ [
+  # user_id:2 なぎさ
+  {user_id: 2, post_image_id: 2}, {user_id: 2, post_image_id: 5}, {user_id: 2, post_image_id: 4},
+  {user_id: 2, post_image_id: 1}, {user_id: 2, post_image_id: 3}, {user_id: 2, post_image_id: 6},
+  {user_id: 2, post_image_id: 8}, {user_id: 2, post_image_id: 10}, {user_id: 2, post_image_id: 14},
+
+  # user_id:3 kuro
+  {user_id: 3, post_image_id: 1}, {user_id: 3, post_image_id: 4}, {user_id: 3, post_image_id: 3},
+  {user_id: 3, post_image_id: 5}, {user_id: 3, post_image_id: 7}, {user_id: 3, post_image_id: 13},
+
+  # user_id:5 めがね
+  {user_id: 5, post_image_id: 3}, {user_id: 5, post_image_id: 8}, {user_id: 5, post_image_id: 1},
+  {user_id: 5, post_image_id: 13}, {user_id: 5, post_image_id: 14},
+
+  # user_id:6 ひまり
+  {user_id: 6, post_image_id: 7}, {user_id: 6, post_image_id: 3}, {user_id: 6, post_image_id: 11},
+  {user_id: 6, post_image_id: 13},
+
+  # user_id:7 taro
+  {user_id: 7, post_image_id: 5}, {user_id: 7, post_image_id: 13}, {user_id: 7, post_image_id: 1},
+  {user_id: 7, post_image_id: }, {user_id: 7, post_image_id: }, {user_id: 7, post_image_id: },
+  {user_id: 7, post_image_id: }, {user_id: 7, post_image_id: }, {user_id: 7, post_image_id: },
+  {user_id: 7, post_image_id: }, {user_id: 7, post_image_id: },
+
+  # user_id:8 たみこ
+  {user_id: 8, post_image_id: 1}, {user_id: 8, post_image_id: 4}, {user_id: 8, post_image_id: 8},
+  {user_id: 8, post_image_id: 7}, {user_id: 8, post_image_id: 9}, {user_id: 8, post_image_id: 13},
+
+  # user_id:9 おむすび
+  {user_id: , post_image_id: },
+  {user_id: , post_image_id: },
+  {user_id: , post_image_id: },
+  {user_id: , post_image_id: },
+  {user_id: , post_image_id: },
+  {user_id: , post_image_id: },
+  {user_id: , post_image_id: },
+  {user_id: , post_image_id: },
+  {user_id: , post_image_id: },
+  {user_id: , post_image_id: },
+  {user_id: , post_image_id: },
+  {user_id: , post_image_id: },
+  {user_id: , post_image_id: },
+  {user_id: , post_image_id: },
+  {user_id: , post_image_id: },
+  {user_id: , post_image_id: }
+ ]
+)
+
+# フォロー・フォロワーの関係
+user2 = User.find(2) # user_id:2 なぎさ
+user3 = User.find(3) # user_id:3 kuro
+user5 = User.find(5) # user_id:5 めがね
+user6 = User.find(6) # user_id:6 ひまり
+user7 = User.find(7) # user_id:7 taro
+user8 = User.find(8) # user_id:8 たみこ
+user9 = User.find(9) # user_id:9 おむすび
+user10 = User.find(10) # user_id:10 ゆら
+
+# フォローされる側 user2:なぎさ
+# フォローする側 user3:kuro（最初のフォロワー）、user6:ひまり、user5:めがね、user8:たみこ、user7:taro、user9:おむすび、user10:ゆら
+[user2.followers << user3] [user2.followers << user6] [user2.followers << user5] [user2.followers << user8]
+[user2.followers << user7] [user2.followers << user9] [user2.followers << user10]
+user2.save
+
+# フォローされる側 user3:kuro
+# フォローする側 user2:なぎさ（最初のフォロワー）、user7:taro、user5:めがね、user10:ゆら
+[user3.followers << user2] [user3.followers << user7] [user3.followers << user5] [user3.followers << user10]
+user3.save
+
+# フォローされる側 user5:めがね
+# フォローする側 user2:なぎさ（最初のフォロワー）、user3:kuro、user10:ゆら、user9:おむすび
+[user5.followers << user2] [user5.followers << user3] [user5.followers << user10] [user5.followers << user9]
+user5.save
+
+# フォローされる側 user6:ひまり
+# フォローする側 user2:なぎさ
+user6.followers << user2
+user6.save
+
+# フォローされる側 user7:taro
+# フォローする側 user2:なぎさ（最初のフォロワー）、user3:kuro、user8:たみこ
+[user7.followers << user2] [user7.followers << user3] [user7.followers << user8]
+user7.save
+
+# フォローされる側 user8:たみこ
+# フォローする側 user7:taro（最初のフォロワー）、user2:なぎさ、user10:ゆら
+[user8.followers << user7] [user8.followers << user2] [user8.followers << user10]
+user8.save
+
+# フォローされる側 user9:おむすび
+# フォローする側 user5:めがね（最初のフォロワー）、user2:なぎさ、user10:ゆら
+[user9.followers << user5] [user9.followers << user2] [user9.followers << user10]
+user9.save
+
+# フォローされる側 user10:ゆら
+# フォローする側 user9:おむすび（最初のフォロワー）、user8:たみこ、user3:kuro、user5:めがね、user2:なぎさ、user7:taro
+[user10.followers << user9] [user10.followers << user8] [user10.followers << user3] [user10.followers << user5]
+[user10.followers << user2] [user10.followers << user7]
+user10.save
