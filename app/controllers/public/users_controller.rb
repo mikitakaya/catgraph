@@ -1,5 +1,5 @@
 class Public::UsersController < ApplicationController
- before_action :correct_user, only: [:edit, :update, :unsubscribe]
+ before_action :correct_user, only: [:edit, :update]
  # ログイン認証が済んでいない場合、userに関するページにアクセス不可、ログイン画面に遷移する
  before_action :authenticate_user!
 

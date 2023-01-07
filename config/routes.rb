@@ -33,6 +33,8 @@ Rails.application.routes.draw do
    # いいね一覧
    collection do
     get :favorites
+    get :unsubscribe
+    patch :withdraw
    end
 
    # public/relationships
@@ -40,9 +42,6 @@ Rails.application.routes.draw do
    get 'followings' => 'relationships#followings', as: 'followings'
    get 'followers' => 'relationships#followers', as: 'followers'
   end
-
-  get 'users/:id/unsubscribe' => "users#unsubscribe", as: "unsubscribe"
-  patch 'users/:id/withdraw' => "users#withdraw", as: "withdraw"
 
   # public/post_images
   resources :post_images do
