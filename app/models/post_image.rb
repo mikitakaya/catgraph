@@ -24,7 +24,7 @@ class PostImage < ApplicationRecord
 
   def self.search(word)
    return PostImage.all unless word
-   @post_image = PostImage.where("title or body LIKE?", "%#{word}%")
+   @post_image = PostImage.where("title LIKE? or body LIKE?", "%#{word}%", "%#{word}%")
   end
 
 end

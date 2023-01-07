@@ -74,7 +74,7 @@ class User < ApplicationRecord
   # wordは未設定の場合（unless word）、全ユーザー情報を返します（return User.all）
   return User.all unless word
   # 検索結果に「ゲスト」は含まない（where.not(name: "ゲスト")）、ステータスが退会の場合も含まない
-  User.where("name LIKE?","%#{word}%").where.not(name: "ゲスト").where.not(is_deleted: true)
+  @user = User.where("name LIKE? or username LIKE?","%#{word}%","%#{word}%").where.not(name: "ゲスト").where.not(is_deleted: true)
  end
 
 end
