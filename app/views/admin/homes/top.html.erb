@@ -6,6 +6,11 @@
    }
   </style>
   <div class="col-lg-12">
+   <div class="text">
+    <h4 style="margin-top: 30px;">
+     <span>投稿一覧</span>
+    </h4>
+   </div>
    <%= render 'public/post_images/index', post_images: @post_images %>
    <%= paginate @post_images %>
   </div>
