@@ -149,7 +149,7 @@
        <td style="border-bottom: none;">
         <!-- 自己紹介の値は存在しないですか？ -->
         <% if @user.introduction.nil? %>
-         <% @user.introduction %>
+         <%# @user.introduction %>
         <% else %>
          <%= safe_join(@user.introduction.split("\n"),tag(:br)) %>
         <% end %>
