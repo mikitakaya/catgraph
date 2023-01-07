@@ -226,8 +226,9 @@
         <!-- 自己紹介の値は存在しないですか？ -->
         <% if @user.introduction.nil? %>
         <% else %>
-         <%= safe_join(@user.introduction.split("\n"),tag(:br)) %></td>
+         <%= safe_join(@user.introduction.split("\n"),tag(:br)) %>
         <% end %>
+       </td>
       </tr>
 
      </tbody>
