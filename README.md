@@ -57,6 +57,8 @@
 
 - <a href="https://docs.google.com/spreadsheets/d/1kD_7g6Hm6VJ5Ri_sHDDZRdhi_5V_cYkM_p1iWrft_oM/edit?usp=sharing">アプリケーション詳細設計</a>
 
+## 使用について
+管理者情報やテストデータのユーザー情報は【catgraph/db/seeds.rb】に記述しています
 
 ## 開発環境
 - OS：Linux
