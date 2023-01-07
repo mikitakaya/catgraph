@@ -14,6 +14,7 @@ Admin.create(
 # user_id:1はゲストユーザーのため、user2から作成
 User.create!(
  [
+  {email: 'cg_guest@example.com', name: 'ゲスト', username: 'Catgraph_gest', introduction: "ゲストアカウントです。\n新規投稿や投稿閲覧（一部）に制限がかかっています。", password: SecureRandom.urlsafe_base64, id: 1},
   # user_id:2 なぎさ
   {email: 'nagisa@test.com', name: 'なぎさ', username: 'nagi_gisa', introduction: '我が家のチェルシーちゃん（ロシアンブルー）の写真を主にUPします', password: 'nagisapass', id: 2, profile_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-user2.jpg"), filename:"sample-user2.jpg")},
   # user_id:3 kuro
