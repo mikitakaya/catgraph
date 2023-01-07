@@ -69,7 +69,7 @@
 - <a href="https://www.pakutaso.com/">ぱくたそ</a>
 - <a href="https://www.designevo.com/">designevo</a>
 - <a href="http://da-lace.com/">ダ・レース</a>
-- ユーザーID2,6の投稿写真は作成者にて撮影した写真です
+- ユーザーID2,10の投稿写真は作成者にて撮影した写真です（保存や利用はお控えください）
 
 ## 作成者
 高屋未来（ https://github.com/mikitakaya ）
