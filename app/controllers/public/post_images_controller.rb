@@ -54,10 +54,15 @@ class Public::PostImagesController < ApplicationController
  def destroy
   # レコードを1件取得
   @post_image = PostImage.find(params[:id])
-  # レコードを削除
-  @post_image.destroy
-  # レコードを削除後、投稿一覧画面にリダイレクトする
-  redirect_to post_images_path, notice: "投稿を削除しました"
+  # 投稿者ID＝ログイン中ユーザーですか
+  if @post_image.user_id == current_user.id
+   # レコードを削除
+   @post_image.destroy
+   # レコードを削除後、投稿一覧画面にリダイレクトする
+   redirect_to post_images_path, notice: "投稿を削除しました"
+  else
+   redirect_to post_images_path, notice: "他人の投稿は削除できません"
+  end
  end
 
  def search
