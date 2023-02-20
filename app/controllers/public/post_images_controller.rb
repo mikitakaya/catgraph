@@ -9,7 +9,7 @@ class Public::PostImagesController < ApplicationController
  def create
   # データを受け取り新規登録するインスタンス
   @post_image = PostImage.new(post_image_params)
-  # 投稿者ID＝ログイン中ユーザー
+  # 投稿者ID＝ログイン中ユーザーID
   @post_image.user_id = current_user.id
   # データをデータベースに保存する
   if @post_image.save
@@ -54,13 +54,14 @@ class Public::PostImagesController < ApplicationController
  def destroy
   # レコードを1件取得
   @post_image = PostImage.find(params[:id])
-  # 投稿者ID＝ログイン中ユーザーですか
+  # 投稿者ID＝ログイン中ユーザーIDですか
   if @post_image.user_id == current_user.id
    # レコードを削除
    @post_image.destroy
    # レコードを削除後、投稿一覧画面にリダイレクトする
    redirect_to post_images_path, notice: "投稿を削除しました"
   else
+   # 投稿したユーザーとログイン中ユーザーが不一致の場合
    redirect_to post_images_path, notice: "他人の投稿は削除できません"
   end
  end
