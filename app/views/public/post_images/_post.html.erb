@@ -1,0 +1,35 @@
+<style>
+ .post_image {
+  width: 220px;
+  height: 220px;
+  object-fit: cover; /* 中央でトリミング */
+ }
+ 
+ /* タブレット横置きサイズ（1024px）以下の際に適用される設定 */
+ @media screen and (max-width: 1024px) {
+  .post_image {
+   width: 150px;
+   height: 150px;
+  }
+ }
+ 
+ /* タブレット縦置きサイズ（768px）以下の際に適用される設定 */
+ @media screen and (max-width:768px) {
+  .post_image {
+   width: 180px;
+   height: 180px;
+  }
+ }
+ 
+ /* スマートフォンサイズ（425px）以下の際に適用される設定 */
+ @media screen and (max-width: 425px) {
+  .post_image {
+   width: 120px;
+   height: 120px;
+  }
+ }
+</style>
+
+<%= link_to post_image_path(post_image.id) do %>
+ <%= image_tag post_image.image, class: "post_image" %>
+<% end %>

@@ -15,12 +15,6 @@
     flex-wrap: wrap;
    }
 
-   .post_image {
-    width: 220px;
-    height: 220px;
-    object-fit: cover; /* 中央でトリミング */
-   }
-
    .pagination {
     justify-content: center;
    }
@@ -67,12 +61,9 @@
      width: 640px;
     }
 
-    .post_image, .post {
+    .post {
      width: 150px;
      height: 150px;
-    }
-
-    .post {
      margin: 5px;
     }
    }
@@ -83,12 +74,9 @@
      width: 380px;
     }
 
-    .post_image, .post {
+    .post {
      width: 180px;
      height: 180px;
-    }
-
-    .post {
      margin: 5px;
     }
    }
@@ -99,12 +87,9 @@
      width: 248px;
     }
 
-    .post_image, .post {
+    .post {
      width: 120px;
      height: 120px;
-    }
-
-    .post {
      margin: 2px;
     }
 
@@ -143,10 +128,7 @@
         </h3>
        </div>
       <% end %>
-
-      <%= link_to post_image_path(post_image.id) do %>
-       <%= image_tag post_image.image, class: "post_image" %>
-      <% end %>
+      <%= render 'public/post_images/post', post_image: post_image %>
      </div>
      <% end %>
     <% end %>
