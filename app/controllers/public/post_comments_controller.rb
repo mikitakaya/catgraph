@@ -17,10 +17,18 @@ class Public::PostCommentsController < ApplicationController
  end
 
  def destroy
-  # レコードを取得し、削除する
-  PostComment.find(params[:id]).destroy
-  # 投稿詳細画面にリダイレクトする
-  redirect_to post_image_path(params[:post_image_id]), notice: "コメントを削除しました"
+  # レコードを1件取得
+  @post_comment = PostComment.find(params[:id])
+  # コメント投稿者ID = ログイン中ユーザーIDですか
+  if @post_comment.user_id == current_user.id
+   # レコードを削除
+   @post_comment.destroy
+   # レコード削除後、投稿詳細画面にリダイレクトする
+   redirect_to post_image_path(params[:post_image_id]), notice: "コメントを削除しました"
+  else
+   # コメントを投稿したユーザーとログイン中ユーザーが不一致の場合
+   redirect_to post_image_path(params[:post_image_id]), notice: "他人のコメントは削除できません"
+  end
  end
 
  private

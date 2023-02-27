@@ -61,7 +61,7 @@
 管理者情報やテストデータのユーザー情報は【catgraph/db/seeds.rb】に記述しています
 
 ## 開発環境
-- OS：Linux
+- OS：Linux release 2 (Karoo)
 - 言語：HTML,CSS,JavaScript,Ruby,SQL
 - フレームワーク：Ruby on Rails
 - JSライブラリ：jQuery
