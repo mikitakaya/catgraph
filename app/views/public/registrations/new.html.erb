@@ -94,18 +94,16 @@
     <span>新規会員登録</span>
    </h4>
 
-
+   <% if @user.errors.any? %>
+    <%= @user.errors.count %>件のエラーが発生しました
+    <ul>
+     <% @user.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+     <% end %>
+    </ul>
+   <% end %>
 
    <div class="text">
-    <% if @user.errors.any? %>
-     <%= @user.errors.count %>件のエラーが発生しました
-     <ul>
-      <% @user.errors.full_messages.each do |message| %>
-       <li><%= message %></li>
-      <% end %>
-     </ul>
-    <% end %>
-
     <%= form_with model: @user, url: user_registration_path, class: "new_user" do |f| %>
      <div class="field">
       <%= f.label :name, "名前" %>
